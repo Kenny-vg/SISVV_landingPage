@@ -1,11 +1,6 @@
 @extends('layouts.public')
 
 @section('content')
-    @if (Route::has('login'))
-        <div class="auth-navigation-wrapper" style="position: absolute; top: 1.5rem; right: 18%; z-index: 1001; font-family: var(--font-base); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">
-            <livewire:welcome.navigation />
-        </div>
-    @endif
 
     <section class="hero-asymmetric">
         <div class="hero-left-content">

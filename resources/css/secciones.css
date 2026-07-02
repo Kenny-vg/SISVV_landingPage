@@ -1,0 +1,357 @@
+/* resources/css/secciones.css */
+
+.premium-section {
+    padding: 8rem 8%;
+    position: relative;
+    display: block;
+}
+
+.bg-obsidian {
+    background-color: var(--color-bg);
+}
+
+.bg-forest {
+    background-color: var(--color-bg-forest); /* Fondo verde bosque de contraste */
+    color: var(--color-bg); /* Texto claro */
+}
+
+/* Títulos editoriales asimétricos */
+.section-header-editorial {
+    margin-bottom: 5rem;
+    max-width: 700px;
+}
+
+.section-header-editorial h2 {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.section-header-editorial h2 span {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-accent-gold);
+}
+
+.section-header-editorial p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+/* ==========================================
+   BENTO BOX ORGÁNICO (CSS GRID ASIMÉTRICO)
+   ========================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bento-item {
+    background-color: var(--color-surface);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 4px 20px rgba(24, 42, 33, 0.02);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover de Bento: Zoom-in en imágenes y sutil levitación */
+.bento-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--color-bento-hover-shadow);
+    background-color: var(--color-bento-hover-bg);
+}
+
+.bento-item:hover img {
+    transform: scale(1.04);
+}
+
+/* Distribución de celdas asimétricas (Awwwards style) */
+.bento-col-8 {
+    grid-column: span 8;
+}
+
+.bento-col-4 {
+    grid-column: span 4;
+}
+
+.bento-col-5 {
+    grid-column: span 5;
+}
+
+.bento-col-7 {
+    grid-column: span 7;
+}
+
+/* Altura fija de imágenes Bento */
+.bento-img-container {
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bento-img-large {
+    height: 420px !important;
+}
+
+.bento-card-content {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.bento-card-content h3 {
+    font-family: var(--font-editorial);
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+}
+
+.bento-card-content p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   HERO SECTOR ASIMÉTRICO (3 BANDAS)
+   ========================================== */
+.hero-asymmetric {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+    padding: 80px 8% 2rem 8%;
+    background-color: var(--color-bg);
+    gap: 4rem;
+    box-sizing: border-box;
+}
+
+.hero-left-content {
+    max-width: 480px;
+    z-index: 10;
+}
+
+.hero-left-content h1 {
+    font-family: var(--font-editorial);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--color-text-primary);
+    margin-bottom: 2rem;
+}
+
+.hero-left-content h1 span {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-accent-gold);
+}
+
+.hero-left-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 3rem;
+}
+
+.hero-right-media {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 45px rgba(24, 42, 33, 0.05);
+}
+
+.hero-right-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================
+   GASTRONOMÍA Y SPA (OVERLAPPING EDITORIAL)
+   ========================================== */
+.gastronomy-asymmetric {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.gastronomy-media-wrapper {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.gastronomy-main-img {
+    width: 85%;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(24, 42, 33, 0.06);
+    display: block;
+}
+
+.gastronomy-float-img {
+    position: absolute;
+    bottom: -3rem;
+    right: 0;
+    width: 40%;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 8px solid var(--color-bg);
+    box-shadow: 0 10px 30px rgba(24, 42, 33, 0.1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gastronomy-asymmetric:hover .gastronomy-float-img {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* ==========================================
+   RESPONSIVIDAD
+   ========================================== */
+@media (max-width: 991px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-7 {
+        grid-column: span 12;
+    }
+    
+    .hero-asymmetric {
+        grid-template-columns: 1fr;
+        padding-top: 100px;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-left-content {
+        max-width: 100%;
+    }
+    
+    .hero-right-media {
+        height: 45vh;
+    }
+
+    .gastronomy-asymmetric {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .gastronomy-media-wrapper {
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
+}
+
+/* ==========================================
+   FOOTER DE SILENCIO VISUAL
+   ========================================== */
+.premium-footer {
+    background-color: #15221B; /* Sombra de verde bosque */
+    color: var(--color-bg);
+    padding: 6rem 8% 3rem 8%;
+    border-top: 1px solid rgba(253, 252, 249, 0.05);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+}
+
+.footer-logo {
+    font-family: var(--font-editorial);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-bg);
+}
+
+.footer-logo span {
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-accent-gold);
+}
+
+.footer-tagline {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(253, 252, 249, 0.6);
+    max-width: 320px;
+}
+
+.footer-col h4 {
+    font-family: var(--font-base);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-accent-gold);
+}
+
+.footer-col p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(253, 252, 249, 0.7);
+    margin: 0 0 0.5rem 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(253, 252, 249, 0.05);
+    padding-top: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: rgba(253, 252, 249, 0.4);
+}
+
+@media (max-width: 767px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    .premium-footer {
+        padding: 4rem 1.5rem 2rem 1.5rem;
+    }
+}
+
+/* Animaciones con Scroll */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+

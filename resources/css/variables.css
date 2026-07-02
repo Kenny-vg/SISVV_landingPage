@@ -1,0 +1,78 @@
+/* resources/css/variables.css */
+:root {
+    /* --- TEMA CLARO (Lujo Fresco: Lino, Piedra y Salvia) --- */
+    --color-bg: #FDFCF9;              /* Lino natural claro */
+    --color-surface: #F2EFEA;         /* Piedra caliza suave */
+    --color-text-primary: #182A21;    /* Verde bosque húmedo / oliva profundo */
+    --color-text-secondary: #5C685F;  /* Verde salvia medio */
+    --color-accent-gold: #C4AF9A;     /* Arena tostada / champagne mate */
+    --color-border-subtle: rgba(24, 42, 33, 0.08); /* Borde sutil */
+    
+    /* Mapeo para compatibilidad de estilos existentes */
+    --color-bg-obsidian: var(--color-bg); 
+    --color-bg-forest: #182A21;       /* Verde bosque oscuro inmersivo */
+    --color-bg-navy: #151E1A;
+    
+    /* Variables del Visualizador / Lector */
+    --color-lector-bg: var(--color-bg);
+    --color-lector-surface: var(--color-surface);
+    --color-lector-text-primary: var(--color-text-primary);
+    --color-lector-text-secondary: var(--color-text-secondary);
+    --color-lector-accent: var(--color-bg-forest);
+    --color-lector-accent-light: rgba(24, 42, 33, 0.08);
+    --color-lector-accent-gold: var(--color-accent-gold);
+    --color-lector-border: #E2DDD5;
+
+    /* Variables abstractas del Navbar */
+    --color-navbar-bg: rgba(253, 252, 249, 0.75);
+    --color-navbar-scrolled: rgba(253, 252, 249, 0.92);
+    --color-navbar-border: rgba(24, 42, 33, 0.04);
+    --color-navbar-border-scrolled: rgba(24, 42, 33, 0.06);
+    --color-navbar-shadow-scrolled: rgba(24, 42, 33, 0.03);
+
+    /* Variables abstractas de Secciones / Bento */
+    --color-bento-hover-bg: #f7f5f1;
+    --color-bento-hover-shadow: rgba(24, 42, 33, 0.06);
+
+    /* Tipografías Editoriales */
+    --font-editorial: 'Cormorant Garamond', serif;
+    --font-base: 'Plus Jakarta Sans', sans-serif;
+    
+    /* Mapeos base */
+    --font-serif: var(--font-editorial);
+    --font-sans: var(--font-base);
+}
+
+[data-theme="dark"] {
+    /* --- TEMA OSCURO (Lujo Oscuro: Bosque Profundo y Arena Tostada) --- */
+    --color-bg: #0B0F0D;              /* Negro bosque profundo / obsidiana orgánica */
+    --color-surface: #121815;         /* Verde bosque oscuro texturizado */
+    --color-text-primary: #F4F2EC;    /* Lino natural claro / crema suave */
+    --color-text-secondary: #8E9B92;  /* Salvia silvestre claro / gris verdoso */
+    --color-border-subtle: rgba(253, 252, 249, 0.08); /* Borde claro sutil */
+    
+    --color-bg-obsidian: var(--color-bg); 
+    --color-bg-forest: #121815;       /* Bosque oscuro */
+    --color-bg-navy: #0B0F0D;
+    
+    /* Variables del Visualizador / Lector */
+    --color-lector-bg: var(--color-bg);
+    --color-lector-surface: var(--color-surface);
+    --color-lector-text-primary: var(--color-text-primary);
+    --color-lector-text-secondary: var(--color-text-secondary);
+    --color-lector-accent: var(--color-accent-gold);
+    --color-lector-accent-light: rgba(253, 252, 249, 0.08);
+    --color-lector-accent-gold: var(--color-accent-gold);
+    --color-lector-border: rgba(253, 252, 249, 0.1);
+
+    /* Variables abstractas del Navbar */
+    --color-navbar-bg: rgba(11, 15, 13, 0.65);
+    --color-navbar-scrolled: rgba(11, 15, 13, 0.8);
+    --color-navbar-border: rgba(253, 252, 249, 0.04);
+    --color-navbar-border-scrolled: rgba(253, 252, 249, 0.08);
+    --color-navbar-shadow-scrolled: rgba(0, 0, 0, 0.2);
+
+    /* Variables abstractas de Secciones / Bento */
+    --color-bento-hover-bg: rgba(253, 252, 249, 0.03);
+    --color-bento-hover-shadow: rgba(0, 0, 0, 0.25);
+}
