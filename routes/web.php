@@ -23,4 +23,12 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::get('/lector', function () {
+    return view('lector.index');
+});
+
+Route::get('/lector-pdf', function () {
+    return view('lector.pdf_viewer');
+});
+
 require __DIR__.'/auth.php';
