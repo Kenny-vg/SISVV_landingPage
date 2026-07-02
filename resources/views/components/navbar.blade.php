@@ -1,7 +1,8 @@
 <nav class="premium-navbar" id="main-navbar">
     <div class="navbar-brand">
-        <a href="{{ url('/') }}" style="text-decoration: none;">
-            <h2>Vista<span>Verde</span></h2>
+        <a href="{{ url('/') }}" style="text-decoration: none; display: flex; align-items: center;">
+            <img src="{{ asset('images/logo.png') }}" alt="Vista Verde" class="logo-light" style="height: 50px; width: auto;">
+            <img src="{{ asset('images/logo-dark.png') }}" alt="Vista Verde" class="logo-dark" style="height: 50px; width: auto; display: none;">
         </a>
     </div>
 
