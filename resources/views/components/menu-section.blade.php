@@ -1,4 +1,4 @@
-<section class="premium-section bg-obsidian fade-in-section">
+<section class="premium-section bg-obsidian fade-in-section" id="gastronomia">
     <div class="gastronomy-asymmetric">
         <!-- Lado Izquierdo: Composición de imágenes superpuestas -->
         <div class="gastronomy-media-wrapper">

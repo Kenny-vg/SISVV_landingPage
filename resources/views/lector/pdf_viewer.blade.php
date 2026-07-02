@@ -11,6 +11,14 @@
         <span>Volver al Club</span>
     </a>
 
+    <!-- Cabecera Editorial Elegante -->
+    <header class="pdf-header-editorial">
+        <span class="pdf-category-tag">Gastronomía Exclusiva</span>
+        <h1>La Carta</h1>
+        <p>Una sofisticada selección de platillos de temporada curados por nuestro chef ejecutivo.</p>
+        <div class="pdf-header-divider"></div>
+    </header>
+
     <!-- Área principal de renderizado -->
     <div class="pdf-canvas-container" id="pdf-canvas-container">
         <div class="pdf-canvas-wrapper" id="pdf-canvas-wrapper">

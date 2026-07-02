@@ -2,11 +2,11 @@
 
 /* Contenedor e interfaz principal del Visor */
 .pdf-viewer-page {
-    background-color: var(--color-lector-bg, #F6F4F0);
-    color: var(--color-lector-text-primary, #14241D);
-    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-base);
     min-height: 100vh;
-    padding-top: 80px; /* Margen para navbar de Laravel */
+    padding-top: 100px; /* Margen para navbar */
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -15,13 +15,57 @@
     -webkit-user-select: none;
 }
 
+/* Cabecera Editorial Elegante */
+.pdf-header-editorial {
+    text-align: center;
+    max-width: 650px;
+    margin: 3rem auto 1.5rem auto;
+    padding: 0 1.5rem;
+}
+
+.pdf-category-tag {
+    font-family: var(--font-base);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-accent-gold);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.pdf-header-editorial h1 {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.pdf-header-editorial p {
+    font-family: var(--font-base);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.pdf-header-divider {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-accent-gold);
+    margin: 2rem auto 0 auto;
+    opacity: 0.6;
+}
+
 /* Área de Canvas y visualización del documento */
 .pdf-canvas-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 2rem 1rem 7rem 1rem; /* Espacio extra abajo para que el Dock flotante no obstruya */
+    padding: 1.5rem 1rem 8rem 1rem; /* Espacio extra abajo para el Dock flotante */
     width: 100%;
     box-sizing: border-box;
 }
@@ -30,12 +74,12 @@
 .pdf-canvas-wrapper {
     position: relative;
     max-width: 100%;
-    background-color: #ffffff;
-    box-shadow: 0 10px 45px rgba(20, 36, 29, 0.05);
-    border-radius: 4px;
-    border: 1px solid rgba(20, 36, 29, 0.05);
+    background-color: var(--color-surface);
+    box-shadow: var(--color-bento-hover-shadow);
+    border-radius: 16px; /* Más redondeado y elegante */
+    border: 1px solid var(--color-border-subtle);
     overflow: hidden;
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform-origin: top center;
 }
 
@@ -48,50 +92,60 @@
 /* Botón flotante para regresar (arriba a la izquierda) */
 .pdf-back-btn {
     position: fixed;
-    top: 95px;
-    left: 2rem;
+    top: 110px;
+    left: 3rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background-color: rgba(251, 249, 246, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(20, 36, 29, 0.06);
+    gap: 0.6rem;
+    padding: 0.65rem 1.4rem;
+    background-color: var(--color-navbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border-subtle);
     border-radius: 30px;
-    color: var(--color-lector-text-primary, #14241D);
+    color: var(--color-text-primary);
     text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(20, 36, 29, 0.03);
-    z-index: 1000;
-    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    z-index: 999;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pdf-back-btn:hover {
-    background-color: rgba(251, 249, 246, 0.95);
+    background-color: var(--color-text-primary);
+    color: var(--color-bg);
+    border-color: var(--color-text-primary);
     transform: translateX(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.pdf-back-btn svg {
+    width: 1rem;
+    height: 1rem;
 }
 
 /* Dock flotante de controles (Estilo Píldora Premium) */
 .pdf-dock {
     position: fixed;
-    bottom: 2rem;
+    bottom: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.6rem 1.2rem;
-    background-color: rgba(251, 249, 246, 0.75); /* Esmerilado de lujo */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(20, 36, 29, 0.06);
+    padding: 0.7rem 1.4rem;
+    background-color: var(--color-navbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border-subtle);
     border-radius: 40px;
-    box-shadow: 0 10px 30px rgba(20, 36, 29, 0.05);
+    box-shadow: var(--color-navbar-shadow-scrolled);
     z-index: 1000;
-    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
-                transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Clase añadida por inactividad para ocultar controles (Auto-Hide) */
@@ -119,29 +173,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-lector-text-primary, #14241D);
+    color: var(--color-text-primary);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
 }
 
 .pdf-btn:hover {
-    background-color: rgba(20, 36, 29, 0.06);
-    color: var(--color-lector-text-primary, #14241D);
+    background-color: rgba(196, 175, 154, 0.15); /* Oro mate translúcido */
+    color: var(--color-accent-gold);
 }
 
 .pdf-btn:active {
-    transform: scale(0.92);
+    transform: scale(0.9);
 }
 
 .pdf-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 1.1rem;
+    height: 1.1rem;
     stroke-width: 1.5;
 }
 
 .pdf-btn:disabled {
-    opacity: 0.3;
+    opacity: 0.35;
     pointer-events: none;
 }
 
@@ -149,7 +203,7 @@
 .pdf-divider {
     width: 1px;
     height: 18px;
-    background-color: rgba(20, 36, 29, 0.08);
+    background-color: var(--color-border-subtle);
 }
 
 /* Indicador y Navegación de Página */
@@ -160,9 +214,11 @@
 }
 
 .pdf-page-indicator {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--color-lector-text-primary, #14241D);
+    font-size: 0.8rem;
+    font-family: var(--font-base);
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text-primary);
     padding: 0 0.5rem;
     text-align: center;
     white-space: nowrap;
@@ -170,9 +226,11 @@
 
 /* Indicador de Porcentaje de Zoom */
 .pdf-zoom-indicator {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--color-lector-text-primary, #14241D);
+    font-size: 0.8rem;
+    font-family: var(--font-base);
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-text-primary);
     min-width: 45px;
     text-align: center;
 }
@@ -187,7 +245,11 @@
    ========================================== */
 @media (max-width: 767px) {
     .pdf-viewer-page {
-        padding-top: 60px;
+        padding-top: 80px;
+    }
+
+    .pdf-header-editorial {
+        margin: 2rem auto 1rem auto;
     }
 
     .pdf-canvas-container {
@@ -195,10 +257,11 @@
     }
 
     .pdf-back-btn {
-        top: 75px;
+        position: absolute;
+        top: 95px;
         left: 1rem;
         padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
 
     /* Redefinimos el Dock para móviles */
@@ -219,33 +282,33 @@
 
     .pdf-btn {
         width: 42px;
-        height: 42px; /* Touch target ampliado para el pulgar */
+        height: 42px; /* Touch target ampliado */
     }
 
     .pdf-divider {
-        display: none; /* Simplificamos visualmente quitando divisores */
+        display: none;
     }
 
     .pdf-zoom-indicator {
-        display: none; /* Ocultamos el indicador numérico de zoom en móvil */
+        display: none;
     }
 
-    /* Slider deslizador de páginas móvil interactivo */
+    /* Slider deslizador de páginas móvil */
     .pdf-mobile-slider-container {
-        display: none; /* Se activa mediante JS si pulsamos el indicador */
+        display: none;
         position: fixed;
         bottom: 6rem;
         left: 50%;
         transform: translateX(-50%);
         width: calc(100% - 3rem);
         max-width: 380px;
-        background-color: rgba(251, 249, 246, 0.9);
+        background-color: var(--color-navbar-bg);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(20, 36, 29, 0.08);
+        border: 1px solid var(--color-border-subtle);
         border-radius: 20px;
         padding: 0.8rem 1.2rem;
-        box-shadow: 0 8px 24px rgba(20, 36, 29, 0.08);
+        box-shadow: var(--color-navbar-shadow-scrolled);
         z-index: 1001;
         box-sizing: border-box;
         opacity: 0;
@@ -271,7 +334,7 @@
         width: 100%;
         height: 4px;
         border-radius: 2px;
-        background: rgba(20, 36, 29, 0.1);
+        background: var(--color-border-subtle);
         outline: none;
     }
 
@@ -281,7 +344,7 @@
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background: var(--color-lector-text-primary, #14241D);
+        background: var(--color-accent-gold);
         cursor: pointer;
         transition: transform 0.2s ease;
     }
