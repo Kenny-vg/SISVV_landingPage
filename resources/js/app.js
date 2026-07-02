@@ -50,27 +50,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const moonIcon = document.querySelector('.theme-icon-moon');
     const sunIcon = document.querySelector('.theme-icon-sun');
+    const logosLight = document.querySelectorAll('.logo-light');
+    const logosDark = document.querySelectorAll('.logo-dark');
 
-    const updateIcons = (theme) => {
-        if (theme === 'dark') {
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
-        } else {
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
-        }
+    const updateTheme = (theme) => {
+        const isDark = theme === 'dark';
+        if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+        if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+        logosLight.forEach(el => el.style.display = isDark ? 'none' : 'block');
+        logosDark.forEach(el => el.style.display = isDark ? 'block' : 'none');
     };
 
-    // Inicializar iconos de acuerdo al tema actual cargado
+    // Inicializar de acuerdo al tema actual cargado
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    updateIcons(currentTheme);
+    updateTheme(currentTheme);
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', activeTheme);
             localStorage.setItem('theme', activeTheme);
-            updateIcons(activeTheme);
+            updateTheme(activeTheme);
         });
     }
 });

@@ -13,7 +13,7 @@
                 <img src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1200&q=80" alt="Campo de golf profesional VistaVerde">
             </div>
             <div class="bento-card-content">
-                <h3>Campo de Golf de 18 Hoyos</h3>
+                <h3>Campo de Golf de 9 Hoyos</h3>
                 <p>Un recorrido desafiante e integrado en la topografía local, diseñado por firmas internacionales de renombre.</p>
                 <button class="btn-link">Ver Recorrido &rarr;</button>
             </div>
