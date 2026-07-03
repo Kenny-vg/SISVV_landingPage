@@ -28,7 +28,7 @@
             <p>Carretera Federal México-Tehuacán Km. 252</p>
             <p>San Nicolás Tetitzintla</p>
             <p>75710 Tehuacán, Pue.</p>
-            <a href="https://goo.gl/maps/Y6jWqA4tG1yUUiKH9" target="_blank" rel="noopener" class="btn-link" style="margin-top: 1rem; display: inline-flex; color: var(--color-accent-gold);">Ver en Google Maps &rarr;</a>
+            <a href="https://www.google.com/maps/place/Casa+Club+Vista+Verde+Country+Club/@18.4835419,-97.4133092,17z" target="_blank" rel="noopener" class="btn-link" style="margin-top: 1rem; display: inline-flex; color: var(--color-accent-gold);">Ver en Google Maps &rarr;</a>
         </div>
     </div>
 
