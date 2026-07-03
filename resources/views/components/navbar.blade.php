@@ -8,8 +8,10 @@
 
     <ul class="navbar-links">
         <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li><a href="{{ url('/#instalaciones') }}">Instalaciones</a></li>
+        <li><a href="{{ url('/instalaciones') }}">Instalaciones</a></li>
         <li><a href="{{ url('/#gastronomia') }}">Gastronomía</a></li>
+        <li><a href="{{ url('/#membresias') }}">Membresías</a></li>
+        <li><a href="{{ url('/#contacto') }}">Contacto</a></li>
     </ul>
 
     <div class="navbar-actions" style="display: flex; align-items: center; gap: 1rem;">

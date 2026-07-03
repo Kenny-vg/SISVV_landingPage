@@ -4,11 +4,11 @@
 <div class="pdf-viewer-page">
     
     <!-- Botón elegante de Volver -->
-    <a href="{{ url('/') }}" class="pdf-back-btn" id="pdf-back-btn">
+    <a href="{{ url('/lector') }}" class="pdf-back-btn" id="pdf-back-btn">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
-        <span>Volver al Club</span>
+        <span>Volver a la Carta</span>
     </a>
 
     <!-- Cabecera Editorial Elegante -->
@@ -105,8 +105,50 @@
         let startX, startY;
         let scrollLeft, scrollTop;
 
-        // URL del PDF estático del Menú
-        const pdfUrl = "{{ asset('menu_vistaverde.pdf') }}";
+        // Datos específicos por categoría para actualizar la interfaz
+        const categoriesData = {
+            'desayunos': {
+                tag: 'Desayunos & Brunch',
+                title: 'Menú de Desayunos',
+                desc: 'Una deliciosa selección para comenzar su mañana con la excelencia de nuestra cocina.'
+            },
+            'comida': {
+                tag: 'Comidas & Terrazas',
+                title: 'Menú de Comida',
+                desc: 'Cortes seleccionados, platillos frescos y alternativas gourmet para su almuerzo.'
+            },
+            'cena': {
+                tag: 'Cena & Alta Cocina',
+                title: 'Menú de Cena',
+                desc: 'Una propuesta culinaria de autor con platillos de mar y tierra en maridaje de excelencia.'
+            },
+            'cafe': {
+                tag: 'Cafetería & Bar',
+                title: 'Café & Coctelería',
+                desc: 'Cafés de especialidad, mixología sofisticada y repostería artesanal gourmet.'
+            }
+        };
+
+        // Capturar categoría desde la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'desayunos';
+        const categoryInfo = categoriesData[category] || categoriesData['desayunos'];
+
+        // Actualizar textos e interfaz dinámicamente
+        document.querySelector('.pdf-category-tag').textContent = categoryInfo.tag;
+        document.querySelector('.pdf-header-editorial h1').textContent = categoryInfo.title;
+        document.querySelector('.pdf-header-editorial p').textContent = categoryInfo.desc;
+
+        // URL dinámica del PDF correspondiente
+        const pdfUrl = `{{ asset('') }}menu_${category}.pdf`;
+
+        // Actualizar botón de descarga flotante
+        const downloadBtn = document.getElementById('download-pdf');
+        if (downloadBtn) {
+            downloadBtn.href = pdfUrl;
+            downloadBtn.setAttribute('download', `menu_${category}.pdf`);
+            downloadBtn.title = `Descargar ${categoryInfo.title}`;
+        }
 
         // Elementos DOM
         const canvas = document.getElementById('pdf-canvas');
