@@ -1,3 +1,8 @@
+@php
+    if (!isset($disciplines)) {
+        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('sort_order')->get();
+    }
+@endphp
 <!-- resources/views/components/facilities-section.blade.php -->
 <section class="premium-section bg-obsidian fade-in-section" id="clases">
 
@@ -29,145 +34,22 @@
     <div class="facilities-carousel-wrapper" id="wrapper-deportivo" style="display: block;">
         <div class="facilities-carousel-track" id="track-deportivo">
 
-            <!-- Tarjeta 1: Tenis -->
-            <a href="{{ url('/clases/tenis') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80" alt="Tenis" class="bento-fullbleed-img">
+            @forelse($disciplines as $discipline)
+            <a href="{{ url('/clases/'.$discipline->slug) }}" class="bento-fullbleed">
+                <img src="{{ asset($discipline->images->first()?->image_path ?? 'images/hero.jpg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">01</span>
+                    <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                     <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Tenis</h3>
-                        <p class="bento-fullbleed-desc">Canchas profesionales de arcilla y dura con iluminación LED de alto rendimiento.</p>
+                        <h3 class="bento-fullbleed-title">{{ $discipline->title }}</h3>
+                        <p class="bento-fullbleed-desc">{{ $discipline->description }}</p>
                         <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
                     </div>
                 </div>
             </a>
-
-            <!-- Tarjeta 2: Pádel -->
-            <a href="{{ url('/clases/padel') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80" alt="Pádel" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">02</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Pádel</h3>
-                        <p class="bento-fullbleed-desc">Canchas panorámicas techadas de cristal templado y césped texturizado.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 3: Natación -->
-            <a href="{{ url('/clases/natacion') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=600&q=80" alt="Natación" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">03</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Natación</h3>
-                        <p class="bento-fullbleed-desc">Alberca semiolímpica templada para entrenamiento de alto rendimiento.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 4: Box -->
-            <a href="{{ url('/clases/box') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1578500351865-d6c3706f46bc?auto=format&fit=crop&w=600&q=80" alt="Box" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">04</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Box</h3>
-                        <p class="bento-fullbleed-desc">Ring profesional, sacos de entrenamiento y área de sparring supervisado.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 5: Taekwondo -->
-            <a href="{{ url('/clases/taekwondo') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1555597673-b21d5c9356e0?auto=format&fit=crop&w=600&q=80" alt="Taekwondo" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">05</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Taekwondo</h3>
-                        <p class="bento-fullbleed-desc">Dojo con piso de competencia, espejos y entrenadores certificados.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 6: Zumba -->
-            <a href="{{ url('/clases/zumba') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Zumba" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">06</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Zumba</h3>
-                        <p class="bento-fullbleed-desc">Clases grupales de baile y cardio con instructores de clase mundial.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 7: Jumping -->
-            <a href="{{ url('/clases/jumping') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=600&q=80" alt="Jumping" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">07</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Jumping</h3>
-                        <p class="bento-fullbleed-desc">Alto impacto sobre mini-camas elásticas para quemar calorías y ganar resistencia.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 8: Spinning -->
-            <a href="{{ url('/clases/spinning') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=600&q=80" alt="Spinning" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">08</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Spinning</h3>
-                        <p class="bento-fullbleed-desc">Bicicletas estáticas de última generación con audio envolvente y ambiente inmersivo.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 9: Pilates -->
-            <a href="{{ url('/clases/pilates') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=600&q=80" alt="Pilates" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">09</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Pilates</h3>
-                        <p class="bento-fullbleed-desc">Camas reformadoras y aditamentos en un estudio zen cerrado de total quietud.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Tarjeta 10: Sauna y Vapor -->
-            <a href="{{ url('/clases/sauna-vapor') }}" class="bento-fullbleed">
-                <img src="https://images.unsplash.com/photo-1570333361746-e0527b0d6c6b?auto=format&fit=crop&w=600&q=80" alt="Sauna y Vapor" class="bento-fullbleed-img">
-                <div class="bento-fullbleed-overlay"></div>
-                <div class="bento-fullbleed-content">
-                    <span class="bento-fullbleed-number">10</span>
-                    <div class="bento-fullbleed-bottom">
-                        <h3 class="bento-fullbleed-title">Sauna y Vapor</h3>
-                        <p class="bento-fullbleed-desc">Sauna seca finlandesa y baño de vapor turco para una recuperación total.</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
-                    </div>
-                </div>
-            </a>
+            @empty
+            <p style="color: var(--color-text-secondary); padding: 2rem;">No hay disciplinas disponibles actualmente.</p>
+            @endforelse
 
         </div>
     </div>
