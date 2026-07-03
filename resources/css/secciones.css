@@ -98,6 +98,10 @@
     grid-column: span 5;
 }
 
+.bento-col-6 {
+    grid-column: span 6;
+}
+
 .bento-col-7 {
     grid-column: span 7;
 }
@@ -236,7 +240,7 @@
         grid-template-columns: 1fr;
     }
     
-    .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-7 {
+    .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-6, .bento-col-7 {
         grid-column: span 12;
     }
     
@@ -403,4 +407,113 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ==========================================
+   CARRUSEL DE INSTALACIONES (PAG. PRINCIPAL)
+   ========================================== */
+.facilities-carousel-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.facilities-carousel-track {
+    display: flex;
+    gap: 2.2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 1.5rem 0.5rem 3rem 0.5rem;
+    margin: 0;
+    list-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.facilities-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+.facilities-carousel-track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Snap individual card layout in slider */
+.facilities-carousel-track .bento-item {
+    flex: 0 0 360px;
+    scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+    .facilities-carousel-track .bento-item {
+        flex: 0 0 300px;
+    }
+}
+
+.facilities-carousel-btn {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-subtle);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.facilities-carousel-btn:hover:not(:disabled) {
+    color: var(--color-accent-gold);
+    border-color: var(--color-accent-gold);
+    transform: scale(1.05);
+}
+
+.facilities-carousel-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.facilities-tab-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 0.8rem;
+}
+
+.facilities-tab {
+    font-family: var(--font-alt);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0.5rem 0.2rem;
+    transition: color 0.3s ease;
+}
+
+.facilities-tab:hover {
+    color: var(--color-text-primary);
+}
+
+.facilities-tab.active {
+    color: var(--color-accent-gold);
+    font-weight: 600;
+}
+
+.facilities-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-accent-gold);
+    border-radius: 2px;
+}
+
 

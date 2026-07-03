@@ -13,7 +13,7 @@
                 <p style="margin-bottom: 2rem;">
                     Descubre nuestra propuesta gastronómica de temporada, curada por chefs de renombre y diseñada para acompañar tus tardes en el club. Disfruta de un maridaje exclusivo en la terraza frente al lago o en la comodidad del salón privado.
                 </p>
-                <a href="{{ url('/lector-pdf') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
+                <a href="{{ url('/lector') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
                     Ver Carta Interactiva
                 </a>
             </div>
