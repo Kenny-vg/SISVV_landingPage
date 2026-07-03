@@ -1,12 +1,12 @@
 <!-- resources/views/components/facilities-section.blade.php -->
-<section class="premium-section bg-obsidian fade-in-section" id="instalaciones">
+<section class="premium-section bg-obsidian fade-in-section" id="clases">
 
     <!-- Encabezado con botones de navegación del carrusel -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem;">
         <div class="section-header-editorial" style="margin-bottom: 0; max-width: 700px;">
-            <h2>Instalaciones<br><span>sin precedentes.</span></h2>
+            <h2>Clases &<br><span>Disciplinas.</span></h2>
             <p>
-                Cada espacio de VistaVerde ha sido concebido para fundirse con el paisaje y ofrecer una vivencia de privacidad y sofisticación absoluta.
+                Instructores certificados, metodología de élite y espacios de primer nivel para elevar tu rendimiento y bienestar en cada sesión.
             </p>
         </div>
 
@@ -30,124 +30,144 @@
         <div class="facilities-carousel-track" id="track-deportivo">
 
             <!-- Tarjeta 1: Tenis -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/tenis') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80" alt="Tenis" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/tenis') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80" alt="Tenis" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">01</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Tenis</h3>
+                        <p class="bento-fullbleed-desc">Canchas profesionales de arcilla y dura con iluminación LED de alto rendimiento.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Tenis</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Canchas profesionales de arcilla y dura con iluminación LED de alto rendimiento.</p>
-                    <a href="{{ url('/instalaciones/tenis') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 2: Pádel -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/padel') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80" alt="Pádel" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/padel') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=600&q=80" alt="Pádel" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">02</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Pádel</h3>
+                        <p class="bento-fullbleed-desc">Canchas panorámicas techadas de cristal templado y césped texturizado.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Pádel</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Canchas panorámicas techadas de cristal templado y césped texturizado.</p>
-                    <a href="{{ url('/instalaciones/padel') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 3: Natación -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/natacion') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=600&q=80" alt="Natación" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/natacion') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=600&q=80" alt="Natación" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">03</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Natación</h3>
+                        <p class="bento-fullbleed-desc">Alberca semiolímpica templada para entrenamiento de alto rendimiento.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Natación</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Alberca semiolímpica templada para entrenamiento de alto rendimiento.</p>
-                    <a href="{{ url('/instalaciones/natacion') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 4: Box -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/box') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1578500351865-d6c3706f46bc?auto=format&fit=crop&w=600&q=80" alt="Box" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/box') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1578500351865-d6c3706f46bc?auto=format&fit=crop&w=600&q=80" alt="Box" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">04</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Box</h3>
+                        <p class="bento-fullbleed-desc">Ring profesional, sacos de entrenamiento y área de sparring supervisado.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Box</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Ring profesional, sacos de entrenamiento y área de sparring supervisado.</p>
-                    <a href="{{ url('/instalaciones/box') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 5: Taekwondo -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/taekwondo') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1555597673-b21d5c9356e0?auto=format&fit=crop&w=600&q=80" alt="Taekwondo" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/taekwondo') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1555597673-b21d5c9356e0?auto=format&fit=crop&w=600&q=80" alt="Taekwondo" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">05</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Taekwondo</h3>
+                        <p class="bento-fullbleed-desc">Dojo con piso de competencia, espejos y entrenadores certificados.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Taekwondo</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Dojo equipado con piso de competencia, espejos y entrenadores certificados.</p>
-                    <a href="{{ url('/instalaciones/taekwondo') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 6: Zumba -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/zumba') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Zumba" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/zumba') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Zumba" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">06</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Zumba</h3>
+                        <p class="bento-fullbleed-desc">Clases grupales de baile y cardio con instructores de clase mundial.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Zumba</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Clases grupales de baile y cardio con instructores de clase mundial.</p>
-                    <a href="{{ url('/instalaciones/zumba') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 7: Jumping -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/jumping') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=600&q=80" alt="Jumping" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/jumping') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=600&q=80" alt="Jumping" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">07</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Jumping</h3>
+                        <p class="bento-fullbleed-desc">Alto impacto sobre mini-camas elásticas para quemar calorías y ganar resistencia.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Jumping</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Ejercicio de alto impacto sobre mini-camas elásticas para quemar calorías.</p>
-                    <a href="{{ url('/instalaciones/jumping') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 8: Spinning -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/spinning') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=600&q=80" alt="Spinning" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/spinning') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=600&q=80" alt="Spinning" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">08</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Spinning</h3>
+                        <p class="bento-fullbleed-desc">Bicicletas estáticas de última generación con audio envolvente y ambiente inmersivo.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Spinning</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Sala con bicicletas estáticas de última generación y música envolvente.</p>
-                    <a href="{{ url('/instalaciones/spinning') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 9: Pilates -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/pilates') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=600&q=80" alt="Pilates" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/pilates') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=600&q=80" alt="Pilates" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">09</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Pilates</h3>
+                        <p class="bento-fullbleed-desc">Camas reformadoras y aditamentos en un estudio zen cerrado de total quietud.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Pilates</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Camas reformadoras y aditamentos en un estudio zen cerrado.</p>
-                    <a href="{{ url('/instalaciones/pilates') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
             <!-- Tarjeta 10: Sauna y Vapor -->
-            <div class="bento-item" style="cursor: pointer;" onclick="window.location.href='{{ url('/instalaciones/sauna-vapor') }}'">
-                <div class="bento-img-container" style="height: 220px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1570333361746-e0527b0d6c6b?auto=format&fit=crop&w=600&q=80" alt="Sauna y Vapor" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+            <a href="{{ url('/clases/sauna-vapor') }}" class="bento-fullbleed">
+                <img src="https://images.unsplash.com/photo-1570333361746-e0527b0d6c6b?auto=format&fit=crop&w=600&q=80" alt="Sauna y Vapor" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number">10</span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title">Sauna y Vapor</h3>
+                        <p class="bento-fullbleed-desc">Sauna seca finlandesa y baño de vapor turco para una recuperación total.</p>
+                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                    </div>
                 </div>
-                <div class="bento-card-content" style="padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-text-primary);">Sauna y Vapor</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">Sauna seca finlandesa y baño de vapor turco para una recuperación total.</p>
-                    <a href="{{ url('/instalaciones/sauna-vapor') }}" class="btn-link" style="text-decoration: none; color: var(--color-text-primary); font-weight: 600; font-size: 0.85rem; margin-top: auto; align-self: flex-start;">Ver Detalles &rarr;</a>
-                </div>
-            </div>
+            </a>
 
         </div>
     </div>
@@ -164,7 +184,7 @@
         const track = document.getElementById(`track-${activeCategory}`);
         if (!track) return;
 
-        const scrollAmount = 395 * direction;
+        const scrollAmount = 375 * direction;
         track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 
         setTimeout(updateButtonStates, 400);
@@ -178,7 +198,6 @@
         const nextBtn = document.getElementById('fac-next-btn');
 
         prevBtn.disabled = track.scrollLeft <= 10;
-
         nextBtn.disabled = (track.scrollLeft + track.clientWidth) >= (track.scrollWidth - 10);
     }
 
@@ -192,7 +211,6 @@
         }
 
         setTimeout(updateButtonStates, 200);
-
         window.addEventListener('resize', updateButtonStates);
     });
 </script>

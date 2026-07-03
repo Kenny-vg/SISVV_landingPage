@@ -11,11 +11,10 @@
 }
 
 .bg-forest {
-    background-color: var(--color-bg-forest); /* Fondo verde bosque de contraste */
-    color: var(--color-bg); /* Texto claro */
+    background-color: var(--color-bg-forest);
+    color: var(--color-bg);
 }
 
-/* Títulos editoriales asimétricos */
 .section-header-editorial {
     margin-bottom: 3rem;
     max-width: 700px;
@@ -41,9 +40,6 @@
     color: var(--color-text-secondary);
 }
 
-/* ==========================================
-   BENTO BOX ORGÁNICO (CSS GRID ASIMÉTRICO)
-   ========================================== */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -62,8 +58,8 @@
     flex-direction: column;
     border: 1px solid var(--color-border-subtle);
     box-shadow: 0 4px 20px var(--color-shadow-active);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                 background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -74,7 +70,6 @@
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover de Bento: Zoom-in en imágenes y sutil levitación */
 .bento-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--color-bento-hover-shadow);
@@ -85,28 +80,12 @@
     transform: scale(1.04);
 }
 
-/* Distribución de celdas asimétricas (Awwwards style) */
-.bento-col-8 {
-    grid-column: span 8;
-}
+.bento-col-8 { grid-column: span 8; }
+.bento-col-4 { grid-column: span 4; }
+.bento-col-5 { grid-column: span 5; }
+.bento-col-6 { grid-column: span 6; }
+.bento-col-7 { grid-column: span 7; }
 
-.bento-col-4 {
-    grid-column: span 4;
-}
-
-.bento-col-5 {
-    grid-column: span 5;
-}
-
-.bento-col-6 {
-    grid-column: span 6;
-}
-
-.bento-col-7 {
-    grid-column: span 7;
-}
-
-/* Altura fija de imágenes Bento */
 .bento-img-container {
     height: 260px;
     overflow: hidden;
@@ -138,9 +117,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* ==========================================
-   HERO SECTOR ASIMÉTRICO (3 BANDAS)
-   ========================================== */
 .hero-asymmetric {
     position: relative;
     min-height: 100vh;
@@ -202,9 +178,6 @@
     color: #075B2A;
 }
 
-/* ==========================================
-   GOLFISTA DECORATIVO + PELOTA FLOTANTE
-   ========================================== */
 .hero-golfista {
     position: absolute;
     right: -2%;
@@ -233,38 +206,20 @@
 }
 
 @keyframes golfista-appear {
-    0% {
-        opacity: 0;
-        transform: translateX(60px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    0% { opacity: 0; transform: translateX(60px); }
+    100% { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes golf-ball-float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    30% {
-        transform: translateY(-18px) rotate(4deg);
-    }
-    60% {
-        transform: translateY(8px) rotate(-2deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(-18px) rotate(4deg); }
+    60% { transform: translateY(8px) rotate(-2deg); }
 }
 
 @media (max-width: 991px) {
-    .hero-golfista,
-    .hero-golf-ball {
-        display: none;
-    }
+    .hero-golfista, .hero-golf-ball { display: none; }
 }
 
-/* ==========================================
-   GASTRONOMÍA Y SPA (OVERLAPPING EDITORIAL)
-   ========================================== */
 .gastronomy-asymmetric {
     display: grid;
     grid-template-columns: 5fr 6fr;
@@ -301,36 +256,14 @@
     transform: rotate(5deg) scale(1.05);
 }
 
-/* ==========================================
-   RESPONSIVIDAD
-   ========================================== */
 @media (max-width: 991px) {
-    .bento-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-6, .bento-col-7 {
-        grid-column: span 12;
-    }
-    
-    .hero-asymmetric {
-        padding: 100px 5% 3rem 5%;
-    }
-
-    .gastronomy-asymmetric {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    
-    .gastronomy-media-wrapper {
-        padding-left: 0;
-        margin-bottom: 2rem;
-    }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-6, .bento-col-7 { grid-column: span 12; }
+    .hero-asymmetric { padding: 100px 5% 3rem 5%; }
+    .gastronomy-asymmetric { grid-template-columns: 1fr; gap: 3rem; }
+    .gastronomy-media-wrapper { padding-left: 0; margin-bottom: 2rem; }
 }
 
-/* ==========================================
-   FOOTER DE SILENCIO VISUAL
-   ========================================== */
 .premium-footer {
     background-color: var(--color-footer-bg);
     color: var(--color-bg);
@@ -401,10 +334,7 @@
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.social-link svg {
-    width: 18px;
-    height: 18px;
-}
+.social-link svg { width: 18px; height: 18px; }
 
 .social-link:hover {
     color: var(--color-accent-gold);
@@ -427,37 +357,20 @@
     gap: 1rem;
 }
 
-.footer-legal {
-    display: flex;
-    align-items: center;
-}
-
-.footer-legal a:hover {
-    color: var(--color-accent-gold) !important;
-}
+.footer-legal { display: flex; align-items: center; }
+.footer-legal a:hover { color: var(--color-accent-gold) !important; }
 
 @media (max-width: 767px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-    gap: 2rem;
-    }
-    .premium-footer {
-        padding: 4rem 1.5rem 2rem 1.5rem;
-    }
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-    }
-    .footer-legal {
-        justify-content: center;
-    }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .premium-footer { padding: 4rem 1.5rem 2rem 1.5rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .footer-legal { justify-content: center; }
 }
 
-/* Animaciones con Scroll */
 .fade-in-section {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -467,7 +380,7 @@
 }
 
 /* ==========================================
-   CARRUSEL DE INSTALACIONES (PAG. PRINCIPAL)
+   CARRUSEL DE CLASES
    ========================================== */
 .facilities-carousel-wrapper {
     position: relative;
@@ -484,26 +397,19 @@
     margin: 0;
     list-style: none;
     -webkit-overflow-scrolling: touch;
-}
-
-.facilities-carousel-track::-webkit-scrollbar {
-    display: none;
-}
-.facilities-carousel-track {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-/* Snap individual card layout in slider */
+.facilities-carousel-track::-webkit-scrollbar { display: none; }
+
 .facilities-carousel-track .bento-item {
     flex: 0 0 360px;
     scroll-snap-align: start;
 }
 
 @media (max-width: 768px) {
-    .facilities-carousel-track .bento-item {
-        flex: 0 0 300px;
-    }
+    .facilities-carousel-track .bento-item { flex: 0 0 300px; }
 }
 
 .facilities-carousel-btn {
@@ -554,9 +460,7 @@
     transition: color 0.3s ease;
 }
 
-.facilities-tab:hover {
-    color: var(--color-text-primary);
-}
+.facilities-tab:hover { color: var(--color-text-primary); }
 
 .facilities-tab.active {
     color: var(--color-accent-gold);
@@ -574,4 +478,160 @@
     border-radius: 2px;
 }
 
-
+/* ==========================================
+   BENTO CARD FULL-BLEED (PREMIUM EDITION)
+   ========================================== */
+.bento-fullbleed {
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+    border-radius: 24px;
+    text-decoration: none !important;
+    display: block;
+    background-color: #111;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-fullbleed:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.bento-fullbleed-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+}
+
+.bento-fullbleed:hover .bento-fullbleed-img {
+    transform: scale(1.07);
+}
+
+.bento-fullbleed-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.42) 50%, rgba(0,0,0,0.06) 100%);
+    z-index: 1;
+    transition: background 0.5s ease;
+}
+
+.bento-fullbleed:hover .bento-fullbleed-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.58) 55%, rgba(0,0,0,0.12) 100%);
+}
+
+.bento-fullbleed-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.6rem 2rem 2rem 2rem;
+}
+
+.bento-fullbleed-number {
+    font-family: var(--font-alt);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    align-self: flex-start;
+    background: rgba(255,255,255,0.08);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.bento-fullbleed-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.bento-fullbleed-title {
+    font-family: var(--font-editorial);
+    font-size: 1.65rem;
+    color: #fff;
+    margin: 0;
+    line-height: 1.15;
+    font-weight: 500;
+}
+
+.bento-fullbleed-desc {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.55;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    opacity: 0;
+}
+
+.bento-fullbleed:hover .bento-fullbleed-desc {
+    max-height: 5rem;
+    opacity: 1;
+}
+
+.bento-fullbleed-link {
+    font-family: var(--font-alt);
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    color: var(--color-accent-gold);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0;
+    transform: translateY(7px);
+    transition: opacity 0.3s ease 0.06s, transform 0.3s ease 0.06s;
+    margin-top: 0.5rem;
+}
+
+.bento-fullbleed:hover .bento-fullbleed-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fix: dark mode verde en cards normales */
+[data-theme=dark] .bento-item:not(.bento-fullbleed) {
+    background-color: #111111;
+    border-color: rgba(193, 201, 77, 0.10);
+}
+
+/* Carrusel full-bleed snap */
+.facilities-carousel-track .bento-fullbleed {
+    flex: 0 0 340px;
+    scroll-snap-align: start;
+}
+
+@media (max-width: 768px) {
+    .facilities-carousel-track .bento-fullbleed { flex: 0 0 290px; }
+    .bento-fullbleed { min-height: 320px; }
+}
+
+/* ==========================================
+   GRID DE INSTALACIONES (LUGARES DEL CLUB)
+   ========================================== */
+.instalaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .instalaciones-grid { grid-template-columns: 1fr; }
+}
+
+.instalaciones-grid .bento-fullbleed {
+    min-height: 420px;
+}

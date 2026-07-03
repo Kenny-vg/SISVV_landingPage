@@ -19,6 +19,8 @@
 
     <x-about-section />
 
+    <x-instalaciones-section />
+
     <x-facilities-section />
 
     <x-menu-section />
