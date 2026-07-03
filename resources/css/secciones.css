@@ -1,7 +1,7 @@
 /* resources/css/secciones.css */
 
 .premium-section {
-    padding: 8rem 8%;
+    padding: 5rem 8%;
     position: relative;
     display: block;
 }
@@ -17,7 +17,7 @@
 
 /* Títulos editoriales asimétricos */
 .section-header-editorial {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     max-width: 700px;
 }
 
@@ -61,7 +61,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--color-border-subtle);
-    box-shadow: 0 4px 20px rgba(24, 42, 33, 0.02);
+    box-shadow: 0 4px 20px var(--color-shadow-active);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
                 box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
                 background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -108,7 +108,7 @@
 
 /* Altura fija de imágenes Bento */
 .bento-img-container {
-    height: 320px;
+    height: 260px;
     overflow: hidden;
     position: relative;
 }
@@ -118,7 +118,7 @@
 }
 
 .bento-card-content {
-    padding: 2.2rem;
+    padding: 1.8rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -146,8 +146,8 @@
     min-height: 100vh;
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-    padding: 80px 8% 4rem 8%;
+    justify-content: flex-start;
+    padding: 80px 8% 2rem 8%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -164,42 +164,102 @@
 .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 720px;
+    text-align: left;
+    max-width: 600px;
 }
 
 .hero-content h1 {
     font-family: var(--font-editorial);
     font-size: clamp(3rem, 6vw, 5.5rem);
     line-height: 1.05;
-    color: #FFFFFF;
+    color: var(--color-hero-text);
     margin-bottom: 1.5rem;
 }
 
 .hero-content h1 span {
     font-style: italic;
     font-weight: 300;
-    color: #c1c94d;
+    color: var(--color-hero-accent);
 }
 
 .hero-content p {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-hero-text-secondary);
     margin-bottom: 2.5rem;
 }
 
 .hero-content .btn-gold {
-    color: #FFFFFF;
-    border-color: #FFFFFF;
+    color: var(--color-hero-text);
+    border-color: var(--color-hero-text);
 }
 
 .hero-content .btn-gold::before {
-    background-color: #FFFFFF;
+    background-color: var(--color-hero-text);
 }
 
 .hero-content .btn-gold:hover {
     color: #075B2A;
+}
+
+/* ==========================================
+   GOLFISTA DECORATIVO + PELOTA FLOTANTE
+   ========================================== */
+.hero-golfista {
+    position: absolute;
+    right: -2%;
+    bottom: 0;
+    height: 68vh;
+    width: auto;
+    z-index: 0;
+    opacity: 0;
+    animation: golfista-appear 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    pointer-events: none;
+    user-select: none;
+    filter: saturate(0.85) brightness(0.9);
+}
+
+.hero-golf-ball {
+    position: absolute;
+    right: 8%;
+    bottom: 50%;
+    width: 55px;
+    height: auto;
+    z-index: 0;
+    animation: golf-ball-float 4s ease-in-out infinite;
+    pointer-events: none;
+    user-select: none;
+    filter: saturate(0.8) brightness(0.95);
+}
+
+@keyframes golfista-appear {
+    0% {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes golf-ball-float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    30% {
+        transform: translateY(-18px) rotate(4deg);
+    }
+    60% {
+        transform: translateY(8px) rotate(-2deg);
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-golfista,
+    .hero-golf-ball {
+        display: none;
+    }
 }
 
 /* ==========================================
@@ -220,7 +280,7 @@
 .gastronomy-main-img {
     width: 85%;
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(24, 42, 33, 0.06);
+    box-shadow: 0 15px 40px var(--color-shadow-hover);
     display: block;
 }
 
@@ -233,7 +293,7 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border: 8px solid var(--color-bg);
-    box-shadow: 0 10px 30px rgba(24, 42, 33, 0.1);
+    box-shadow: 0 10px 30px var(--color-shadow-hover);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -272,10 +332,10 @@
    FOOTER DE SILENCIO VISUAL
    ========================================== */
 .premium-footer {
-    background-color: #15221B; /* Sombra de verde bosque */
+    background-color: var(--color-footer-bg);
     color: var(--color-bg);
-    padding: 6rem 8% 3rem 8%;
-    border-top: 1px solid rgba(253, 252, 249, 0.05);
+    padding: 4rem 8% 2.5rem 8%;
+    border-top: 1px solid var(--color-footer-border);
 }
 
 .footer-grid {
@@ -283,7 +343,7 @@
     grid-template-columns: 2fr 1fr 1fr;
     gap: 4rem;
     max-width: 1200px;
-    margin: 0 auto 4rem auto;
+    margin: 0 auto 2.5rem auto;
 }
 
 .footer-logo {
@@ -302,7 +362,7 @@
 .footer-tagline {
     font-size: 0.95rem;
     line-height: 1.7;
-    color: rgba(253, 252, 249, 0.6);
+    color: var(--color-footer-tagline);
     max-width: 320px;
 }
 
@@ -313,13 +373,13 @@
     letter-spacing: 2px;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    color: var(--color-accent-gold);
+    color: var(--color-footer-heading);
 }
 
 .footer-col p {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: rgba(253, 252, 249, 0.7);
+    color: var(--color-footer-text);
     margin: 0 0 0.5rem 0;
 }
 
@@ -336,8 +396,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(253, 252, 249, 0.15);
-    color: rgba(253, 252, 249, 0.6);
+    border: 1px solid var(--color-footer-social-border);
+    color: var(--color-footer-text);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -349,12 +409,12 @@
 .social-link:hover {
     color: var(--color-accent-gold);
     border-color: var(--color-accent-gold);
-    background-color: rgba(196, 175, 154, 0.08);
+    background-color: rgba(193, 201, 77, 0.08);
     transform: translateY(-3px);
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(253, 252, 249, 0.05);
+    border-top: 1px solid var(--color-footer-border);
     padding-top: 2rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -362,7 +422,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.8rem;
-    color: rgba(253, 252, 249, 0.4);
+    color: var(--color-footer-legal-text);
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -379,7 +439,7 @@
 @media (max-width: 767px) {
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+    gap: 2rem;
     }
     .premium-footer {
         padding: 4rem 1.5rem 2rem 1.5rem;

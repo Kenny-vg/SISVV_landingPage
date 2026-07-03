@@ -21,7 +21,7 @@
             <p>Tel. 238 37 4 50 11 ext. 101 o 108</p>
             <p>Cel. 238 129 0316</p>
             <p style="margin-top: 0.8rem;"><a href="mailto:sistemas@vistaverde.com.mx" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='inherit'">sistemas@vistaverde.com.mx</a></p>
-            <p style="margin-top: 1rem; font-size: 0.85rem; color: rgba(253, 252, 249, 0.5);">Mar - Sáb: 8:00 am - 8:00 pm<br>Dom: 8:00 am - 6:00 pm</p>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-footer-legal-text);">Mar - Sáb: 8:00 am - 8:00 pm<br>Dom: 8:00 am - 6:00 pm</p>
         </div>
         <div class="footer-col">
             <h4>Ubicación</h4>
@@ -35,9 +35,9 @@
     <div class="footer-bottom">
         <p>&copy; {{ date('Y') }} VistaVerde Country Club. Todos los derechos reservados.</p>
         <div class="footer-legal">
-            <a href="#" style="color: rgba(253, 252, 249, 0.4); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='rgba(253, 252, 249, 0.4)'">Aviso de Privacidad</a>
-            <span style="margin: 0 0.8rem; color: rgba(253, 252, 249, 0.2);">|</span>
-            <a href="#" style="color: rgba(253, 252, 249, 0.4); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='rgba(253, 252, 249, 0.4)'">Términos y Condiciones</a>
+            <a href="#" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">Aviso de Privacidad</a>
+            <span style="margin: 0 0.8rem; color: var(--color-footer-border);">|</span>
+            <a href="#" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">Términos y Condiciones</a>
         </div>
     </div>
 </footer>

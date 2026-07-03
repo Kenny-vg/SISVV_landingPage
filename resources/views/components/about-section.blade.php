@@ -1,70 +1,20 @@
 <!-- resources/views/components/about-section.blade.php -->
 <section class="premium-section bg-obsidian fade-in-section" id="nosotros">
-    <div class="section-header-editorial">
-        <h2>Nuestro Legado<br><span>y Valores.</span></h2>
-        <p>
-            Conoce la historia, la filosofía que nos define y el compromiso diario que asumimos con cada uno de nuestros socios.
-        </p>
-    </div>
-
-    <!-- Grid Asimétrico Bento para la información corporativa -->
-    <div class="bento-grid">
-        
-        <!-- Tarjeta 1: Historia (Ancho 7) -->
-        <div class="bento-item bento-col-7">
-            <div class="bento-img-container" style="height: 250px;">
-                <img src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=1200&q=80" alt="Historia del Club Vista Verde">
-            </div>
-            <div class="bento-card-content">
-                <span class="gold-subtitle" style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">Desde nuestra fundación</span>
-                <h3>Nuestra Historia</h3>
-                <p>
-                    Fundado con el propósito de fusionar el lujo moderno con la serenidad de la naturaleza, Vista Verde nació como un santuario exclusivo donde generaciones de familias han compartido momentos memorables frente a nuestros lagos y campos verdes.
-                </p>
-            </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto;">
+        <div>
+            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Quiénes somos</span>
+            <h2 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;">
+                Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>
+            </h2>
+            <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
+                Vista Verde Country Club nació como un sueño: crear un espacio donde la excelencia deportiva, el bienestar y la naturaleza se fundieran en perfecta armonía. Hoy somos un destino exclusivo para quienes buscan más que un club, un estilo de vida.
+            </p>
+            <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8;">
+                Nuestras instalaciones de primer nivel, rodeadas de paisajes que inspiran, ofrecen a cada socio una experiencia única de privacidad, sofisticación y conexión con el entorno.
+            </p>
         </div>
-
-        <!-- Tarjeta 2: Filosofía (Ancho 5) -->
-        <div class="bento-item bento-col-5">
-            <div class="bento-img-container" style="height: 250px;">
-                <img src="https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=800&q=80" alt="Filosofía y naturaleza Vista Verde">
-            </div>
-            <div class="bento-card-content">
-                <span class="gold-subtitle" style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">Armonía & Equilibrio</span>
-                <h3>Filosofía</h3>
-                <p>
-                    Creemos en el equilibrio perfecto entre la excelencia y la sostenibilidad. Cada rincón del club está diseñado para inspirar calma, promover el bienestar físico y cultivar conexiones profundas con nuestro entorno natural.
-                </p>
-            </div>
+        <div style="border-radius: 24px; overflow: hidden; height: 500px;">
+            <img src="{{ asset('images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
-
-        <!-- Tarjeta 3: Misión (Ancho 5) -->
-        <div class="bento-item bento-col-5">
-            <div class="bento-img-container" style="height: 250px;">
-                <img src="https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&w=800&q=80" alt="Misión del club Vista Verde">
-            </div>
-            <div class="bento-card-content">
-                <span class="gold-subtitle" style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">Nuestro Propósito</span>
-                <h3>Misión</h3>
-                <p>
-                    Ofrecer a nuestros miembros un estilo de vida inigualable mediante instalaciones deportivas de élite, experiencias gastronómicas de primer nivel y un servicio personalizado caracterizado por la calidez, la excelencia y la discreción.
-                </p>
-            </div>
-        </div>
-
-        <!-- Tarjeta 4: Visión (Ancho 7) -->
-        <div class="bento-item bento-col-7">
-            <div class="bento-img-container" style="height: 250px;">
-                <img src="https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=1200&q=80" alt="Visión del futuro Vista Verde">
-            </div>
-            <div class="bento-card-content">
-                <span class="gold-subtitle" style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">Hacia el futuro</span>
-                <h3>Visión</h3>
-                <p>
-                    Consolidarnos como el club de campo más distinguido y sostenible de la región, siendo reconocidos a nivel nacional por nuestra excelencia en hospitalidad, comunidad deportiva y respeto por el entorno ecológico.
-                </p>
-            </div>
-        </div>
-
     </div>
 </section>

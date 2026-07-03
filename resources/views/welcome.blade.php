@@ -4,8 +4,10 @@
 
     <section class="hero-asymmetric" style="background-image: url('{{ asset('images/hero.jpg') }}');">
         <div class="hero-overlay"></div>
+        <img src="{{ asset('images/golfista.png') }}" alt="" class="hero-golfista">
+        <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
         <div class="hero-content">
-            <h1>Donde cada día se <span>disfruta diferente.</span></h1>
+            <h1>Donde cada día se <span>disfruta diferente</span></h1>
             <p>
                 Naturaleza, bienestar y experiencias que elevan tu estilo de vida.
             </p>
@@ -21,125 +23,12 @@
 
     <x-menu-section />
 
-    <!-- ==========================================
-       SECCIÓN DE MEMBRESÍAS (PLANES)
-       ========================================== -->
-    <section class="premium-section bg-obsidian fade-in-section" id="membresias" style="background-color: var(--color-bg); padding: 8rem 8% 6rem 8%;">
-        <div class="section-header-editorial" style="text-align: center; max-width: 800px; margin: 0 auto 5rem auto;">
-            <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Membresías Exclusivas</span>
-            <h2 style="color: var(--color-text-primary);">Planes de Acceso<br><span>a su medida.</span></h2>
-            <p style="color: var(--color-text-secondary); max-width: 600px; margin: 2rem auto 0 auto;">
-                Únase a la comunidad de VistaVerde y disfrute de un estilo de vida inigualable. Seleccione la membresía que mejor se adapte a sus necesidades.
-            </p>
-        </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; align-items: stretch;">
-            
-            <!-- Plan 1: Individual -->
-            <div class="bento-item" style="background-color: var(--color-surface); border: 1px solid var(--color-border-subtle); border-radius: 24px; padding: 3rem 2.2rem; display: flex; flex-direction: column; position: relative;">
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 1rem; display: block;">Acceso Single</span>
-                <h3 style="font-family: var(--font-editorial); font-size: 2rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">Individual</h3>
-                <div style="margin-bottom: 2rem;">
-                    <span style="font-size: 2.2rem; font-weight: 300; color: var(--color-text-primary);">$3,500</span>
-                    <span style="color: var(--color-text-secondary); font-size: 0.9rem;">MXN / mes</span>
-                </div>
-                <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.2rem;">Acceso individual completo para deportistas y profesionales que buscan excelencia física.</p>
-                <div style="border-top: 1px solid var(--color-border-subtle); padding-top: 2rem; margin-bottom: 3rem; flex-grow: 1;">
-                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Acceso ilimitado a gimnasio y alberca
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Reservación de canchas de tenis y pádel
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Ingreso a Casa Club y restaurant
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Tarifas preferentes en torneos del club
-                        </li>
-                    </ul>
-                </div>
-                <a href="#contacto" class="btn-gold" style="text-decoration: none; text-align: center; display: block; border: 1px solid var(--color-accent-gold); background: transparent; color: var(--color-text-primary);">Solicitar Informes</a>
-            </div>
-
-            <!-- Plan 2: Familiar (Destacado con acentos dorados) -->
-            <div class="bento-item" style="background-color: var(--color-surface); border: 2px solid var(--color-accent-gold); border-radius: 24px; padding: 3rem 2.2rem; display: flex; flex-direction: column; position: relative; box-shadow: 0 10px 30px rgba(193, 201, 77, 0.08);">
-                <div style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background-color: var(--color-accent-gold); color: #07361B; font-family: var(--font-alt); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.4rem 1.2rem; border-radius: 30px; white-space: nowrap;">
-                    Más Popular
-                </div>
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 1rem; display: block;">Acceso Familiar</span>
-                <h3 style="font-family: var(--font-editorial); font-size: 2rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">Familiar</h3>
-                <div style="margin-bottom: 2rem;">
-                    <span style="font-size: 2.2rem; font-weight: 300; color: var(--color-text-primary);">$6,500</span>
-                    <span style="color: var(--color-text-secondary); font-size: 0.9rem;">MXN / mes</span>
-                </div>
-                <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.2rem;">La experiencia familiar completa de bienestar, deporte y convivencia en comunidad.</p>
-                <div style="border-top: 1px solid var(--color-border-subtle); padding-top: 2rem; margin-bottom: 3rem; flex-grow: 1;">
-                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Titular, cónyuge e hijos menores de 18 años
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Acceso total a áreas deportivas y sociales
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            4 pases de invitado de cortesía al mes
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Descuentos especiales en clases e instrucción
-                        </li>
-                    </ul>
-                </div>
-                <a href="#contacto" class="btn-gold" style="text-decoration: none; text-align: center; display: block; background-color: var(--color-accent-gold); color: #07361B; border: none;">Solicitar Informes</a>
-            </div>
-
-            <!-- Plan 3: Corporativo -->
-            <div class="bento-item" style="background-color: var(--color-surface); border: 1px solid var(--color-border-subtle); border-radius: 24px; padding: 3rem 2.2rem; display: flex; flex-direction: column; position: relative;">
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 1rem; display: block;">Acceso Business</span>
-                <h3 style="font-family: var(--font-editorial); font-size: 2rem; color: var(--color-text-primary); margin: 0 0 1rem 0;">Corporativo</h3>
-                <div style="margin-bottom: 2rem;">
-                    <span style="font-size: 1.8rem; font-weight: 300; color: var(--color-text-primary);">A Medida</span>
-                </div>
-                <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.2rem;">Soluciones corporativas de esparcimiento y bienestar para su equipo de ejecutivos.</p>
-                <div style="border-top: 1px solid var(--color-border-subtle); padding-top: 2rem; margin-bottom: 3rem; flex-grow: 1;">
-                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem;">
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Para 5 o más ejecutivos designados
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Uso de salas de juntas en Casa Club
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Tarifas especiales para eventos empresariales
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 0.8rem; font-size: 0.9rem; color: var(--color-text-primary);">
-                            <svg fill="none" stroke="var(--color-accent-gold)" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>
-                            Facturación mensual unificada corporativa
-                        </li>
-                    </ul>
-                </div>
-                <a href="#contacto" class="btn-gold" style="text-decoration: none; text-align: center; display: block; border: 1px solid var(--color-accent-gold); background: transparent; color: var(--color-text-primary);">Cotizar Plan</a>
-            </div>
-
-        </div>
-    </section>
 
     <!-- ==========================================
        SECCIÓN DE CONTACTO & UBICACIÓN (REFACTORIZACIÓN)
        ========================================== -->
-    <section class="premium-section bg-obsidian fade-in-section" style="background-color: var(--color-bg); padding: 8rem 8%;" id="contacto">
+    <section class="premium-section bg-obsidian fade-in-section" style="background-color: var(--color-bg); padding: 5rem 8%;" id="contacto">
         <style>
             @media (max-width: 991px) {
                 .contacto-grid-wrapper {
@@ -153,7 +42,7 @@
         </style>
 
         <div style="max-width: 1200px; margin: 0 auto;">
-            <div class="contacto-grid-wrapper" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center;">
+            <div class="contacto-grid-wrapper" style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 3.5rem; align-items: center;">
                 
                 <!-- Columna Izquierda: Información de Ubicación Minimalista -->
                 <div>
