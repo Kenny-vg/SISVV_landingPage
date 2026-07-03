@@ -35,15 +35,15 @@
             <!-- Columna Izquierda: Información Editorial -->
             <div class="editorial-col" style="position: sticky; top: 100px;">
                 <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">
-                    Club {{ $area['category'] }}
+                    Club {{ $area->category }}
                 </span>
 
                 <h1 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; color: var(--color-text-primary); margin-bottom: 2rem;">
-                    {{ $area['title'] }}
+                    {{ $area->title }}
                 </h1>
-
+                
                 <p style="color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3rem;">
-                    {{ $area['description'] }}
+                    {{ $area->description }}
                 </p>
 
                 <!-- Caja de Horario Estilo Premium -->
@@ -58,7 +58,7 @@
                             Horarios de Clases
                         </h4>
                         <p style="margin: 0; color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5;">
-                            {{ $area['schedule'] }}
+                            {{ $area->schedule }}
                         </p>
                     </div>
                 </div>
@@ -68,16 +68,16 @@
             <div>
                 <!-- Imagen Principal Ampliada -->
                 <div class="main-img-wrapper" style="width: 100%; height: 500px; border-radius: 24px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: 1px solid var(--color-border-subtle); background-color: var(--color-surface); position: relative;">
-                    <img id="main-gallery-img" src="{{ $area['images'][0] }}" alt="{{ $area['title'] }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; opacity: 1;">
+                    <img id="main-gallery-img" src="{{ asset($area->images->first()?->image_path ?? '') }}" alt="{{ $area->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease; opacity: 1;">
                 </div>
 
                 <!-- Miniaturas (Thumbnails) -->
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
-                    @foreach($area['images'] as $index => $imgUrl)
+                    @foreach($area->images as $index => $img)
                         <div class="gallery-thumbnail {{ $index === 0 ? 'active' : '' }}"
-                             onclick="changeMainImage('{{ $imgUrl }}', this)"
+                             onclick="changeMainImage('{{ asset($img->image_path) }}', this)"
                              style="cursor: pointer; height: 120px; border-radius: 16px; overflow: hidden; border: 2px solid {{ $index === 0 ? 'var(--color-accent-gold)' : 'transparent' }}; transition: all 0.3s ease; background-color: var(--color-surface);">
-                            <img src="{{ $imgUrl }}" alt="Vista {{ $index + 1 }}" style="width: 100%; height: 100%; object-fit: cover; opacity: {{ $index === 0 ? '1' : '0.6' }}; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="if(!this.parentNode.classList.contains('active')) this.style.opacity='0.6'">
+                            <img src="{{ asset($img->image_path) }}" alt="Vista {{ $index + 1 }}" style="width: 100%; height: 100%; object-fit: cover; opacity: {{ $index === 0 ? '1' : '0.6' }}; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="if(!this.parentNode.classList.contains('active')) this.style.opacity='0.6'">
                         </div>
                     @endforeach
                 </div>

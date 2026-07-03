@@ -40,6 +40,11 @@
     color: var(--color-text-secondary);
 }
 
+[data-theme="dark"] .bg-obsidian .section-header-editorial p,
+[data-theme="dark"] .instalaciones-page .section-header-editorial p {
+    color: #FFFFFF;
+}
+
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);

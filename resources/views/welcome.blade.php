@@ -1,19 +1,39 @@
+@php
+    if (!isset($hero)) {
+        $hero = \App\Models\Hero::where('is_active', true)->orderBy('sort_order')->first();
+    }
+    if (!isset($pageSections)) {
+        $pageSections = \App\Models\PageSection::where('is_active', true)->get()->keyBy('key');
+    }
+    if (!isset($disciplines)) {
+        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('sort_order')->get();
+    }
+    if (!isset($facilities)) {
+        $facilities = \App\Models\Facility::where('is_published', true)->orderBy('sort_order')->get();
+    }
+@endphp
 @extends('layouts.public')
 
 @section('content')
 
-    <section class="hero-asymmetric" style="background-image: url('{{ asset('images/hero.jpg') }}');">
+    <section class="hero-asymmetric" style="background-image: url('{{ $hero ? asset($hero->background_image) : asset('images/hero.jpg') }}');">
         <div class="hero-overlay"></div>
         <img src="{{ asset('images/golfista.png') }}" alt="" class="hero-golfista">
         <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
         <div class="hero-content">
-            <h1>Donde cada día se <span>disfruta diferente</span></h1>
+            <h1>{!! $hero?->title ?? 'Donde cada día se <span>disfruta diferente</span>' !!}</h1>
             <p>
-                Naturaleza, bienestar y experiencias que elevan tu estilo de vida.
+                {{ $hero?->subtitle ?? 'Naturaleza, bienestar y experiencias que elevan tu estilo de vida.' }}
             </p>
-            <button class="btn-gold" onclick="document.getElementById('instalaciones').scrollIntoView({behavior: 'smooth'})">
-                Explorar el Club
-            </button>
+            @if ($hero?->button_text)
+                <a href="{{ $hero->button_link ? url($hero->button_link) : '#instalaciones' }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
+                    {{ $hero->button_text }}
+                </a>
+            @else
+                <button class="btn-gold" onclick="document.getElementById('instalaciones').scrollIntoView({behavior: 'smooth'})">
+                    Explorar el Club
+                </button>
+            @endif
         </div>
     </section>
 
@@ -51,7 +71,7 @@
                     <div class="section-header-editorial" style="margin-bottom: 3rem;">
                         <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">Visítenos</span>
                         <h2 style="color: var(--color-text-primary);">Ubicación<br><span>y acceso.</span></h2>
-                        <p style="color: var(--color-text-secondary); margin-top: 1.5rem; line-height: 1.7; font-size: 0.95rem;">
+                        <p style="margin-top: 1.5rem; line-height: 1.7; font-size: 0.95rem;">
                             Vista Verde Country Club se encuentra ubicado en una zona privilegiada y de fácil acceso en Tehuacán, ofreciendo un entorno natural exclusivo de total privacidad para sus socios.
                         </p>
                     </div>
