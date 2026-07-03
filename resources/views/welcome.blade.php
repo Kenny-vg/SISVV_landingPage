@@ -2,18 +2,16 @@
 
 @section('content')
 
-    <section class="hero-asymmetric">
-        <div class="hero-left-content">
-            <h1>Donde la naturaleza<br><span>encuentra su santuario.</span></h1>
+    <section class="hero-asymmetric" style="background-image: url('{{ asset('images/hero.jpg') }}');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Donde cada día se <span>disfruta diferente.</span></h1>
             <p>
-                El escenario perfecto para tus mejores momentos.
+                Naturaleza, bienestar y experiencias que elevan tu estilo de vida.
             </p>
             <button class="btn-gold" onclick="document.getElementById('instalaciones').scrollIntoView({behavior: 'smooth'})">
                 Explorar el Club
             </button>
-        </div>
-        <div class="hero-right-media">
-            <img src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=1200&q=80" alt="Campo de golf VistaVerde al amanecer">
         </div>
     </section>
 

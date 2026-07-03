@@ -25,13 +25,11 @@
         </button>
 
         @auth
-            <a href="{{ url('/admin') }}" class="btn-portal">Portal de Socios</a>
+            <a href="{{ url('/admin') }}" class="btn-link" style="font-size: 0.7rem; text-decoration: none; letter-spacing: 1px;">Admin</a>
             <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 1rem;">
                 @csrf
                 <button type="submit" class="btn-link" style="font-size: 0.7rem; text-decoration: none; border: none; background: none; color: var(--color-text-secondary); cursor: pointer; letter-spacing: 1px;">Salir</button>
             </form>
-        @else
-            <a href="{{ url('/admin') }}" class="btn-portal">Portal de Socios</a>
         @endauth
     </div>
 </nav>

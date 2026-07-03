@@ -138,55 +138,64 @@
    HERO SECTOR ASIMÉTRICO (3 BANDAS)
    ========================================== */
 .hero-asymmetric {
+    position: relative;
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    align-items: center;
-    padding: 80px 8% 2rem 8%;
-    background-color: var(--color-bg);
-    gap: 4rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 80px 8% 4rem 8%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     box-sizing: border-box;
 }
 
-.hero-left-content {
-    max-width: 480px;
-    z-index: 10;
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+    z-index: 1;
 }
 
-.hero-left-content h1 {
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 720px;
+}
+
+.hero-content h1 {
     font-family: var(--font-editorial);
     font-size: clamp(3rem, 6vw, 5.5rem);
     line-height: 1.05;
-    color: var(--color-text-primary);
-    margin-bottom: 2rem;
+    color: #FFFFFF;
+    margin-bottom: 1.5rem;
 }
 
-.hero-left-content h1 span {
+.hero-content h1 span {
     font-style: italic;
     font-weight: 300;
-    color: var(--color-accent-gold);
+    color: #c1c94d;
 }
 
-.hero-left-content p {
+.hero-content p {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--color-text-secondary);
-    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2.5rem;
 }
 
-.hero-right-media {
-    position: relative;
-    width: 100%;
-    height: 70vh;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 0 15px 45px rgba(24, 42, 33, 0.05);
+.hero-content .btn-gold {
+    color: #FFFFFF;
+    border-color: #FFFFFF;
 }
 
-.hero-right-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.hero-content .btn-gold::before {
+    background-color: #FFFFFF;
+}
+
+.hero-content .btn-gold:hover {
+    color: #075B2A;
 }
 
 /* ==========================================
@@ -241,18 +250,7 @@
     }
     
     .hero-asymmetric {
-        grid-template-columns: 1fr;
-        padding-top: 100px;
-        text-align: center;
-        gap: 2rem;
-    }
-    
-    .hero-left-content {
-        max-width: 100%;
-    }
-    
-    .hero-right-media {
-        height: 45vh;
+        padding: 100px 5% 3rem 5%;
     }
 
     .gastronomy-asymmetric {

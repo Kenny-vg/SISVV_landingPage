@@ -25,8 +25,8 @@
     --color-lector-border: #d0d47e;
 
     /* Navbar */
-    --color-navbar-bg: rgba(253, 252, 249, 0.85);
-    --color-navbar-scrolled: rgba(253, 252, 249, 0.95);
+    --color-navbar-bg: rgba(253, 252, 249, 0.25);
+    --color-navbar-scrolled: rgba(253, 252, 249, 0.4);
     --color-navbar-border: rgba(7, 91, 42, 0.06);
     --color-navbar-border-scrolled: rgba(7, 91, 42, 0.1);
     --color-navbar-shadow-scrolled: rgba(7, 91, 42, 0.05);
