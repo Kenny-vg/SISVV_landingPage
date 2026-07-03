@@ -9,6 +9,7 @@
     <ul class="navbar-links">
         <li><a href="{{ url('/') }}">Inicio</a></li>
         <li><a href="{{ url('/instalaciones') }}">Instalaciones</a></li>
+        <li><a href="{{ url('/clases') }}">Clases</a></li>
         <li><a href="{{ url('/#gastronomia') }}">Gastronomía</a></li>
         <li><a href="{{ url('/#membresias') }}">Membresías</a></li>
         <li><a href="{{ url('/#contacto') }}">Contacto</a></li>
