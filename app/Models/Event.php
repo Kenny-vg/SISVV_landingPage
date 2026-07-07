@@ -12,10 +12,12 @@ class Event extends Model
     protected $fillable = [
         'title',
         'slug',
+        'category',
         'description',
         'event_date',
         'location',
         'image',
+        'pdf_path',
         'is_published',
     ];
 

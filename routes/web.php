@@ -14,13 +14,13 @@ Route::get('/', function () {
     $disciplines = Discipline::with('images')->where('is_published', true)->orderBy('sort_order')->get();
     $facilities = Facility::with('images')->where('is_published', true)->orderBy('sort_order')->get();
     $pageSections = PageSection::where('is_active', true)->get()->keyBy('key');
-    $events = Event::where('is_published', true)->orderBy('event_date', 'desc')->take(6)->get();
+    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->take(6)->get();
 
     return view('welcome', compact('hero', 'disciplines', 'facilities', 'pageSections', 'events'));
 });
 
 Route::get('/eventos', function () {
-    $events = Event::where('is_published', true)->orderBy('event_date', 'desc')->get();
+    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->get();
     return view('eventos', compact('events'));
 })->name('eventos.index');
 

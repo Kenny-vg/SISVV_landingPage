@@ -38,9 +38,20 @@ class EventResource extends Resource
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->hidden(),
+                Forms\Components\Select::make('category')
+                    ->label('Categoría')
+                    ->options([
+                        'Boda' => 'Boda',
+                        'Baby Shower' => 'Baby Shower',
+                        'Fiesta' => 'Fiesta',
+                        'Graduación' => 'Graduación',
+                        'Torneo' => 'Torneo',
+                        'Corporativo' => 'Corporativo',
+                        'Otro' => 'Otro',
+                    ]),
                 Forms\Components\DatePicker::make('event_date')
                     ->label('Fecha del evento')
-                    ->required(),
+                    ->nullable(),
                 Forms\Components\TextInput::make('location')
                     ->label('Ubicación')
                     ->maxLength(255),
@@ -51,6 +62,12 @@ class EventResource extends Resource
                     ->label('Imagen')
                     ->image()
                     ->directory('events')
+                    ->disk('public'),
+                Forms\Components\FileUpload::make('pdf_path')
+                    ->label('PDF informativo')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(10240)
+                    ->directory('events/pdfs')
                     ->disk('public'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado'),
@@ -65,22 +82,33 @@ class EventResource extends Resource
                     ->label('Título')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('category')
+                    ->label('Categoría')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('event_date')
                     ->label('Fecha del evento')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('location')
                     ->label('Ubicación')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Imagen')
                     ->square(),
+                Tables\Columns\IconColumn::make('pdf_path')
+                    ->label('PDF')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-document-arrow-down')
+                    ->falseIcon('heroicon-o-x-circle'),
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publicado')
                     ->boolean()
                     ->sortable(),
             ])
-            ->defaultSort('event_date', 'desc')
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_published')
                     ->label('Publicado'),

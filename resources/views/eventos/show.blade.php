@@ -4,112 +4,411 @@
 @section('meta_description', Str::limit(strip_tags($event->description ?? ''), 160))
 
 @section('content')
-<div class="evento-detalle-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
+<div class="evento-pdf-page">
 
-    <style>
-        @media (max-width: 991px) {
-            .evento-detalle-grid {
-                grid-template-columns: 1fr !important;
-                gap: 3rem !important;
-            }
-            .evento-sticky-col {
-                position: relative !important;
-                top: 0 !important;
-            }
-            .evento-hero-img-wrap {
-                height: 300px !important;
-            }
-        }
-    </style>
+    <!-- Split layout: sidebar info + PDF viewer -->
+    <div class="evento-pdf-split">
 
-    <div style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 8rem 1.5rem;">
+        <!-- ===== Sidebar: información del evento ===== -->
+        <aside class="evento-pdf-sidebar">
 
-        <!-- Botón Volver -->
-        <a href="{{ route('eventos.index') }}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--color-accent-gold); font-family: var(--font-alt); font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3rem; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateX(-5px)'" onmouseout="this.style.transform='translateX(0)'">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Volver a Eventos
-        </a>
+            <a href="{{ route('eventos.index') }}" class="evento-pdf-back">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Volver a Eventos
+            </a>
 
-        <!-- Grid asimétrico -->
-        <div class="evento-detalle-grid" style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 4.5rem; align-items: start;">
+            @if($event->category)
+            <span class="evento-pdf-category-badge">{{ $event->category }}</span>
+            @endif
 
-            <!-- ===== Columna Izquierda: info editorial ===== -->
-            <div class="evento-sticky-col" style="position: sticky; top: 100px;">
+            <h1 class="evento-pdf-title">{{ $event->title }}</h1>
 
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">Evento</span>
+            <div class="evento-pdf-divider"></div>
 
-                <h1 style="font-family: var(--font-editorial); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; color: var(--color-text-primary); margin-bottom: 2.5rem;">
-                    {{ $event->title }}
-                </h1>
+            @if($event->description)
+            <div class="evento-pdf-description">
+                {!! $event->description !!}
+            </div>
+            @endif
 
-                <!-- Ficha de detalles -->
-                <div style="display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 3rem;">
+            @if($event->pdf_path)
+            <a href="{{ asset('storage/' . $event->pdf_path) }}" target="_blank" class="evento-pdf-download-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Descargar PDF
+            </a>
+            @endif
 
-                    <!-- Fecha -->
-                    <div style="display: flex; align-items: flex-start; gap: 1.2rem; background-color: var(--color-surface); padding: 1.4rem 1.8rem; border-radius: 12px;">
-                        <div style="color: var(--color-accent-gold); margin-top: 0.15rem; flex-shrink: 0;">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 22px; height: 22px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 style="font-family: var(--font-alt); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 0.35rem 0; color: var(--color-text-primary);">Fecha y hora</h4>
-                            <p style="margin: 0; color: var(--color-text-secondary); font-size: 1rem; line-height: 1.4;">
-                                {{ $event->event_date->translatedFormat('l, d \d\e F \d\e Y') }}<br>
-                                <span style="font-size: 0.9rem; opacity: 0.8;">{{ $event->event_date->format('H:i') }} hrs</span>
-                            </p>
-                        </div>
-                    </div>
+        </aside>
 
-                    <!-- Ubicación -->
-                    @if($event->location)
-                    <div style="display: flex; align-items: flex-start; gap: 1.2rem; background-color: var(--color-surface); padding: 1.4rem 1.8rem; border-radius: 12px;">
-                        <div style="color: var(--color-accent-gold); margin-top: 0.15rem; flex-shrink: 0;">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 22px; height: 22px;">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 style="font-family: var(--font-alt); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 0.35rem 0; color: var(--color-text-primary);">Lugar</h4>
-                            <p style="margin: 0; color: var(--color-text-secondary); font-size: 1rem; line-height: 1.4;">{{ $event->location }}</p>
-                        </div>
-                    </div>
-                    @endif
+        <!-- ===== Main: visor PDF ===== -->
+        <main class="evento-pdf-main">
 
+            @if($event->pdf_path)
+            <div class="pdf-canvas-container" id="pdf-canvas-container">
+                <div class="pdf-canvas-wrapper" id="pdf-canvas-wrapper">
+                    <canvas id="pdf-canvas"></canvas>
                 </div>
+            </div>
 
-                <!-- Botón de regresar a eventos -->
-                <a href="{{ route('eventos.index') }}" class="btn-gold" style="text-decoration: none; display: inline-block; font-size: 0.82rem;">
-                    Ver todos los eventos
+            <!-- Slider móvil -->
+            <div class="pdf-mobile-slider-container" id="pdf-mobile-slider-container">
+                <div class="pdf-mobile-slider-wrapper">
+                    <span style="font-size: 0.75rem; font-weight:600; color:var(--color-lector-text-primary);" id="slider-page-min">1</span>
+                    <input type="range" min="1" max="1" value="1" class="pdf-slider" id="pdf-page-slider">
+                    <span style="font-size: 0.75rem; font-weight:600; color:var(--color-lector-text-primary);" id="slider-page-max">1</span>
+                </div>
+            </div>
+
+            <!-- Dock flotante -->
+            <div class="pdf-dock" id="pdf-dock">
+                <div class="pdf-page-nav">
+                    <button class="pdf-btn" id="prev-page" title="Página Anterior">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="pdf-page-indicator" id="pdf-page-indicator-btn" style="cursor: pointer;" title="Cambiar página">
+                        <span id="page-num">0</span> / <span id="page-count">0</span>
+                    </div>
+                    <button class="pdf-btn" id="next-page" title="Página Siguiente">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="pdf-divider"></div>
+                <button class="pdf-btn" id="zoom-out" title="Alejar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                    </svg>
+                </button>
+                <span class="pdf-zoom-indicator" id="zoom-percent">100%</span>
+                <button class="pdf-btn" id="zoom-in" title="Acercar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+                <div class="pdf-divider"></div>
+                <a href="{{ asset('storage/' . $event->pdf_path) }}" download class="pdf-btn" id="download-pdf" title="Descargar PDF">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
                 </a>
-
             </div>
+            @else
+            <p style="color: var(--color-text-secondary); padding: 2rem; text-align: center;">No hay PDF disponible para este evento.</p>
+            @endif
 
-            <!-- ===== Columna Derecha: imagen + descripción ===== -->
-            <div>
+        </main>
 
-                <!-- Imagen del evento -->
-                <div class="evento-hero-img-wrap" style="width: 100%; height: 480px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.08); margin-bottom: 3rem; position: relative; background-color: var(--color-surface);">
-                    <img
-                        src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/hero.jpg') }}"
-                        alt="{{ $event->title }}"
-                        style="width: 100%; height: 100%; object-fit: cover;"
-                    >
-                </div>
-
-                <!-- Descripción completa (rich text) -->
-                @if($event->description)
-                <div class="evento-rich-content">
-                    {!! $event->description !!}
-                </div>
-                @endif
-
-            </div>
-
-        </div>
     </div>
 </div>
+
+@if($event->pdf_path)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+        let scale = 1.0;
+        let currentZoomPercent = 100;
+
+        let isDragging = false;
+        let startX, startY;
+        let scrollLeft, scrollTop;
+
+        const pdfUrl = '{{ asset("storage/" . $event->pdf_path) }}';
+
+        const canvas = document.getElementById('pdf-canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasWrapper = document.getElementById('pdf-canvas-wrapper');
+        const canvasContainer = document.getElementById('pdf-canvas-container');
+
+        const btnPrev = document.getElementById('prev-page');
+        const btnNext = document.getElementById('next-page');
+        const txtPageNum = document.getElementById('page-num');
+        const txtPageCount = document.getElementById('page-count');
+        const btnZoomIn = document.getElementById('zoom-in');
+        const btnZoomOut = document.getElementById('zoom-out');
+        const txtZoomPercent = document.getElementById('zoom-percent');
+        const dock = document.getElementById('pdf-dock');
+
+        const btnPageIndicator = document.getElementById('pdf-page-indicator-btn');
+        const mobileSliderContainer = document.getElementById('pdf-mobile-slider-container');
+        const pageSlider = document.getElementById('pdf-page-slider');
+        const sliderPageMin = document.getElementById('slider-page-min');
+        const sliderPageMax = document.getElementById('slider-page-max');
+
+        function renderPage(num) {
+            pageRendering = true;
+
+            pdfDoc.getPage(num).then((page) => {
+                const containerWidth = canvasContainer.clientWidth - 32;
+                const viewportOriginal = page.getViewport({ scale: 1.0 });
+
+                if (viewportOriginal.width > containerWidth) {
+                    scale = containerWidth / viewportOriginal.width;
+                } else {
+                    scale = 1.2;
+                }
+
+                const finalScale = scale * (currentZoomPercent / 100);
+                const viewport = page.getViewport({ scale: finalScale });
+
+                const pixelRatio = window.devicePixelRatio || 1;
+                canvas.width = viewport.width * pixelRatio;
+                canvas.height = viewport.height * pixelRatio;
+                canvas.style.width = viewport.width + 'px';
+                canvas.style.height = viewport.height + 'px';
+
+                canvasWrapper.style.width = viewport.width + 'px';
+                canvasWrapper.style.height = viewport.height + 'px';
+
+                ctx.restore();
+                ctx.save();
+                ctx.scale(pixelRatio, pixelRatio);
+
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                const renderTask = page.render(renderContext);
+
+                renderTask.promise.then(() => {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+
+            txtPageNum.textContent = num;
+            if (pageSlider) pageSlider.value = num;
+
+            btnPrev.disabled = (num <= 1);
+            btnNext.disabled = (num >= pdfDoc.numPages);
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        function onPrevPage() {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        btnPrev.addEventListener('click', onPrevPage);
+        btnNext.addEventListener('click', onNextPage);
+
+        pdfjsLib.getDocument(pdfUrl).promise.then((pdfDoc_) => {
+            pdfDoc = pdfDoc_;
+            txtPageCount.textContent = pdfDoc.numPages;
+
+            if (pageSlider) {
+                pageSlider.max = pdfDoc.numPages;
+                sliderPageMax.textContent = pdfDoc.numPages;
+            }
+
+            renderPage(pageNum);
+        }).catch(err => {
+            console.error("Error cargando PDF:", err);
+            ctx.font = "16px sans-serif";
+            ctx.fillStyle = "#14241D";
+            ctx.textAlign = "center";
+            ctx.fillText("No se pudo cargar el PDF", canvas.width / 2, 100);
+        });
+
+        function adjustZoom(amount) {
+            let targetZoom = currentZoomPercent + amount;
+            if (targetZoom < 50) targetZoom = 50;
+            if (targetZoom > 250) targetZoom = 250;
+
+            currentZoomPercent = targetZoom;
+            txtZoomPercent.textContent = currentZoomPercent + '%';
+
+            queueRenderPage(pageNum);
+
+            if (currentZoomPercent === 100) {
+                canvasContainer.style.cursor = 'default';
+            } else {
+                canvasContainer.style.cursor = 'grab';
+            }
+        }
+
+        btnZoomIn.addEventListener('click', () => adjustZoom(25));
+        btnZoomOut.addEventListener('click', () => adjustZoom(-25));
+
+        function startDrag(e) {
+            if (currentZoomPercent <= 100) return;
+
+            isDragging = true;
+            canvasContainer.style.cursor = 'grabbing';
+
+            const pageX = e.pageX || e.touches[0].pageX;
+            const pageY = e.pageY || e.touches[0].pageY;
+
+            startX = pageX - canvasContainer.offsetLeft;
+            startY = pageY - canvasContainer.offsetTop;
+
+            scrollLeft = canvasContainer.scrollLeft;
+            scrollTop = canvasContainer.scrollTop;
+        }
+
+        function doDrag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            const pageX = e.pageX || e.touches[0].pageX;
+            const pageY = e.pageY || e.touches[0].pageY;
+
+            const x = pageX - canvasContainer.offsetLeft;
+            const y = pageY - canvasContainer.offsetTop;
+
+            const walkX = (x - startX) * 1.5;
+            const walkY = (y - startY) * 1.5;
+
+            canvasContainer.scrollLeft = scrollLeft - walkX;
+            canvasContainer.scrollTop = scrollTop - walkY;
+        }
+
+        function stopDrag() {
+            isDragging = false;
+            if (currentZoomPercent > 100) {
+                canvasContainer.style.cursor = 'grab';
+            } else {
+                canvasContainer.style.cursor = 'default';
+            }
+        }
+
+        canvasContainer.addEventListener('mousedown', startDrag);
+        canvasContainer.addEventListener('mousemove', doDrag);
+        window.addEventListener('mouseup', stopDrag);
+
+        canvasContainer.addEventListener('touchstart', startDrag, { passive: true });
+        canvasContainer.addEventListener('touchmove', doDrag, { passive: false });
+        canvasContainer.addEventListener('touchend', stopDrag);
+
+        let lastTap = 0;
+        canvasContainer.addEventListener('click', (e) => {
+            const now = new Date().getTime();
+            const timesince = now - lastTap;
+
+            if ((timesince < 300) && (timesince > 0)) {
+                if (currentZoomPercent === 100) {
+                    currentZoomPercent = 160;
+                    adjustZoom(0);
+                } else {
+                    currentZoomPercent = 100;
+                    adjustZoom(0);
+                }
+                e.preventDefault();
+            }
+            lastTap = now;
+        });
+
+        if (btnPageIndicator && mobileSliderContainer) {
+            btnPageIndicator.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (window.innerWidth < 768) {
+                    mobileSliderContainer.classList.toggle('open');
+                }
+            });
+        }
+
+        if (pageSlider) {
+            pageSlider.addEventListener('input', (e) => {
+                const targetPage = parseInt(e.target.value);
+                if (targetPage !== pageNum) {
+                    pageNum = targetPage;
+                    queueRenderPage(pageNum);
+                }
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (mobileSliderContainer && !mobileSliderContainer.contains(e.target) && e.target !== btnPageIndicator) {
+                mobileSliderContainer.classList.remove('open');
+            }
+        });
+
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        canvasContainer.addEventListener('touchstart', e => {
+            if (currentZoomPercent <= 100 && e.touches.length === 1) {
+                touchstartX = e.changedTouches[0].screenX;
+            }
+        }, { passive: true });
+
+        canvasContainer.addEventListener('touchend', e => {
+            if (currentZoomPercent <= 100 && e.changedTouches.length === 1) {
+                touchendX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }
+        });
+
+        function handleSwipe() {
+            const threshold = 80;
+            const diff = touchstartX - touchendX;
+
+            if (Math.abs(diff) < threshold) return;
+
+            if (diff > 0) {
+                onNextPage();
+            } else {
+                onPrevPage();
+            }
+        }
+
+        let controlsTimeout;
+
+        function showControls() {
+            dock.classList.remove('hide-controls');
+
+            clearTimeout(controlsTimeout);
+
+            controlsTimeout = setTimeout(() => {
+                if (!isDragging && (!mobileSliderContainer || !mobileSliderContainer.classList.contains('open'))) {
+                    dock.classList.add('hide-controls');
+                }
+            }, 3000);
+        }
+
+        window.addEventListener('mousemove', showControls);
+        window.addEventListener('scroll', showControls);
+        canvasContainer.addEventListener('touchstart', showControls, { passive: true });
+
+        showControls();
+
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeFinished);
+            window.resizeFinished = setTimeout(() => {
+                renderPage(pageNum);
+            }, 250);
+        });
+    });
+</script>
+@endif
 @endsection

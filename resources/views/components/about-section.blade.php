@@ -17,12 +17,12 @@
             <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
                 {!! $aboutBody !!}
             </p>
-            <a href="{{ url('/nosotros') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
+            <a href="{{ url('/nosotros') }}" class="btn-gold" style="text-decoration: none; display: inline-block; margin-top: 0.5rem;">
                 Conócenos más →
             </a>
         </div>
-        <div style="border-radius: 24px; overflow: hidden; height: 500px;">
-            <img src="{{ ($section && $section->image) ? asset('storage/' . $section->image) : asset('images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <div style="border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
+            <img src="{{ setting('about_image') ? asset('storage/' . setting('about_image')) : asset('images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
         </div>
     </div>
 </section>

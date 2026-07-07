@@ -359,3 +359,213 @@
         transform: scale(1.3);
     }
 }
+
+/* ==========================================
+   SPLIT LAYOUT: INFO SIDEBAR + PDF VIEWER
+   (Para catálogo de eventos)
+   ========================================== */
+
+.evento-pdf-page {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-base);
+    min-height: 100vh;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.evento-pdf-split {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.evento-pdf-sidebar {
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.evento-pdf-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.evento-pdf-sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-subtle);
+    border-radius: 4px;
+}
+
+.evento-pdf-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-accent-gold);
+    font-family: var(--font-base);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.evento-pdf-back:hover {
+    transform: translateX(-5px);
+    color: var(--color-accent-gold);
+}
+
+.evento-pdf-back svg {
+    width: 16px;
+    height: 16px;
+}
+
+.evento-pdf-category-badge {
+    font-family: var(--font-base);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-accent-gold);
+    font-weight: 600;
+    display: block;
+}
+
+.evento-pdf-title {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin: 0;
+    font-weight: 400;
+}
+
+.evento-pdf-divider {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-accent-gold);
+    opacity: 0.6;
+}
+
+.evento-pdf-description {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+.evento-pdf-description h1,
+.evento-pdf-description h2,
+.evento-pdf-description h3,
+.evento-pdf-description h4 {
+    font-family: var(--font-editorial);
+    color: var(--color-text-primary);
+    margin: 1rem 0 0.5rem;
+}
+
+.evento-pdf-description p {
+    margin: 0 0 0.75rem;
+}
+
+.evento-pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.8rem;
+    background-color: var(--color-accent-gold);
+    color: #ffffff;
+    text-decoration: none;
+    font-family: var(--font-base);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+.evento-pdf-download-btn:hover {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.evento-pdf-download-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.evento-pdf-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 200px);
+}
+
+.evento-pdf-main .pdf-canvas-container {
+    flex: 1;
+    padding: 0 0 8rem 0;
+}
+
+.evento-pdf-main .pdf-canvas-wrapper {
+    margin: 0 auto;
+}
+
+@media (max-width: 991px) {
+    .evento-pdf-page {
+        padding-top: 80px;
+    }
+
+    .evento-pdf-split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem 1rem 2rem 1rem;
+    }
+
+    .evento-pdf-sidebar {
+        position: relative;
+        top: 0;
+        max-height: none;
+        overflow-y: visible;
+        padding-right: 0;
+        gap: 1rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+        padding-bottom: 1.5rem;
+    }
+
+    .evento-pdf-main {
+        min-height: auto;
+    }
+
+    .evento-pdf-main .pdf-canvas-container {
+        padding: 0 0 6.5rem 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .evento-pdf-page {
+        padding-top: 70px;
+    }
+
+    .evento-pdf-download-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
