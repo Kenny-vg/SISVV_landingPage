@@ -243,6 +243,12 @@
 /* ==========================================
    DISEÑO RESPONSIVO MÓVIL (Max 767px)
    ========================================== */
+@media (max-width: 991px) {
+    .pdf-back-btn {
+        left: 1.5rem;
+    }
+}
+
 @media (max-width: 767px) {
     .pdf-viewer-page {
         padding-top: 80px;

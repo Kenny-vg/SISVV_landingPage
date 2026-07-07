@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('content')
-<div class="lector-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); transition: background-color 0.3s ease;">
+<div class="lector-page" style="min-height: 100vh; background-color: var(--color-bg); transition: background-color 0.3s ease;">
     <div class="lector-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 8rem 1.5rem;">
         
         <!-- Cabecera Editorial Elegante -->
@@ -17,10 +17,10 @@
         <div class="bento-grid">
             @forelse($categories as $cat)
             <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category='.$cat->slug) }}'">
-                <div class="bento-img-container" style="height: 300px; overflow: hidden; position: relative;">
+                <div class="bento-img-container" style="overflow: hidden; position: relative;">
                     <img src="{{ $cat->image ? asset('storage/'.$cat->image) : asset('images/hero.jpg') }}" alt="{{ $cat->name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
                 </div>
-                <div class="bento-card-content" style="padding: 2.2rem; display: flex; flex-direction: column; flex-grow: 1;">
+                <div class="bento-card-content" style="display: flex; flex-direction: column; flex-grow: 1;">
                     @if($cat->schedule)
                     <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">{{ $cat->schedule }}</span>
                     @endif
