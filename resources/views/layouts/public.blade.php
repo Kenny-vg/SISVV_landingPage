@@ -26,6 +26,7 @@
 
     <x-footer />
 
+    <x-theme-floating-toggle />
     <x-admin-widget />
 
     @stack('scripts')

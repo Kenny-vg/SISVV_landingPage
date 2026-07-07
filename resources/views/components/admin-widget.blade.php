@@ -28,8 +28,8 @@
 <style>
 .admin-floating-widget {
     position: fixed;
-    bottom: 1.5rem;
-    left: 1.5rem;
+    bottom: calc(1.5rem + 48px);
+    right: 1.5rem;
     z-index: 999;
 }
 
@@ -58,7 +58,7 @@
 .admin-widget-menu {
     position: absolute;
     bottom: calc(100% + 8px);
-    left: 0;
+    right: 0;
     background: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: 12px;
