@@ -69,6 +69,18 @@
     align-items: center;
 }
 
+.navbar-brand {
+    animation: fade-in 0.8s ease 0.1s forwards;
+}
+
+.navbar-left .navbar-links {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.navbar-right .navbar-links {
+    animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
 /* ─── Links de navegación ──────────────────────────────────────── */
 .navbar-links {
     list-style: none;
