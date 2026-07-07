@@ -60,6 +60,7 @@ class FacilityResource extends Resource
                                     ->label('Imagen')
                                     ->image()
                                     ->directory('facilities')
+                                    ->disk('public')
                                     ->required(),
                             ])
                             ->orderable('sort_order')

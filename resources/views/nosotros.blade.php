@@ -54,7 +54,7 @@
                     @endphp
                     <h2>{{ $beforeTitle }}<br><span>{{ $afterTitle }}.</span></h2>
                     @if($item['key'] !== 'about_values')
-                        <p>{{ $s->content }}</p>
+                        <p>{!! $s->content !!}</p>
                     @endif
                 </div>
                 @if($item['key'] === 'about_values')
@@ -67,7 +67,7 @@
                             @endforeach
                         </div>
                     @else
-                        <p style="max-width: 900px; margin-top: 1rem;">{{ $s->content }}</p>
+                        <p style="max-width: 900px; margin-top: 1rem;">{!! $s->content !!}</p>
                     @endif
                 @endif
             </section>

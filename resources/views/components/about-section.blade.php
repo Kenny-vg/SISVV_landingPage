@@ -15,7 +15,7 @@
                 {!! $aboutHeading !!}
             </h2>
             <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
-                {{ $aboutBody }}
+                {!! $aboutBody !!}
             </p>
             <a href="{{ url('/nosotros') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
                 Conócenos más →

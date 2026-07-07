@@ -15,6 +15,8 @@ class SettingSeeder extends Seeder
             ['key' => 'site_description', 'value' => 'Un refugio privado de golf y bienestar termal en sintonía con la naturaleza.', 'group' => 'general'],
 
             // Hero
+            ['key' => 'hero_title', 'value' => 'Donde cada día se disfruta diferente', 'group' => 'general'],
+            ['key' => 'hero_subtitle', 'value' => 'Naturaleza, bienestar y experiencias que elevan tu estilo de vida.', 'group' => 'general'],
             ['key' => 'hero_default_button', 'value' => 'Explorar el Club', 'group' => 'general'],
 
             // Secciones - Encabezados y textos

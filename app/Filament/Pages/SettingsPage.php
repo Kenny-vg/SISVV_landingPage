@@ -50,6 +50,14 @@ class SettingsPage extends Page
                                 Textarea::make('site_description')
                                     ->label('Descripción del club')
                                     ->helperText('Breve descripción que aparece en el sitio'),
+                                RichEditor::make('hero_title')
+                                    ->label('Título del hero')
+                                    ->toolbarButtons(['italic', 'bold'])
+                                    ->helperText('Texto principal del hero en la portada'),
+                                RichEditor::make('hero_subtitle')
+                                    ->label('Subtítulo del hero')
+                                    ->toolbarButtons(['italic', 'bold'])
+                                    ->helperText('Texto secundario del hero en la portada'),
                                 TextInput::make('hero_default_button')
                                     ->label('Botón del hero principal')
                                     ->helperText('Texto del botón en la portada principal'),

@@ -49,12 +49,14 @@ class PageSectionResource extends Resource
                     ->label('Imagen principal')
                     ->image()
                     ->maxSize(2048)
-                    ->directory('sections'),
+                    ->directory('sections')
+                    ->disk('public'),
                 Forms\Components\FileUpload::make('image_float')
                     ->label('Imagen secundaria (circular)')
                     ->image()
                     ->maxSize(2048)
-                    ->directory('sections'),
+                    ->directory('sections')
+                    ->disk('public'),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo'),
             ]);

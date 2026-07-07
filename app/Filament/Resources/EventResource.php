@@ -50,7 +50,8 @@ class EventResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen')
                     ->image()
-                    ->directory('events'),
+                    ->directory('events')
+                    ->disk('public'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado'),
             ]);
