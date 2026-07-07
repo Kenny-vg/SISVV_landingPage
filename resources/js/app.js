@@ -74,7 +74,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Carrusel de imágenes (Instalaciones / Clases)
+    // 4. Menú móvil (hamburguesa)
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function openMobileMenu() {
+        hamburgerBtn?.classList.add('is-active');
+        mobileDrawer?.classList.add('is-open');
+        mobileOverlay?.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        hamburgerBtn?.classList.remove('is-active');
+        mobileDrawer?.classList.remove('is-open');
+        mobileOverlay?.classList.remove('is-visible');
+        document.body.style.overflow = '';
+    }
+
+    hamburgerBtn?.addEventListener('click', () => {
+        if (mobileDrawer?.classList.contains('is-open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    mobileOverlay?.addEventListener('click', closeMobileMenu);
+
+    // Cerrar menú al hacer clic en un link
+    mobileDrawer?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // 5. Carrusel de imágenes (Instalaciones / Clases)
     document.querySelectorAll('[data-carousel]').forEach(container => {
         const track = container.querySelector('[data-track]');
         const slides = track.querySelectorAll('.carousel-slide');

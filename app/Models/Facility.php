@@ -15,6 +15,7 @@ class Facility extends Model
         'category',
         'description',
         'schedule',
+        'panorama_path',
         'is_published',
         'sort_order',
     ];

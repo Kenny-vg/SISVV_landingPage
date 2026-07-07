@@ -17,6 +17,9 @@
                 top: 0 !important;
             }
         }
+        @media (max-width: 767px) {
+            #pano { height: 300px !important; }
+        }
     </style>
 
     <div style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 8rem 1.5rem;">
@@ -65,35 +68,60 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Carrusel de imágenes -->
+            <!-- Columna Derecha: Tour 360° o Carrusel -->
             <div>
-                <div class="carousel-container" data-carousel>
-                    <div class="carousel-track" data-track>
-                        @forelse($area->images as $img)
-                            <div class="carousel-slide">
-                                <img src="{{ asset('storage/' . $img->image_path) }}" alt="{{ $area->title }}">
-                            </div>
-                        @empty
-                            <div class="carousel-slide">
-                                <img src="{{ asset('images/hero.jpg') }}" alt="{{ $area->title }}">
-                            </div>
-                        @endforelse
-                    </div>
-
-                    @if($area->images->count() > 1)
-                        <button class="carousel-btn carousel-prev" data-prev>&lsaquo;</button>
-                        <button class="carousel-btn carousel-next" data-next>&rsaquo;</button>
-
-                        <div class="carousel-dots" data-dots>
-                            @foreach($area->images as $index => $img)
-                                <span class="carousel-dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}"></span>
-                            @endforeach
+                @if($area->panorama_path)
+                    <div id="pano" style="width:100%;height:500px;border-radius:12px;overflow:hidden;"></div>
+                    <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--color-text-secondary);font-family:var(--font-alt);letter-spacing:1px;text-transform:uppercase;">Arrastra para explorar 360°</p>
+                @else
+                    <div class="carousel-container" data-carousel>
+                        <div class="carousel-track" data-track>
+                            @forelse($area->images as $img)
+                                <div class="carousel-slide">
+                                    <img src="{{ asset('storage/' . $img->image_path) }}" alt="{{ $area->title }}">
+                                </div>
+                            @empty
+                                <div class="carousel-slide">
+                                    <img src="{{ asset('images/hero.jpg') }}" alt="{{ $area->title }}">
+                                </div>
+                            @endforelse
                         </div>
-                    @endif
-                </div>
+
+                        @if($area->images->count() > 1)
+                            <button class="carousel-btn carousel-prev" data-prev>&lsaquo;</button>
+                            <button class="carousel-btn carousel-next" data-next>&rsaquo;</button>
+
+                            <div class="carousel-dots" data-dots>
+                                @foreach($area->images as $index => $img)
+                                    <span class="carousel-dot {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}"></span>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endif
             </div>
 
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var panoEl = document.getElementById('pano');
+    if (panoEl && typeof pannellum !== 'undefined') {
+        pannellum.viewer('pano', {
+            type: 'equirectangular',
+            panorama: '{{ asset('storage/' . $area->panorama_path) }}',
+            autoLoad: true,
+            compass: true,
+            showZoomCtrl: false,
+            keyboardZoom: true,
+            mouseZoom: true,
+            hotSpotDebug: false,
+        });
+    }
+});
+</script>
+@endpush
 @endsection

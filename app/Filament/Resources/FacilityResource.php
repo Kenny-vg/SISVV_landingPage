@@ -67,6 +67,16 @@ class FacilityResource extends Resource
                             ->defaultItems(0)
                             ->collapsible(),
                     ]),
+                Forms\Components\Section::make('Tour 360°')
+                    ->schema([
+                        Forms\Components\FileUpload::make('panorama_path')
+                            ->label('Imagen panorámica')
+                            ->image()
+                            ->directory('facilities/panoramas')
+                            ->disk('public')
+                            ->maxSize(20480)
+                            ->hint('Proporción 2:1 equirectangular, mínimo 4000×2000px, máximo 20MB'),
+                    ]),
             ]);
     }
 
@@ -82,6 +92,11 @@ class FacilityResource extends Resource
                     ->label('Categoría')
                     ->badge()
                     ->sortable(),
+                Tables\Columns\IconColumn::make('panorama_path')
+                    ->label('360°')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle'),
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publicado')
                     ->boolean()
