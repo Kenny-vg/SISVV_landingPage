@@ -25,6 +25,9 @@
 
     <x-footer />
 
+    <x-admin-widget />
+
+    @stack('scripts')
 </body>
 
 </html>

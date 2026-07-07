@@ -14,6 +14,9 @@ class Category extends Model
         'slug',
         'description',
         'is_visible',
+        'image',
+        'pdf',
+        'schedule',
     ];
 
     protected function casts(): array
@@ -23,13 +26,5 @@ class Category extends Model
         ];
     }
 
-    public function galleries(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Gallery::class);
-    }
 
-    public function services(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Service::class);
-    }
 }

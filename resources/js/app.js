@@ -73,5 +73,46 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTheme(activeTheme);
         });
     }
+
+    // 4. Carrusel de imágenes (Instalaciones / Clases)
+    document.querySelectorAll('[data-carousel]').forEach(container => {
+        const track = container.querySelector('[data-track]');
+        const slides = track.querySelectorAll('.carousel-slide');
+        const prevBtn = container.querySelector('[data-prev]');
+        const nextBtn = container.querySelector('[data-next]');
+        const dots = container.querySelectorAll('[data-dots] .carousel-dot');
+
+        if (slides.length < 2) return;
+
+        let current = 0;
+
+        function update() {
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === current);
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + slides.length) % slides.length;
+                update();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % slides.length;
+                update();
+            });
+        }
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                current = parseInt(dot.dataset.index);
+                update();
+            });
+        });
+    });
 });
 

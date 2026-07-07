@@ -15,24 +15,45 @@ class PageSectionResource extends Resource
     protected static ?string $model = PageSection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationGroup = 'Contenido';
-    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationLabel = 'Secciones de página';
+    protected static ?string $navigationGroup = 'Portada';
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $modelLabel = 'Sección de página';
+    protected static ?string $pluralModelLabel = 'Secciones de página';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')
+                Forms\Components\Select::make('key')
+                    ->label('Sección')
                     ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true)
-                    ->helperText('Identificador único. Ej: about_intro, menu_intro, contact_intro'),
+                    ->options([
+                        'about_intro' => 'Nosotros - Introducción',
+                        'about_mission' => 'Nosotros - Misión',
+                        'about_vision' => 'Nosotros - Visión',
+                        'about_values' => 'Nosotros - Valores',
+                        'about_philosophy' => 'Nosotros - Filosofía',
+                        'menu_intro' => 'Gastronomía',
+                    ])
+                    ->helperText('Selecciona la sección de la página que este contenido representa.'),
                 Forms\Components\TextInput::make('title')
+                    ->label('Título')
                     ->maxLength(255),
                 Forms\Components\RichEditor::make('content')
+                    ->label('Contenido')
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
+                    ->label('Imagen principal')
                     ->image()
+                    ->maxSize(2048)
+                    ->directory('sections'),
+                Forms\Components\FileUpload::make('image_float')
+                    ->label('Imagen secundaria (circular)')
+                    ->image()
+                    ->maxSize(2048)
                     ->directory('sections'),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo'),
@@ -44,16 +65,20 @@ class PageSectionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('key')
+                    ->label('Identificador')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Título')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Activo')
                     ->boolean()
                     ->sortable(),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_active'),
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Activo'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

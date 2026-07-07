@@ -15,31 +15,38 @@ class HeroResource extends Resource
     protected static ?string $model = Hero::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static ?string $navigationGroup = 'Contenido';
+    protected static ?string $navigationLabel = 'Slides del Hero';
+    protected static ?string $navigationGroup = 'Portada';
     protected static ?int $navigationSort = 1;
+
+    protected static ?string $modelLabel = 'Slide del Hero';
+    protected static ?string $pluralModelLabel = 'Slides del Hero';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label('Título')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('subtitle')
+                    ->label('Subtítulo')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('button_text')
+                    ->label('Texto del botón')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('button_link')
+                    ->label('Enlace del botón')
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('background_image')
+                    ->label('Imagen de fondo')
                     ->image()
                     ->directory('heroes')
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo'),
-                Forms\Components\TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0),
             ]);
     }
 
@@ -48,21 +55,22 @@ class HeroResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Título')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('background_image')
+                    ->label('Imagen de fondo')
                     ->square(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Activo')
                     ->boolean()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sort_order')
-                    ->numeric()
                     ->sortable(),
             ])
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_active'),
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('Activo'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -69,7 +69,7 @@
 [data-theme="dark"] {
     /* --- TEMA OSCURO --- */
     --color-bg: #000000;
-    --color-surface: #075B2A;
+    --color-surface: #111111;
     --color-text-primary: #e5e7b5;
     --color-text-secondary: #d0d47e;
     --color-border-subtle: rgba(229, 231, 181, 0.08);
@@ -80,7 +80,7 @@
 
     /* Lector */
     --color-lector-bg: var(--color-bg);
-    --color-lector-surface: #075B2A;
+    --color-lector-surface: #111111;
     --color-lector-text-primary: var(--color-text-primary);
     --color-lector-text-secondary: var(--color-text-secondary);
     --color-lector-accent: #c1c94d;

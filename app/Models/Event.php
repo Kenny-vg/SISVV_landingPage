@@ -19,11 +19,8 @@ class Event extends Model
         'is_published',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'event_date' => 'datetime',
-            'is_published' => 'boolean',
-        ];
-    }
+    protected $casts = [
+        'event_date' => 'datetime',
+        'is_published' => 'boolean',
+    ];
 }
