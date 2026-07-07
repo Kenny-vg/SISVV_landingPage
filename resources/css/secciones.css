@@ -281,11 +281,11 @@
 }
 
 @media (max-width: 991px) {
-    .bento-grid { grid-template-columns: 1fr; }
+    .bento-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .bento-col-8, .bento-col-4, .bento-col-5, .bento-col-6, .bento-col-7 { grid-column: span 12; }
     .hero-asymmetric { padding: 100px 5% 3rem 5%; }
     .gastronomy-asymmetric { grid-template-columns: 1fr; gap: 3rem; }
-    .gastronomy-media-wrapper { padding-left: 0; margin-bottom: 2rem; }
+    .gastronomy-media-wrapper { padding-left: 0; margin-bottom: 2rem; overflow: hidden; }
 }
 
 .premium-footer {

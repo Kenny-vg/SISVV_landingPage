@@ -1,5 +1,10 @@
 <nav class="premium-navbar" id="main-navbar">
     <div class="navbar-left">
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Menú" title="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="navbar-links">
             <li><a href="{{ url('/nosotros') }}">{{ setting('nav_link_nosotros', 'Sobre Nosotros') }}</a></li>
             <li><a href="{{ url('/instalaciones') }}">{{ setting('nav_link_instalaciones', 'Instalaciones') }}</a></li>
@@ -24,11 +29,6 @@
     </div>
 
     <div class="navbar-actions">
-        <button id="hamburger-btn" class="hamburger-btn" aria-label="Menú" title="Menú">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <button id="theme-toggle" class="btn-theme-toggle" aria-label="Alternar tema" title="Alternar tema">
             <svg class="theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>

@@ -35,8 +35,10 @@
             }
         </style>
         <div class="hero-overlay"></div>
+        @if(setting('hero_show_golfista', true))
         <img src="{{ asset('images/golfista.png') }}" alt="" class="hero-golfista">
         <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
+        @endif
         <div class="hero-content">
             <h1>{!! $hero?->title ?? setting('hero_title') !!}</h1>
             <p>

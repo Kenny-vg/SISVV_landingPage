@@ -6,8 +6,17 @@
     color: var(--color-lector-text-primary);
     font-family: var(--font-sans);
     min-height: 100vh;
-    padding-top: 80px; /* Espacio para el navbar principal */
+    padding-top: 120px;
+    overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lector-page .bento-img-container {
+    height: 300px;
+}
+
+.lector-page .bento-card-content {
+    padding: 2.2rem;
 }
 
 .lector-container {
@@ -489,5 +498,17 @@
     /* Buscador e info en cabecera móvil */
     .lector-mobile-header {
         margin-bottom: 2rem;
+    }
+
+    .lector-page {
+        padding-top: 80px;
+    }
+
+    .lector-page .bento-img-container {
+        height: 200px !important;
+    }
+
+    .lector-page .bento-card-content {
+        padding: 1.2rem !important;
     }
 }

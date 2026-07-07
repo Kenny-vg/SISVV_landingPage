@@ -8,6 +8,7 @@ use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -61,6 +62,10 @@ class SettingsPage extends Page
                                 TextInput::make('hero_default_button')
                                     ->label('Botón del hero principal')
                                     ->helperText('Texto del botón en la portada principal'),
+                                Toggle::make('hero_show_golfista')
+                                    ->label('Mostrar ilustraciones del héroe')
+                                    ->helperText('Desactivar para ocultar el golfista y la pelota de golf')
+                                    ->default(true),
                             ]),
 
                         Tab::make('Nosotros')
