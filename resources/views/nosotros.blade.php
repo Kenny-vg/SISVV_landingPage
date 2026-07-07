@@ -45,6 +45,11 @@
         @php $s = $item['section']; @endphp
         @if($s)
             <section class="premium-section {{ $item['bg'] }} fade-in-section">
+                @if($s->image)
+                <div style="width:100%; max-height:400px; border-radius:16px; overflow:hidden; margin-bottom:3rem; background-color:var(--color-surface);">
+                    <img src="{{ asset('storage/'.$s->image) }}" alt="{{ $s->title }}" style="width:100%; height:100%; max-height:400px; max-width:100%; object-fit:cover; display:block;">
+                </div>
+                @endif
                 <div class="section-header-editorial" style="max-width: 900px;">
                     <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">Vista Verde Club</span>
                     @php

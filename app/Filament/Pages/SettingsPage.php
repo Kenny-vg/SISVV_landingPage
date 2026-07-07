@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\Setting;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -73,16 +74,27 @@ class SettingsPage extends Page
                             ->schema([
                                 RichEditor::make('about_heading')
                                     ->label('Encabezado de la sección')
-                                    ->toolbarButtons(['italic', 'bold'])
-                                    ->helperText('Aparece en la sección "Nosotros" del home.'),
+                                    ->toolbarButtons(['italic', 'bold']),
+                                FileUpload::make('about_image')
+                                    ->label('Imagen principal (homepage)')
+                                    ->image()
+                                    ->maxSize(5120)
+                                    ->directory('about')
+                                    ->disk('public'),
+                                FileUpload::make('about_image_float')
+                                    ->label('Imagen secundaria circular')
+                                    ->image()
+                                    ->maxSize(5120)
+                                    ->directory('about')
+                                    ->disk('public'),
                             ]),
 
                         Tab::make('Instalaciones')
                             ->icon('heroicon-o-building-library')
                             ->schema([
-                                TextInput::make('instalaciones_heading')
+                                RichEditor::make('instalaciones_heading')
                                     ->label('Encabezado')
-                                    ->helperText('Título de la sección de instalaciones en el home'),
+                                    ->toolbarButtons(['bold', 'italic']),
                                 Textarea::make('instalaciones_subtext')
                                     ->label('Subtítulo')
                                     ->helperText('Texto descriptivo debajo del título'),
@@ -97,9 +109,9 @@ class SettingsPage extends Page
                         Tab::make('Clases')
                             ->icon('heroicon-o-academic-cap')
                             ->schema([
-                                TextInput::make('facilities_heading')
+                                RichEditor::make('facilities_heading')
                                     ->label('Encabezado')
-                                    ->helperText('Título de la sección de clases en el home'),
+                                    ->toolbarButtons(['bold', 'italic']),
                                 Textarea::make('facilities_subtext')
                                     ->label('Subtítulo')
                                     ->helperText('Texto descriptivo debajo del título'),
@@ -117,9 +129,9 @@ class SettingsPage extends Page
                                 TextInput::make('events_label')
                                     ->label('Etiqueta superior')
                                     ->helperText('Texto pequeño sobre el encabezado'),
-                                TextInput::make('events_heading')
+                                RichEditor::make('events_heading')
                                     ->label('Encabezado')
-                                    ->helperText('Título de la sección de eventos'),
+                                    ->toolbarButtons(['bold', 'italic']),
                                 Textarea::make('events_subtext')
                                     ->label('Subtítulo')
                                     ->helperText('Texto descriptivo'),
@@ -145,9 +157,9 @@ class SettingsPage extends Page
                                 TextInput::make('contact_label')
                                     ->label('Etiqueta superior')
                                     ->helperText('Texto pequeño sobre la sección'),
-                                TextInput::make('contact_heading')
+                                RichEditor::make('contact_heading')
                                     ->label('Encabezado')
-                                    ->helperText('Título de la sección de contacto'),
+                                    ->toolbarButtons(['bold', 'italic']),
                                 Textarea::make('contact_subtext')
                                     ->label('Subtítulo')
                                     ->helperText('Texto descriptivo'),
@@ -243,8 +255,13 @@ class SettingsPage extends Page
 
     public function save(): void
     {
-        foreach ($this->data as $key => $value) {
-            Setting::where('key', $key)->update(['value' => $value]);
+        $data = $this->form->getState();
+
+        foreach ($data as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
         }
 
         Notification::make()
