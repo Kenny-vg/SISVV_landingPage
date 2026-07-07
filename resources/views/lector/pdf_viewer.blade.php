@@ -13,9 +13,9 @@
 
     <!-- Cabecera Editorial Elegante -->
     <header class="pdf-header-editorial">
-        <span class="pdf-category-tag">Gastronomía Exclusiva</span>
-        <h1>La Carta</h1>
-        <p>Una sofisticada selección de platillos de temporada curados por nuestro chef ejecutivo.</p>
+        <span class="pdf-category-tag">{{ $category->name }}</span>
+        <h1>Menú de {{ $category->name }}</h1>
+        <p>{{ strip_tags($category->description) }}</p>
         <div class="pdf-header-divider"></div>
     </header>
 
@@ -76,7 +76,7 @@
         <div class="pdf-divider"></div>
 
         <!-- Botón de Descarga -->
-        <a href="{{ asset('menu_vistaverde.pdf') }}" download class="pdf-btn" id="download-pdf" title="Descargar Menú">
+        <a href="{{ $category->pdf ? asset('storage/'.$category->pdf) : '#' }}" download class="pdf-btn" id="download-pdf" title="Descargar Menú">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
@@ -105,49 +105,27 @@
         let startX, startY;
         let scrollLeft, scrollTop;
 
-        // Datos específicos por categoría para actualizar la interfaz
-        const categoriesData = {
-            'desayunos': {
-                tag: 'Desayunos & Brunch',
-                title: 'Menú de Desayunos',
-                desc: 'Una deliciosa selección para comenzar su mañana con la excelencia de nuestra cocina.'
-            },
-            'comida': {
-                tag: 'Comidas & Terrazas',
-                title: 'Menú de Comida',
-                desc: 'Cortes seleccionados, platillos frescos y alternativas gourmet para su almuerzo.'
-            },
-            'cena': {
-                tag: 'Cena & Alta Cocina',
-                title: 'Menú de Cena',
-                desc: 'Una propuesta culinaria de autor con platillos de mar y tierra en maridaje de excelencia.'
-            },
-            'cafe': {
-                tag: 'Cafetería & Bar',
-                title: 'Café & Coctelería',
-                desc: 'Cafés de especialidad, mixología sofisticada y repostería artesanal gourmet.'
-            }
-        };
-
-        // Capturar categoría desde la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('category') || 'desayunos';
-        const categoryInfo = categoriesData[category] || categoriesData['desayunos'];
+        // Datos de la categoría desde el backend
+        const categorySlug = '{{ $category->slug }}';
+        const categoryName = '{{ $category->name }}';
+        const categoryTitle = 'Menú de {{ $category->name }}';
+        const categoryDesc = `{{ strip_tags($category->description) }}`;
 
         // Actualizar textos e interfaz dinámicamente
-        document.querySelector('.pdf-category-tag').textContent = categoryInfo.tag;
-        document.querySelector('.pdf-header-editorial h1').textContent = categoryInfo.title;
-        document.querySelector('.pdf-header-editorial p').textContent = categoryInfo.desc;
+        document.querySelector('.pdf-category-tag').textContent = categoryName;
+        document.querySelector('.pdf-header-editorial h1').textContent = categoryTitle;
+        document.querySelector('.pdf-header-editorial p').textContent = categoryDesc;
 
         // URL dinámica del PDF correspondiente
-        const pdfUrl = `{{ asset('') }}menu_${category}.pdf`;
+        const hasPdf = {{ $category->pdf ? 'true' : 'false' }};
+        const pdfUrl = hasPdf ? '{{ $category->pdf ? asset("storage/".$category->pdf) : '' }}' : null;
 
         // Actualizar botón de descarga flotante
         const downloadBtn = document.getElementById('download-pdf');
         if (downloadBtn) {
-            downloadBtn.href = pdfUrl;
-            downloadBtn.setAttribute('download', `menu_${category}.pdf`);
-            downloadBtn.title = `Descargar ${categoryInfo.title}`;
+            downloadBtn.href = pdfUrl || '#';
+            downloadBtn.setAttribute('download', `menu_${categorySlug}.pdf`);
+            downloadBtn.title = `Descargar ${categoryTitle}`;
         }
 
         // Elementos DOM
@@ -267,6 +245,14 @@
         // -------------------------------------------------------------
         // CARGA ASÍNCRONA DEL DOCUMENTO PDF
         // -------------------------------------------------------------
+        if (!pdfUrl) {
+            ctx.font = "16px sans-serif";
+            ctx.fillStyle = "#14241D";
+            ctx.textAlign = "center";
+            ctx.fillText("No hay menú disponible para esta categoría", canvas.width / 2, 100);
+            return;
+        }
+
         pdfjsLib.getDocument(pdfUrl).promise.then((pdfDoc_) => {
             pdfDoc = pdfDoc_;
             txtPageCount.textContent = pdfDoc.numPages;

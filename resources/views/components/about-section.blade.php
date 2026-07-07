@@ -4,7 +4,7 @@
     }
     $section = $pageSections['about_intro'] ?? null;
     $aboutTitle = $section?->title ?? 'Quiénes somos';
-    $aboutHeading = 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>';
+    $aboutHeading = setting('about_heading', 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>');
     $aboutBody = $section?->content ?? 'Vista Verde Country Club nació como un sueño: crear un espacio donde la excelencia deportiva, el bienestar y la naturaleza se fundieran en perfecta armonía.';
 @endphp
 <section class="premium-section bg-obsidian fade-in-section" id="nosotros">
@@ -17,9 +17,12 @@
             <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
                 {{ $aboutBody }}
             </p>
+            <a href="{{ url('/nosotros') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
+                Conócenos más →
+            </a>
         </div>
         <div style="border-radius: 24px; overflow: hidden; height: 500px;">
-            <img src="{{ asset($section?->image ?? 'images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="{{ ($section && $section->image) ? asset('storage/' . $section->image) : asset('images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
     </div>
 </section>

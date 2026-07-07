@@ -15,59 +15,25 @@
 
         <!-- Bento Grid para las Categorías del Menú -->
         <div class="bento-grid">
-            
-            <!-- Desayunos (Ancho 6) -->
-            <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category=desayunos') }}'">
+            @forelse($categories as $cat)
+            <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category='.$cat->slug) }}'">
                 <div class="bento-img-container" style="height: 300px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1496042409852-2434aff974de?auto=format&fit=crop&w=1000&q=80" alt="Desayunos y Brunch Vista Verde" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <img src="{{ $cat->image ? asset('storage/'.$cat->image) : asset('images/hero.jpg') }}" alt="{{ $cat->name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
                 </div>
                 <div class="bento-card-content" style="padding: 2.2rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">08:00 AM - 12:30 PM</span>
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Desayunos & Brunch</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Comience el día con una selección de repostería artesanal, platillos tradicionales, frutas de temporada y jugos naturales prensados.</p>
-                    <a href="{{ url('/lector-pdf?category=desayunos') }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
+                    @if($cat->schedule)
+                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">{{ $cat->schedule }}</span>
+                    @endif
+                    <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">{{ $cat->name }}</h3>
+                    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">{{ strip_tags($cat->description) }}</p>
+                    <a href="{{ url('/lector-pdf?category='.$cat->slug) }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
                 </div>
             </div>
-
-            <!-- Comida (Ancho 6) -->
-            <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category=comida') }}'">
-                <div class="bento-img-container" style="height: 300px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" alt="Comida Vista Verde" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-                </div>
-                <div class="bento-card-content" style="padding: 2.2rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">01:00 PM - 06:00 PM</span>
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Comidas</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Una propuesta de cortes premium, ensaladas frescas y platillos de mar ideales para disfrutar en nuestra terraza frente al lago.</p>
-                    <a href="{{ url('/lector-pdf?category=comida') }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
-                </div>
+            @empty
+            <div class="bento-item bento-col-12" style="text-align: center; padding: 4rem;">
+                <p style="color: var(--color-text-secondary);">No hay categorías disponibles en este momento.</p>
             </div>
-
-            <!-- Cena (Ancho 6) -->
-            <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category=cena') }}'">
-                <div class="bento-img-container" style="height: 300px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Cena Fine Dining Vista Verde" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-                </div>
-                <div class="bento-card-content" style="padding: 2.2rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">07:00 PM - 11:00 PM</span>
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Cenas</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Una experiencia de alta cocina y gastronomía de autor maridada con una selecta colección de vinos nacionales e internacionales.</p>
-                    <a href="{{ url('/lector-pdf?category=cena') }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Café (Ancho 6) -->
-            <div class="bento-item bento-col-6" style="cursor: pointer;" onclick="window.location.href='{{ url('/lector-pdf?category=cafe') }}'">
-                <div class="bento-img-container" style="height: 300px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&w=1000&q=80" alt="Café y Bar Vista Verde" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-                </div>
-                <div class="bento-card-content" style="padding: 2.2rem; display: flex; flex-direction: column; flex-grow: 1;">
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">Todo el día</span>
-                    <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">Café & Coctelería</h3>
-                    <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Disfrute de nuestra barra de cafés de especialidad, mixología de autor y repostería gourmet en un ambiente de total privacidad.</p>
-                    <a href="{{ url('/lector-pdf?category=cafe') }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
-                </div>
-            </div>
-
+            @endforelse
         </div>
     </div>
 </div>

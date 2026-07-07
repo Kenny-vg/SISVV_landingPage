@@ -1,9 +1,9 @@
 /* resources/css/navbar.css */
+
 .premium-navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 6%;
+    padding: 1.8rem 8%;
     background-color: var(--color-navbar-bg);
     border-bottom: 1px solid var(--color-navbar-border);
     position: fixed;
@@ -28,28 +28,54 @@
     z-index: -1;
 }
 
-.navbar-brand h2 {
-    font-family: var(--font-editorial);
-    color: var(--color-text-primary);
-    margin: 0;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    font-weight: 400;
+/* ─── Contenedores izquierda / derecha ────────────────────────── */
+.navbar-left,
+.navbar-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
-.navbar-brand h2 span {
-    color: var(--color-accent-gold);
-    font-weight: 300;
-    font-style: italic;
-    margin-left: 0.1rem;
+.navbar-left {
+    justify-content: flex-start;
 }
 
+.navbar-right {
+    justify-content: flex-end;
+}
+
+/* ─── Logo centrado ────────────────────────────────────────────── */
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* ─── Links de navegación ──────────────────────────────────────── */
 .navbar-links {
     list-style: none;
     display: flex;
-    gap: 3.5rem;
+    gap: 3rem;
     margin: 0;
     padding: 0;
+    align-items: center;
+}
+
+.navbar-left .navbar-links {
+    padding-right: 4rem;
+}
+
+.navbar-right .navbar-links {
+    padding-left: 4rem;
 }
 
 .navbar-links a {
@@ -57,15 +83,16 @@
     font-family: var(--font-base);
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
     font-weight: 700;
     position: relative;
     padding: 5px 0;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
-/* --- El Hover Animado Elegante --- */
+/* Hover animado */
 .navbar-links a::after {
     content: '';
     position: absolute;
@@ -85,21 +112,12 @@
     width: 100%;
 }
 
-@media (max-width: 767px) {
-    .premium-navbar {
-        padding: 1rem 1.5rem;
-    }
-    .navbar-links {
-        display: none; /* En producción se integraría un menú hamburguesa sutil */
-    }
-}
-
-/* Efecto Scrolled para Glassmorphism Dinámico */
-.premium-navbar.scrolled {
-    padding: 1rem 6%;
-    background-color: var(--color-navbar-scrolled);
-    box-shadow: var(--color-navbar-shadow-scrolled);
-    border-bottom: 1px solid var(--color-navbar-border-scrolled);
+/* ─── Acciones (theme toggle) ──────────────────────────────────── */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    margin-left: 1.5rem;
+    z-index: 2;
 }
 
 /* Botón Alternador de Tema Premium */
@@ -107,8 +125,8 @@
     background: transparent;
     border: 1px solid var(--color-border-subtle);
     color: var(--color-text-primary);
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.4rem;
+    height: 2.4rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -127,12 +145,48 @@
 }
 
 .btn-theme-toggle svg {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
     transition: transform 0.5s ease;
 }
 
 .btn-theme-toggle:hover svg {
     transform: rotate(15deg);
 }
-
+
+/* ─── Scrolled state ────────────────────────────────────────────── */
+.premium-navbar.scrolled {
+    padding: 1rem 8%;
+    background-color: var(--color-navbar-scrolled);
+    box-shadow: var(--color-navbar-shadow-scrolled);
+    border-bottom: 1px solid var(--color-navbar-border-scrolled);
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .premium-navbar {
+        padding: 1.2rem 5%;
+    }
+
+    .navbar-left .navbar-links,
+    .navbar-right .navbar-links {
+        gap: 1.2rem;
+        padding: 0;
+    }
+
+    .navbar-links a {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 767px) {
+    .premium-navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar-left .navbar-links,
+    .navbar-right .navbar-links {
+        display: none;
+    }
+}

@@ -15,6 +15,26 @@
     color: var(--color-bg);
 }
 
+.bg-forest .section-header-editorial h2 {
+    color: #FDFCF9;
+}
+
+.bg-forest .section-header-editorial h2 span {
+    color: var(--color-accent-gold);
+}
+
+.bg-forest .section-header-editorial p {
+    color: rgba(253, 252, 249, 0.7);
+}
+
+[data-theme="dark"] .bg-forest .section-header-editorial h2 {
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .bg-forest .section-header-editorial p {
+    color: #FFFFFF;
+}
+
 .section-header-editorial {
     margin-bottom: 3rem;
     max-width: 700px;
@@ -56,13 +76,12 @@
 
 .bento-item {
     background-color: var(--color-surface);
-    border-radius: 24px;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--color-border-subtle);
-    box-shadow: 0 4px 20px var(--color-shadow-active);
+    box-shadow: 0 2px 12px var(--color-shadow-active);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                 background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -239,8 +258,8 @@
 
 .gastronomy-main-img {
     width: 85%;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px var(--color-shadow-hover);
+    border-radius: 8px;
+    box-shadow: 0 8px 25px var(--color-shadow-hover);
     display: block;
 }
 
@@ -249,9 +268,9 @@
     bottom: -3rem;
     right: 0;
     width: 40%;
-    border-radius: 50%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    border-radius: 50%;
     border: 8px solid var(--color-bg);
     box-shadow: 0 10px 30px var(--color-shadow-hover);
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -490,12 +509,11 @@
     position: relative;
     overflow: hidden;
     min-height: 380px;
-    border-radius: 24px;
+    border-radius: 12px;
     text-decoration: none !important;
     display: block;
     background-color: #111;
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -608,7 +626,6 @@
 /* Fix: dark mode verde en cards normales */
 [data-theme=dark] .bento-item:not(.bento-fullbleed) {
     background-color: #111111;
-    border-color: rgba(193, 201, 77, 0.10);
 }
 
 /* Carrusel full-bleed snap */
@@ -623,20 +640,599 @@
 }
 
 /* ==========================================
-   GRID DE INSTALACIONES (LUGARES DEL CLUB)
+   SECCIÓN DE EVENTOS (HOME) — CARRUSEL
    ========================================== */
-.instalaciones-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+.events-home-section {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Badge de fecha en las tarjetas del carrusel de eventos */
+.event-date-badge {
+    font-family: var(--font-alt);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(193, 201, 77, 0.22);
+    border: 1px solid rgba(193, 201, 77, 0.45);
+    backdrop-filter: blur(8px);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    text-transform: uppercase;
+}
+
+/* Tarjeta del carrusel de eventos (mismo tamaño que clases) */
+.event-card-item {
+    flex: 0 0 340px;
+    scroll-snap-align: start;
 }
 
 @media (max-width: 768px) {
-    .instalaciones-grid { grid-template-columns: 1fr; }
+    .event-card-item { flex: 0 0 290px; }
 }
 
-.instalaciones-grid .bento-fullbleed {
-    min-height: 420px;
+/* ==========================================
+   VISTA PÚBLICA — GRID DE TODOS LOS EVENTOS
+   ========================================== */
+.eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 2.2rem;
+}
+
+@media (max-width: 768px) {
+    .eventos-grid { grid-template-columns: 1fr; }
+}
+
+/* Tarjeta de evento en la página /eventos */
+.evento-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px var(--color-shadow-active);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.evento-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.13);
+}
+
+/* Imagen con aspect ratio fijo */
+.evento-card-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+}
+
+.evento-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+}
+
+.evento-card:hover .evento-card-img {
+    transform: scale(1.06);
+}
+
+/* Badge de fecha superpuesto en la imagen */
+.evento-card-date-badge {
+    position: absolute;
+    top: 1.2rem;
+    left: 1.2rem;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(193, 201, 77, 0.4);
+    border-radius: 14px;
+    padding: 0.55rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    gap: 0.1rem;
+}
+
+.evento-date-day {
+    font-family: var(--font-editorial);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    line-height: 1;
+}
+
+.evento-date-month {
+    font-family: var(--font-alt);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.evento-date-year {
+    font-family: var(--font-alt);
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Cuerpo de la tarjeta */
+.evento-card-body {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.6rem;
+}
+
+.evento-card-location {
+    font-family: var(--font-alt);
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.evento-card-title {
+    font-family: var(--font-editorial);
+    font-size: 1.45rem;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.evento-card-desc {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.evento-card-link {
+    font-family: var(--font-alt);
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.evento-card:hover .evento-card-link {
+    gap: 0.75rem;
+}
+
+/* ==========================================
+   VISTA DE DETALLE — RICH TEXT
+   ========================================== */
+.evento-rich-content {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-secondary);
+}
+
+.evento-rich-content h1,
+.evento-rich-content h2,
+.evento-rich-content h3 {
+    font-family: var(--font-editorial);
+    color: var(--color-text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+}
+
+.evento-rich-content p {
+    margin-bottom: 1.25rem;
+}
+
+.evento-rich-content ul,
+.evento-rich-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.evento-rich-content li {
+    margin-bottom: 0.4rem;
+}
+
+.evento-rich-content strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.evento-rich-content a {
+    color: var(--color-accent-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ==========================================
+   CARRUSEL DE IMÁGENES (Instalaciones / Clases)
+   ========================================== */
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: var(--color-surface);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 500px;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+    line-height: 1;
+    opacity: 0;
+}
+
+.carousel-container:hover .carousel-btn {
+    opacity: 1;
+}
+
+.carousel-btn:hover {
+    background: rgba(0,0,0,0.75);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-prev { left: 1rem; }
+.carousel-next { right: 1rem; }
+
+.carousel-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: #fff;
+    transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+    .carousel-track { height: 350px; }
+    .carousel-btn { width: 36px; height: 36px; font-size: 1.2rem; }
+}
+
+/* ==========================================
+   MEMBRESÍAS
+   ========================================== */
+.membresias-hero {
+    position: relative;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.membresias-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+    z-index: 1;
+}
+
+.membresias-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 720px;
+    padding: 4rem 1.5rem;
+}
+
+.membresias-hero-tag {
+    font-family: var(--font-alt);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.membresias-hero-content h1 {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+}
+
+.membresias-hero-content h1 span {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-accent-gold);
+}
+
+.membresias-hero-content p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.membresias-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 7rem;
+}
+
+.membresias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+    align-items: stretch;
+}
+
+.membresia-card {
+    background: var(--color-surface);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.membresia-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+}
+
+.membresia-card.featured {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.membresia-card.featured:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+}
+
+.membresia-card-name {
+    font-family: var(--font-editorial);
+    font-size: 1.5rem;
+    margin: 0 0 0.2rem 0;
+    color: var(--color-text-primary);
+}
+
+.membresia-card-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    letter-spacing: -0.5px;
+    margin-bottom: 2rem;
+}
+
+.membresia-card-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.membresia-card-benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.membresia-card-benefits li svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    stroke: var(--color-accent-gold);
+}
+
+.membresia-card-badge {
+    font-family: var(--font-alt);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    border: 1px solid var(--color-accent-gold);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+}
+
+.membresias-empty {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .membresia-card {
+    background: #111;
+}
+
+@media (max-width: 768px) {
+    .membresias-hero { min-height: 40vh; }
+    .membresias-grid { grid-template-columns: 1fr; }
+    .membresia-card { padding: 2rem 1.5rem; }
+}
+
+/* ==========================================
+   PÁGINA: SOBRE NOSOTROS
+   ========================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.about-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px var(--color-shadow-active);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--color-shadow-hover);
+    border-color: var(--color-accent-gold);
+}
+
+.about-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(193, 201, 77, 0.1);
+    color: var(--color-accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.about-card:hover .about-card-icon {
+    background-color: rgba(193, 201, 77, 0.18);
+    transform: scale(1.08);
+}
+
+.about-card-title {
+    font-family: var(--font-editorial);
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.about-card-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .about-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================
+   VALORES GRID
+   ========================================== */
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 900px;
+    margin-top: 2.5rem;
+}
+
+.valor-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease;
+    box-shadow: 0 2px 8px var(--color-shadow-active);
+}
+
+.valor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px var(--color-shadow-hover);
+    border-color: var(--color-accent-gold);
+}
+
+.valor-card-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .valor-card {
+    border-color: rgba(229, 231, 181, 0.2);
+}
+
+@media (max-width: 768px) {
+    .valores-grid {
+        grid-template-columns: 1fr;
+    }
 }

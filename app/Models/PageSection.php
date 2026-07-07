@@ -14,6 +14,7 @@ class PageSection extends Model
         'title',
         'content',
         'image',
+        'image_float',
         'is_active',
     ];
 

@@ -19,13 +19,13 @@
 
             @forelse($disciplines as $discipline)
             <a href="{{ url('/clases/'.$discipline->slug) }}" class="bento-fullbleed">
-                <img src="{{ asset($discipline->images->first()?->image_path ?? 'images/hero.jpg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
+                <img src="{{ ($img = $discipline->images->first()) ? asset('storage/' . $img->image_path) : asset('images/hero.jpg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                     <div class="bento-fullbleed-bottom">
                         <h3 class="bento-fullbleed-title">{{ $discipline->title }}</h3>
-                        <p class="bento-fullbleed-desc">{{ $discipline->description }}</p>
+                        <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($discipline->description), 120) }}</p>
                         <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
                     </div>
                 </div>

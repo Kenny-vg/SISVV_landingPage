@@ -12,26 +12,26 @@
         </p>
     </header>
 
-    <!-- Grid de Instalaciones (Lugares del Club) -->
-    <section class="premium-section" style="padding: 0 1.5rem 6rem 1.5rem; max-width: 1200px; margin: 0 auto;" id="instalaciones-grid">
+    <!-- Grid de Instalaciones (bento-fullbleed como Clases) -->
+    <section style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 6rem 1.5rem;">
 
-        <div class="instalaciones-grid">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
 
             @forelse($facilities as $facility)
             <a href="{{ url('/instalaciones/'.$facility->slug) }}" class="bento-fullbleed">
-                <img src="{{ asset($facility->images->first()?->image_path ?? 'images/hero.jpg') }}" alt="{{ $facility->title }}" class="bento-fullbleed-img">
+                <img src="{{ ($img = $facility->images->first()) ? asset('storage/' . $img->image_path) : asset('images/hero.jpg') }}" alt="{{ $facility->title }}" class="bento-fullbleed-img">
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                     <div class="bento-fullbleed-bottom">
                         <h3 class="bento-fullbleed-title">{{ $facility->title }}</h3>
-                        <p class="bento-fullbleed-desc">{{ $facility->description }}</p>
+                        <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($facility->description), 120) }}</p>
                         <span class="bento-fullbleed-link">Conocer más &rarr;</span>
                     </div>
                 </div>
             </a>
             @empty
-            <p style="color: var(--color-text-secondary); grid-column: 1 / -1; text-align: center; padding: 2rem;">No hay espacios disponibles actualmente.</p>
+            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">No hay espacios disponibles actualmente.</p>
             @endforelse
 
         </div>
