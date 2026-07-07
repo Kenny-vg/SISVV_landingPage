@@ -27,12 +27,14 @@ class HeroResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
+                Forms\Components\RichEditor::make('title')
                     ->label('Título')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('subtitle')
+                    ->toolbarButtons(['italic', 'bold'])
+                    ->columnSpanFull(),
+                Forms\Components\RichEditor::make('subtitle')
                     ->label('Subtítulo')
+                    ->toolbarButtons(['italic', 'bold'])
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('button_text')
                     ->label('Texto del botón')
@@ -44,6 +46,7 @@ class HeroResource extends Resource
                     ->label('Imagen de fondo')
                     ->image()
                     ->directory('heroes')
+                    ->disk('public')
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo'),
@@ -56,6 +59,7 @@ class HeroResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->label('Título')
+                    ->html()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('background_image')

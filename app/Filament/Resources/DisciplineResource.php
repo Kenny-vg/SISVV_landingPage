@@ -60,6 +60,7 @@ class DisciplineResource extends Resource
                                     ->label('Imagen')
                                     ->image()
                                     ->directory('disciplines')
+                                    ->disk('public')
                                     ->required(),
                             ])
                             ->orderable('sort_order')

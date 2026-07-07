@@ -47,6 +47,7 @@ class CategoryResource extends Resource
                     ->image()
                     ->maxSize(2048)
                     ->directory('menus')
+                    ->disk('public')
                     ->imageEditor()
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('pdf')
@@ -55,6 +56,7 @@ class CategoryResource extends Resource
                     ->maxSize(10240)
                     ->rules([new PdfMaxPages(8)])
                     ->directory('menus')
+                    ->disk('public')
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_visible')
                     ->label('Mostrar en el sitio')

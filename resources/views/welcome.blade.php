@@ -17,13 +17,30 @@
 @section('content')
 
     <section class="hero-asymmetric" style="background-image: url('{{ $hero && $hero->background_image ? (str_starts_with($hero->background_image, 'images/') ? asset($hero->background_image) : asset('storage/' . $hero->background_image)) : asset('images/hero.jpg') }}');">
+        <style>
+            .hero-content h1 p,
+            .hero-content p p {
+                display: inline;
+                font-size: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+                color: inherit;
+                margin: 0;
+                padding: 0;
+            }
+            .hero-content em,
+            .hero-content i {
+                color: var(--color-accent-gold);
+                font-style: italic;
+            }
+        </style>
         <div class="hero-overlay"></div>
         <img src="{{ asset('images/golfista.png') }}" alt="" class="hero-golfista">
         <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
         <div class="hero-content">
-            <h1>{{ $hero?->title ?? 'Donde cada día se disfruta diferente' }}</h1>
+            <h1>{!! $hero?->title ?? setting('hero_title') !!}</h1>
             <p>
-                {{ $hero?->subtitle ?? 'Naturaleza, bienestar y experiencias que elevan tu estilo de vida.' }}
+                {!! $hero?->subtitle ?? setting('hero_subtitle') !!}
             </p>
             @if ($hero?->button_text)
                 <a href="{{ $hero->button_link ? url($hero->button_link) : '#instalaciones' }}" class="btn-gold" style="text-decoration: none; display: inline-block;">

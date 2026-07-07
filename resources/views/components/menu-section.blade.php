@@ -15,7 +15,7 @@
             <div class="section-header-editorial" style="margin-bottom: 0;">
                 <h2><br><span>{{ $menuSection?->title ?? 'Alta cocina en cada detalle.' }}</span></h2>
                 <p style="margin-bottom: 2rem;">
-                    {{ $menuSection?->content ?? 'Descubre nuestra propuesta gastronómica de temporada, curada por chefs de renombre y diseñada para acompañar tus tardes en el club. Disfruta de un maridaje exclusivo en la terraza frente al lago o en la comodidad del salón privado.' }}
+                    {!! $menuSection?->content !!}
                 </p>
                 <a href="{{ url('/lector') }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
                     {{ setting('menu_btn_text', 'Ver Carta Interactiva') }}
