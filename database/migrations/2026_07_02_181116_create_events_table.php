@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('category')->nullable();
             $table->text('description')->nullable();
-            $table->dateTime('event_date');
-            $table->string('location')->nullable();
             $table->string('image')->nullable();
+            $table->string('pdf_path')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamps();
         });

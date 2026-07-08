@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_float')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

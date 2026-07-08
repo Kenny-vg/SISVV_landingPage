@@ -59,8 +59,6 @@ class EventSeeder extends Seeder
                 'title' => 'Torneo de Golf Anual',
                 'slug' => 'torneo-de-golf-anual',
                 'category' => 'Torneo',
-                'event_date' => now()->addDays(30),
-                'location' => 'Campo de Golf SISVV',
                 'description' => '<p>Únete a nuestro torneo de golf más esperado del año. Disfruta de una jornada deportiva en nuestro campo de 9 hoyos.</p>',
                 'image' => null,
                 'pdf_path' => null,

@@ -14,15 +14,12 @@ class Event extends Model
         'slug',
         'category',
         'description',
-        'event_date',
-        'location',
         'image',
         'pdf_path',
         'is_published',
     ];
 
     protected $casts = [
-        'event_date' => 'datetime',
         'is_published' => 'boolean',
     ];
 }

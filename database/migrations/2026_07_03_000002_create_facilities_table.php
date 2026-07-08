@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->text('description')->nullable();
             $table->string('schedule')->nullable();
+            $table->string('panorama_path')->nullable();
             $table->boolean('is_published')->default(false);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
