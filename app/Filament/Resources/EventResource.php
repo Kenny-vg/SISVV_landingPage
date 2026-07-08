@@ -49,12 +49,6 @@ class EventResource extends Resource
                         'Corporativo' => 'Corporativo',
                         'Otro' => 'Otro',
                     ]),
-                Forms\Components\DatePicker::make('event_date')
-                    ->label('Fecha del evento')
-                    ->nullable(),
-                Forms\Components\TextInput::make('location')
-                    ->label('Ubicación')
-                    ->maxLength(255),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descripción')
                     ->columnSpanFull(),
@@ -86,15 +80,6 @@ class EventResource extends Resource
                     ->label('Categoría')
                     ->badge()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('event_date')
-                    ->label('Fecha del evento')
-                    ->date()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('location')
-                    ->label('Ubicación')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Imagen')
                     ->square(),

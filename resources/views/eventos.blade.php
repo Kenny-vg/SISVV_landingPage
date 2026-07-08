@@ -45,15 +45,6 @@
                         </span>
                         @endif
                         <div class="bento-fullbleed-bottom">
-                            @if($event->location)
-                            <span style="font-family: var(--font-alt); font-size: 0.65rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.35rem;">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 11px; height: 11px; flex-shrink: 0;">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                {{ $event->location }}
-                            </span>
-                            @endif
                             <h3 class="bento-fullbleed-title">{{ $event->title }}</h3>
                             @if($event->description)
                             <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($event->description), 90) }}</p>
