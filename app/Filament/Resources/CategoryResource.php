@@ -39,8 +39,9 @@ class CategoryResource extends Resource
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->hidden(),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen de portada')

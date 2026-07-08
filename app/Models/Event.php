@@ -22,4 +22,13 @@ class Event extends Model
     protected $casts = [
         'is_published' => 'boolean',
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Event $event) {
+            if (!$event->slug) {
+                $event->slug = \Str::slug($event->title);
+            }
+        });
+    }
 }

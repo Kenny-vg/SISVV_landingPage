@@ -49,8 +49,9 @@ class EventResource extends Resource
                         'Corporativo' => 'Corporativo',
                         'Otro' => 'Otro',
                     ]),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen')
@@ -64,7 +65,8 @@ class EventResource extends Resource
                     ->directory('events/pdfs')
                     ->disk('public'),
                 Forms\Components\Toggle::make('is_published')
-                    ->label('Publicado'),
+                    ->label('Publicado')
+                    ->default(true),
             ]);
     }
 
