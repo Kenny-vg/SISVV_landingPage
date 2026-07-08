@@ -37,7 +37,8 @@ class MembershipResource extends Resource
                     ->maxLength(255)
                     ->helperText('Texto libre. Ej: "$1,500/mes" o "Consultar"'),
                 Forms\Components\Toggle::make('is_published')
-                    ->label('Publicado'),
+                    ->label('Publicado')
+                    ->default(true),
                 Forms\Components\Section::make('Beneficios')
                     ->schema([
                         Forms\Components\Repeater::make('benefits')

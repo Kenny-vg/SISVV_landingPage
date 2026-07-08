@@ -43,14 +43,16 @@ class DisciplineResource extends Resource
                         'Bienestar' => 'Bienestar',
                         'Fitness' => 'Fitness',
                     ]),
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('schedule')
                     ->label('Horario')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
-                    ->label('Publicado'),
+                    ->label('Publicado')
+                    ->default(true),
                 Forms\Components\Section::make('Galería de imágenes')
                     ->schema([
                         Forms\Components\Repeater::make('images')
