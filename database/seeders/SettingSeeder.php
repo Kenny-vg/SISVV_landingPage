@@ -71,6 +71,10 @@ class SettingSeeder extends Seeder
             ['key' => 'footer_terms_text', 'value' => 'Términos y Condiciones', 'group' => 'general'],
             ['key' => 'footer_rights_text', 'value' => 'Todos los derechos reservados.', 'group' => 'general'],
 
+            // Legal PDFs
+            ['key' => 'privacy_pdf', 'value' => '', 'group' => 'general'],
+            ['key' => 'terms_pdf', 'value' => '', 'group' => 'general'],
+
             // Redes sociales
             ['key' => 'social_facebook', 'value' => 'https://www.facebook.com/p/Vista-Verde-Country-Club-AC-100063650045982/', 'group' => 'social'],
             ['key' => 'social_instagram', 'value' => 'https://www.instagram.com/clubvistaverdecountry/', 'group' => 'social'],
