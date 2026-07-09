@@ -245,6 +245,21 @@ class SettingsPage extends Page
                                 TextInput::make('footer_rights_text')
                                     ->label('Derechos reservados')
                                     ->helperText('Texto de copyright en el footer'),
+
+                                FileUpload::make('privacy_pdf')
+                                    ->label('PDF — Aviso de Privacidad')
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->maxSize(10240)
+                                    ->directory('legal')
+                                    ->disk('public')
+                                    ->helperText('Sube el PDF del Aviso de Privacidad'),
+                                FileUpload::make('terms_pdf')
+                                    ->label('PDF — Términos y Condiciones')
+                                    ->acceptedFileTypes(['application/pdf'])
+                                    ->maxSize(10240)
+                                    ->directory('legal')
+                                    ->disk('public')
+                                    ->helperText('Sube el PDF de Términos y Condiciones'),
                             ]),
                     ])
                     ->activeTab(0)

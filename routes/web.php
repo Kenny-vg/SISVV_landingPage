@@ -77,4 +77,7 @@ Route::get('/membresias', function () {
     return view('membresias', compact('memberships'));
 });
 
+Route::view('/aviso-de-privacidad', 'aviso-privacidad');
+Route::view('/terminos-y-condiciones', 'terminos-condiciones');
+
 require __DIR__.'/auth.php';

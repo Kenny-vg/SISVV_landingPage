@@ -34,9 +34,9 @@
     <div class="footer-bottom">
         <p>&copy; {{ date('Y') }} {{ setting('site_name', 'VistaVerde Country Club') }}. {{ setting('footer_rights_text', 'Todos los derechos reservados.') }}</p>
         <div class="footer-legal">
-            <a href="#" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">{{ setting('footer_privacy_text', 'Aviso de Privacidad') }}</a>
+            <a href="{{ url('/aviso-de-privacidad') }}" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">{{ setting('footer_privacy_text', 'Aviso de Privacidad') }}</a>
             <span style="margin: 0 0.8rem; color: var(--color-footer-border);">|</span>
-            <a href="#" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">{{ setting('footer_terms_text', 'Términos y Condiciones') }}</a>
+            <a href="{{ url('/terminos-y-condiciones') }}" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">{{ setting('footer_terms_text', 'Términos y Condiciones') }}</a>
         </div>
     </div>
 </footer>
