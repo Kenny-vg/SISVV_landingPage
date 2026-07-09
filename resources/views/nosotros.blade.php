@@ -8,7 +8,6 @@
     $values = $pageSections['about_values'] ?? null;
     $philosophy = $pageSections['about_philosophy'] ?? null;
 
-    // Parse values content into individual items
     $valoresItems = [];
     if ($values && $values->content) {
         $parts = explode(',', $values->content);
@@ -22,62 +21,110 @@
         }
     }
 
-    $sections = [
-        ['key' => 'about_mission',   'section' => $mission,   'bg' => 'bg-obsidian'],
-        ['key' => 'about_vision',    'section' => $vision,    'bg' => 'bg-forest'],
-        ['key' => 'about_values',    'section' => $values,    'bg' => 'bg-obsidian'],
-        ['key' => 'about_philosophy','section' => $philosophy,'bg' => 'bg-forest'],
-    ];
+    $aboutImage = setting('about_image') ? asset('storage/' . setting('about_image')) : asset('images/about.jpg');
 @endphp
 
 @extends('layouts.public')
 
 @section('content')
-<div class="about-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
+<div style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
 
-    <header style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
-        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
-        <h1 style="font-family: var(--font-editorial); font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Sobre<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">Nosotros.</span></h1>
-        <p style="color: var(--color-text-secondary); max-width: 650px; font-size: 1.05rem; line-height: 1.7;">Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.</p>
-    </header>
+    <!-- Hero con imagen de fondo (como membresías) -->
+    <div class="about-hero" style="background-image: url('{{ $aboutImage }}');">
+        <div class="about-hero-overlay"></div>
+        <div class="about-hero-content">
+            <span class="about-hero-tag">Vista Verde Club</span>
+            <h1>Sobre<br><span>Nosotros.</span></h1>
+            <p>Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.</p>
+        </div>
+    </div>
 
-    @foreach($sections as $item)
-        @php $s = $item['section']; @endphp
-        @if($s)
-            <section class="premium-section {{ $item['bg'] }} fade-in-section">
-                @if($s->image)
-                <div style="width:100%; max-height:400px; border-radius:16px; overflow:hidden; margin-bottom:3rem; background-color:var(--color-surface);">
-                    <img src="{{ asset('storage/'.$s->image) }}" alt="{{ $s->title }}" style="width:100%; height:100%; max-height:400px; max-width:100%; object-fit:cover; display:block;">
-                </div>
-                @endif
-                <div class="section-header-editorial" style="max-width: 900px;">
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">Vista Verde Club</span>
-                    @php
-                        $titleWords = explode(' ', $s->title, 2);
-                        $beforeTitle = $titleWords[0] ?? '';
-                        $afterTitle = $titleWords[1] ?? $s->title;
-                    @endphp
-                    <h2>{{ $beforeTitle }}<br><span>{{ $afterTitle }}.</span></h2>
-                    @if($item['key'] !== 'about_values')
-                        <p>{!! $s->content !!}</p>
-                    @endif
-                </div>
-                @if($item['key'] === 'about_values')
-                    @if(count($valoresItems) >= 2)
-                        <div class="valores-grid">
-                            @foreach($valoresItems as $valor)
-                                <div class="valor-card">
-                                    <span class="valor-card-text">{{ $valor }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <p style="max-width: 900px; margin-top: 1rem;">{!! $s->content !!}</p>
-                    @endif
-                @endif
-            </section>
-        @endif
-    @endforeach
+    <!-- Misión (como about-home-grid del homepage) -->
+    @if($mission)
+    <section class="premium-section bg-obsidian fade-in-section">
+        <div class="about-home-grid">
+            <div>
+                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+                @php
+                    $mW = explode(' ', $mission->title, 2);
+                @endphp
+                <h2 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;">
+                    {{ $mW[0] }}<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">{{ $mW[1] ?? $mission->title }}.</span>
+                </h2>
+                <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    {!! $mission->content !!}
+                </p>
+            </div>
+            <div style="border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
+                <img src="{{ $mission->image ? asset('storage/'.$mission->image) : $aboutImage }}" alt="{{ $mission->title }}" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Visión (invertido: imagen izq, texto der) -->
+    @if($vision)
+    <section class="premium-section bg-obsidian fade-in-section" style="padding-top: 0;">
+        <div class="about-home-grid" style="direction: rtl;">
+            <div style="direction: ltr;">
+                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+                @php
+                    $vW = explode(' ', $vision->title, 2);
+                @endphp
+                <h2 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;">
+                    {{ $vW[0] }}<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">{{ $vW[1] ?? $vision->title }}.</span>
+                </h2>
+                <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    {!! $vision->content !!}
+                </p>
+            </div>
+            <div style="direction: ltr; border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
+                <img src="{{ $vision->image ? asset('storage/'.$vision->image) : $aboutImage }}" alt="{{ $vision->title }}" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Valores -->
+    @if($values)
+    <section class="premium-section bg-obsidian fade-in-section" style="padding-top: 0;">
+        <div class="about-home-grid" style="display: block; text-align: center;">
+            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+            @php
+                $valsT = explode(' ', $values->title, 2);
+            @endphp
+            <h2 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;">
+                {{ $valsT[0] }}<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">{{ $valsT[1] ?? $values->title }}.</span>
+            </h2>
+            @if(count($valoresItems) >= 2)
+            <div class="about-values-grid">
+                @foreach($valoresItems as $valor)
+                <span class="about-values-tag">{{ $valor }}</span>
+                @endforeach
+            </div>
+            @else
+            <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; max-width: 700px; margin: 0 auto;">
+                {!! $values->content !!}
+            </p>
+            @endif
+        </div>
+    </section>
+    @endif
+
+    <!-- Filosofía como banner full-width -->
+    @if($philosophy)
+    <section class="about-banner fade-in-section" style="background-image: url('{{ $philosophy->image ? asset('storage/'.$philosophy->image) : $aboutImage }}');">
+        <div class="about-banner-overlay"></div>
+        <div class="about-banner-content">
+            <span class="about-hero-tag">Vista Verde Club</span>
+            @php
+                $pT = explode(' ', $philosophy->title, 2);
+            @endphp
+            <h2 class="about-banner-title">{{ $pT[0] }}<br><span>{{ $pT[1] ?? $philosophy->title }}.</span></h2>
+            <p class="about-banner-desc">{!! $philosophy->content !!}</p>
+        </div>
+    </section>
+    @endif
 
 </div>
-@endsection
+@stop
