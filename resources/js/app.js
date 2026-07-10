@@ -108,7 +108,116 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // 5a. Protección de créditos (MutationObserver)
+    // 5a. Panel de accesibilidad
+    const a11y = {
+        html: document.documentElement,
+        toggle: document.getElementById('a11y-toggle'),
+        panel: document.getElementById('a11y-panel'),
+        resetBtn: document.getElementById('a11y-reset'),
+        storageKey: 'a11y_preferences',
+
+        defaults: {
+            'text-size': 'md',
+            'contrast': false,
+            'grayscale': false,
+            'dyslexia': false,
+            'no-animations': false,
+            'highlight-links': false,
+        },
+
+        init() {
+            const saved = this.load();
+            this.apply(saved);
+            this.bindEvents();
+            this.syncUI(saved);
+        },
+
+        load() {
+            try {
+                const data = JSON.parse(localStorage.getItem(this.storageKey));
+                return data ? { ...this.defaults, ...data } : { ...this.defaults };
+            } catch {
+                return { ...this.defaults };
+            }
+        },
+
+        save(state) {
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
+        },
+
+        apply(state) {
+            const classes = [
+                'a11y-contrast', 'a11y-grayscale', 'a11y-dyslexia',
+                'a11y-no-animations', 'a11y-highlight-links',
+            ];
+            this.html.classList.remove('a11y-text-md', 'a11y-text-lg', 'a11y-text-xl', ...classes);
+            this.html.classList.add('a11y-text-' + state['text-size']);
+            if (state.contrast) this.html.classList.add('a11y-contrast');
+            if (state.grayscale) this.html.classList.add('a11y-grayscale');
+            if (state.dyslexia) this.html.classList.add('a11y-dyslexia');
+            if (state['no-animations']) this.html.classList.add('a11y-no-animations');
+            if (state['highlight-links']) this.html.classList.add('a11y-highlight-links');
+        },
+
+        syncUI(state) {
+            document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.size === state['text-size']);
+            });
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                const key = input.dataset.a11y;
+                input.checked = !!state[key];
+            });
+        },
+
+        getState() {
+            const state = {};
+            state['text-size'] = document.querySelector('[data-a11y="text-size"].is-active')?.dataset.size || 'md';
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                state[input.dataset.a11y] = input.checked;
+            });
+            return state;
+        },
+
+        bindEvents() {
+            this.toggle?.addEventListener('click', () => {
+                this.panel?.classList.toggle('is-open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (this.panel?.classList.contains('is-open') &&
+                    !this.panel.contains(e.target) &&
+                    !this.toggle?.contains(e.target)) {
+                    this.panel.classList.remove('is-open');
+                }
+            });
+
+            document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('[data-a11y="text-size"]').forEach(b => b.classList.remove('is-active'));
+                    btn.classList.add('is-active');
+                    this.apply(this.getState());
+                    this.save(this.getState());
+                });
+            });
+
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    this.apply(this.getState());
+                    this.save(this.getState());
+                });
+            });
+
+            this.resetBtn?.addEventListener('click', () => {
+                this.apply(this.defaults);
+                this.syncUI(this.defaults);
+                this.save(this.defaults);
+            });
+        },
+    };
+
+    a11y.init();
+
+    // 5b. Protección de créditos (MutationObserver)
     function buildCreditsHTML() {
         const div = document.createElement('div');
         div.className = 'footer-dev';
