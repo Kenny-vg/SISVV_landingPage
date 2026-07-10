@@ -108,7 +108,37 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // 5. Carrusel de imágenes (Instalaciones / Clases)
+    // 5a. Protección de créditos (MutationObserver)
+    const CREDIT_TEXT = 'Desarrollado por Kendra Aiman de la Vega Anaya y Cristhian Emanuel Meza Acevedo';
+
+    function injectCredits() {
+        let creditEl = document.querySelector('.footer-dev-credits');
+        if (!creditEl) {
+            const footerBottom = document.querySelector('.footer-bottom');
+            if (footerBottom) {
+                creditEl = document.createElement('p');
+                creditEl.className = 'footer-dev-credits';
+                creditEl.textContent = CREDIT_TEXT;
+                footerBottom.appendChild(creditEl);
+            }
+        }
+    }
+
+    injectCredits();
+
+    const creditObserver = new MutationObserver(() => {
+        const el = document.querySelector('.footer-dev-credits');
+        if (!el || el.textContent !== CREDIT_TEXT) {
+            injectCredits();
+        }
+    });
+
+    const footerBottom = document.querySelector('.footer-bottom');
+    if (footerBottom) {
+        creditObserver.observe(footerBottom, { childList: true, subtree: true, characterData: true });
+    }
+
+    // 5b. Carrusel de imágenes (Instalaciones / Clases)
     document.querySelectorAll('[data-carousel]').forEach(container => {
         const track = container.querySelector('[data-track]');
         const slides = track.querySelectorAll('.carousel-slide');
