@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         panel: document.getElementById('a11y-panel'),
         resetBtn: document.getElementById('a11y-reset'),
         storageKey: 'a11y_preferences',
+        focusableSelector: 'button, input, [tabindex]:not([tabindex="-1"])',
 
         defaults: {
             'text-size': 'md',
@@ -161,11 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         syncUI(state) {
             document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
-                btn.classList.toggle('is-active', btn.dataset.size === state['text-size']);
+                const isActive = btn.dataset.size === state['text-size'];
+                btn.classList.toggle('is-active', isActive);
+                btn.setAttribute('aria-checked', isActive);
             });
             document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
                 const key = input.dataset.a11y;
                 input.checked = !!state[key];
+                input.setAttribute('aria-checked', !!state[key]);
             });
         },
 
@@ -178,23 +182,52 @@ document.addEventListener('DOMContentLoaded', () => {
             return state;
         },
 
+        open() {
+            this.panel?.classList.add('is-open');
+            this.panel?.setAttribute('aria-hidden', 'false');
+            this.toggle?.setAttribute('aria-expanded', 'true');
+            const firstFocusable = this.panel?.querySelector(this.focusableSelector);
+            setTimeout(() => firstFocusable?.focus(), 100);
+        },
+
+        close() {
+            this.panel?.classList.remove('is-open');
+            this.panel?.setAttribute('aria-hidden', 'true');
+            this.toggle?.setAttribute('aria-expanded', 'false');
+            this.toggle?.focus();
+        },
+
         bindEvents() {
             this.toggle?.addEventListener('click', () => {
-                this.panel?.classList.toggle('is-open');
+                if (this.panel?.classList.contains('is-open')) {
+                    this.close();
+                } else {
+                    this.open();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.panel?.classList.contains('is-open')) {
+                    this.close();
+                }
             });
 
             document.addEventListener('click', (e) => {
                 if (this.panel?.classList.contains('is-open') &&
                     !this.panel.contains(e.target) &&
                     !this.toggle?.contains(e.target)) {
-                    this.panel.classList.remove('is-open');
+                    this.close();
                 }
             });
 
             document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    document.querySelectorAll('[data-a11y="text-size"]').forEach(b => b.classList.remove('is-active'));
+                    document.querySelectorAll('[data-a11y="text-size"]').forEach(b => {
+                        b.classList.remove('is-active');
+                        b.setAttribute('aria-checked', 'false');
+                    });
                     btn.classList.add('is-active');
+                    btn.setAttribute('aria-checked', 'true');
                     this.apply(this.getState());
                     this.save(this.getState());
                 });
@@ -202,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
                 input.addEventListener('change', () => {
+                    input.setAttribute('aria-checked', input.checked);
                     this.apply(this.getState());
                     this.save(this.getState());
                 });

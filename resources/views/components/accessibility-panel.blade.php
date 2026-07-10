@@ -1,56 +1,59 @@
-<button class="a11y-toggle" id="a11y-toggle" aria-label="Panel de accesibilidad" title="Accesibilidad">
-    <span>♿</span>
+<button class="a11y-toggle" id="a11y-toggle" aria-label="Panel de accesibilidad" aria-expanded="false" title="Accesibilidad">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+        <circle cx="12" cy="7" r="2.5" stroke-width="2"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 22v-5l4-3V9h6v5l4 3v5"/>
+    </svg>
 </button>
 
-<div class="a11y-panel" id="a11y-panel">
-    <h3 class="a11y-panel-title">Accesibilidad</h3>
+<aside class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-title" aria-hidden="true">
+    <h2 class="a11y-panel-title" id="a11y-title">Accesibilidad</h2>
 
     <div class="a11y-group">
-        <span class="a11y-group-label">Tamaño de texto</span>
-        <div class="a11y-size-options">
-            <button class="a11y-size-btn" data-size="md" data-a11y="text-size">A</button>
-            <button class="a11y-size-btn" data-size="lg" data-a11y="text-size">A+</button>
-            <button class="a11y-size-btn" data-size="xl" data-a11y="text-size">A++</button>
+        <span class="a11y-group-label" id="a11y-size-label">Tamaño de texto</span>
+        <div class="a11y-size-options" role="radiogroup" aria-labelledby="a11y-size-label">
+            <button class="a11y-size-btn" data-size="md" data-a11y="text-size" role="radio" aria-checked="true" aria-label="Tamaño normal">A</button>
+            <button class="a11y-size-btn" data-size="lg" data-a11y="text-size" role="radio" aria-checked="false" aria-label="Tamaño grande">A+</button>
+            <button class="a11y-size-btn" data-size="xl" data-a11y="text-size" role="radio" aria-checked="false" aria-label="Tamaño extra grande">A++</button>
         </div>
     </div>
 
     <div class="a11y-group">
         <div class="a11y-toggle-option">
-            <span class="a11y-toggle-option-label">Alto contraste</span>
+            <span class="a11y-toggle-option-label" id="a11y-label-contrast">Alto contraste</span>
             <label class="a11y-switch">
-                <input type="checkbox" data-a11y="contrast">
+                <input type="checkbox" data-a11y="contrast" role="switch" aria-checked="false" aria-labelledby="a11y-label-contrast">
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
         <div class="a11y-toggle-option">
-            <span class="a11y-toggle-option-label">Escala de grises</span>
+            <span class="a11y-toggle-option-label" id="a11y-label-grayscale">Escala de grises</span>
             <label class="a11y-switch">
-                <input type="checkbox" data-a11y="grayscale">
+                <input type="checkbox" data-a11y="grayscale" role="switch" aria-checked="false" aria-labelledby="a11y-label-grayscale">
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
         <div class="a11y-toggle-option">
-            <span class="a11y-toggle-option-label">Fuente dislexia</span>
+            <span class="a11y-toggle-option-label" id="a11y-label-dyslexia">Fuente dislexia</span>
             <label class="a11y-switch">
-                <input type="checkbox" data-a11y="dyslexia">
+                <input type="checkbox" data-a11y="dyslexia" role="switch" aria-checked="false" aria-labelledby="a11y-label-dyslexia">
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
         <div class="a11y-toggle-option">
-            <span class="a11y-toggle-option-label">Pausar animaciones</span>
+            <span class="a11y-toggle-option-label" id="a11y-label-noanim">Pausar animaciones</span>
             <label class="a11y-switch">
-                <input type="checkbox" data-a11y="no-animations">
+                <input type="checkbox" data-a11y="no-animations" role="switch" aria-checked="false" aria-labelledby="a11y-label-noanim">
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
         <div class="a11y-toggle-option">
-            <span class="a11y-toggle-option-label">Resaltar enlaces</span>
+            <span class="a11y-toggle-option-label" id="a11y-label-links">Resaltar enlaces</span>
             <label class="a11y-switch">
-                <input type="checkbox" data-a11y="highlight-links">
+                <input type="checkbox" data-a11y="highlight-links" role="switch" aria-checked="false" aria-labelledby="a11y-label-links">
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
     </div>
 
     <button class="a11y-reset-btn" id="a11y-reset">Restablecer todo</button>
-</div>
+</aside>
