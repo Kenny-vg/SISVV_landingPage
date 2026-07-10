@@ -227,3 +227,48 @@ html.a11y-highlight-links a:not(.btn-gold):not(.btn-link) {
     border-color: var(--color-accent-gold);
     color: var(--color-accent-gold);
 }
+
+/* Barra flotante del lector de pantalla */
+.a11y-reader-bar {
+    position: fixed;
+    bottom: calc(1.5rem + 148px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 24px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    animation: fade-in-up 0.3s ease;
+}
+
+.a11y-reader-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border-subtle);
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.a11y-reader-btn:hover {
+    background: var(--color-accent-gold);
+    color: #fff;
+    border-color: var(--color-accent-gold);
+}
+
+.a11y-reader-status {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin-left: 0.5rem;
+}

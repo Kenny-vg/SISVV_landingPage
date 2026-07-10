@@ -124,6 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
             'dyslexia': false,
             'no-animations': false,
             'highlight-links': false,
+            'reader': false,
+        },
+
+        readerState: {
+            utterance: null,
+            playing: false,
+            paused: false,
+            bar: null,
         },
 
         init() {
@@ -197,6 +205,118 @@ document.addEventListener('DOMContentLoaded', () => {
             this.toggle?.focus();
         },
 
+        startReader() {
+            const main = document.querySelector('main');
+            if (!main) return;
+            const text = main.innerText;
+            if (!text) return;
+            speechSynthesis.cancel();
+            this.readerState.utterance = new SpeechSynthesisUtterance(text);
+            this.readerState.utterance.lang = 'es-MX';
+            this.readerState.utterance.rate = 0.9;
+            this.readerState.utterance.onend = () => {
+                this.readerState.playing = false;
+                this.readerState.paused = false;
+                this.removeReaderBar();
+                const readerInput = document.querySelector('[data-a11y="reader"]');
+                if (readerInput) {
+                    readerInput.checked = false;
+                    readerInput.setAttribute('aria-checked', 'false');
+                    this.save(this.getState());
+                }
+            };
+            this.buildReaderBar();
+            speechSynthesis.speak(this.readerState.utterance);
+            this.readerState.playing = true;
+            this.updateReaderBar();
+        },
+
+        stopReader() {
+            speechSynthesis.cancel();
+            this.readerState.playing = false;
+            this.readerState.paused = false;
+            this.removeReaderBar();
+        },
+
+        pauseReader() {
+            speechSynthesis.pause();
+            this.readerState.paused = true;
+            this.updateReaderBar();
+        },
+
+        resumeReader() {
+            speechSynthesis.resume();
+            this.readerState.paused = false;
+            this.updateReaderBar();
+        },
+
+        toggleReaderPlay() {
+            if (this.readerState.paused) {
+                this.resumeReader();
+            } else if (this.readerState.playing) {
+                this.pauseReader();
+            }
+        },
+
+        buildReaderBar() {
+            if (this.readerState.bar) return;
+            const bar = document.createElement('div');
+            bar.className = 'a11y-reader-bar';
+            bar.id = 'a11y-reader-bar';
+            bar.setAttribute('role', 'toolbar');
+            bar.setAttribute('aria-label', 'Control del lector de pantalla');
+            bar.innerHTML = `
+                <button class="a11y-reader-btn a11y-reader-play" id="a11y-reader-play" aria-label="Pausar" title="Pausar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2">
+                        <rect x="6" y="4" width="4" height="16" />
+                        <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+                </button>
+                <button class="a11y-reader-btn a11y-reader-stop" id="a11y-reader-stop" aria-label="Detener" title="Detener">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2">
+                        <rect x="6" y="6" width="12" height="12" />
+                    </svg>
+                </button>
+                <span class="a11y-reader-status" id="a11y-reader-status">Leyendo...</span>
+            `;
+            document.body.appendChild(bar);
+            this.readerState.bar = bar;
+            document.getElementById('a11y-reader-play')?.addEventListener('click', () => this.toggleReaderPlay());
+            document.getElementById('a11y-reader-stop')?.addEventListener('click', () => {
+                this.stopReader();
+                const readerInput = document.querySelector('[data-a11y="reader"]');
+                if (readerInput) {
+                    readerInput.checked = false;
+                    readerInput.setAttribute('aria-checked', 'false');
+                    this.save(this.getState());
+                }
+            });
+        },
+
+        removeReaderBar() {
+            if (this.readerState.bar) {
+                this.readerState.bar.remove();
+                this.readerState.bar = null;
+            }
+        },
+
+        updateReaderBar() {
+            const playBtn = document.getElementById('a11y-reader-play');
+            const status = document.getElementById('a11y-reader-status');
+            if (!playBtn || !status) return;
+            if (this.readerState.paused) {
+                playBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>';
+                playBtn.setAttribute('aria-label', 'Reanudar');
+                playBtn.setAttribute('title', 'Reanudar');
+                status.textContent = 'En pausa';
+            } else {
+                playBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2"><rect x="6" y="4" width="4" height="16" /><rect x="14" y="4" width="4" height="16" /></svg>';
+                playBtn.setAttribute('aria-label', 'Pausar');
+                playBtn.setAttribute('title', 'Pausar');
+                status.textContent = 'Leyendo...';
+            }
+        },
+
         bindEvents() {
             this.toggle?.addEventListener('click', () => {
                 if (this.panel?.classList.contains('is-open')) {
@@ -236,6 +356,13 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
                 input.addEventListener('change', () => {
                     input.setAttribute('aria-checked', input.checked);
+                    if (input.dataset.a11y === 'reader') {
+                        if (input.checked) {
+                            this.startReader();
+                        } else {
+                            this.stopReader();
+                        }
+                    }
                     this.apply(this.getState());
                     this.save(this.getState());
                 });
