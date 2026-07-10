@@ -108,7 +108,324 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // 5. Carrusel de imágenes (Instalaciones / Clases)
+    // 5a. Panel de accesibilidad
+    const a11y = {
+        html: document.documentElement,
+        toggle: document.getElementById('a11y-toggle'),
+        panel: document.getElementById('a11y-panel'),
+        resetBtn: document.getElementById('a11y-reset'),
+        storageKey: 'a11y_preferences',
+        focusableSelector: 'button, input, [tabindex]:not([tabindex="-1"])',
+
+        defaults: {
+            'text-size': 'md',
+            'contrast': false,
+            'grayscale': false,
+            'dyslexia': false,
+            'no-animations': false,
+            'highlight-links': false,
+            'reader': false,
+        },
+
+        readerState: {
+            utterance: null,
+            playing: false,
+            paused: false,
+            bar: null,
+        },
+
+        init() {
+            const saved = this.load();
+            this.apply(saved);
+            this.bindEvents();
+            this.syncUI(saved);
+        },
+
+        load() {
+            try {
+                const data = JSON.parse(localStorage.getItem(this.storageKey));
+                return data ? { ...this.defaults, ...data } : { ...this.defaults };
+            } catch {
+                return { ...this.defaults };
+            }
+        },
+
+        save(state) {
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
+        },
+
+        apply(state) {
+            const classes = [
+                'a11y-contrast', 'a11y-grayscale', 'a11y-dyslexia',
+                'a11y-no-animations', 'a11y-highlight-links',
+            ];
+            this.html.classList.remove('a11y-text-md', 'a11y-text-lg', 'a11y-text-xl', ...classes);
+            this.html.classList.add('a11y-text-' + state['text-size']);
+            if (state.contrast) this.html.classList.add('a11y-contrast');
+            if (state.grayscale) this.html.classList.add('a11y-grayscale');
+            if (state.dyslexia) this.html.classList.add('a11y-dyslexia');
+            if (state['no-animations']) this.html.classList.add('a11y-no-animations');
+            if (state['highlight-links']) this.html.classList.add('a11y-highlight-links');
+        },
+
+        syncUI(state) {
+            document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
+                const isActive = btn.dataset.size === state['text-size'];
+                btn.classList.toggle('is-active', isActive);
+                btn.setAttribute('aria-checked', isActive);
+            });
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                const key = input.dataset.a11y;
+                input.checked = !!state[key];
+                input.setAttribute('aria-checked', !!state[key]);
+            });
+        },
+
+        getState() {
+            const state = {};
+            state['text-size'] = document.querySelector('[data-a11y="text-size"].is-active')?.dataset.size || 'md';
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                state[input.dataset.a11y] = input.checked;
+            });
+            return state;
+        },
+
+        open() {
+            this.panel?.classList.add('is-open');
+            this.panel?.setAttribute('aria-hidden', 'false');
+            this.toggle?.setAttribute('aria-expanded', 'true');
+            const firstFocusable = this.panel?.querySelector(this.focusableSelector);
+            setTimeout(() => firstFocusable?.focus(), 100);
+        },
+
+        close() {
+            this.panel?.classList.remove('is-open');
+            this.panel?.setAttribute('aria-hidden', 'true');
+            this.toggle?.setAttribute('aria-expanded', 'false');
+            this.toggle?.focus();
+        },
+
+        startReader() {
+            const main = document.querySelector('main');
+            if (!main) return;
+            const text = main.innerText;
+            if (!text) return;
+            speechSynthesis.cancel();
+            this.readerState.utterance = new SpeechSynthesisUtterance(text);
+            this.readerState.utterance.lang = 'es-MX';
+            this.readerState.utterance.rate = 0.9;
+            this.readerState.utterance.onend = () => {
+                this.readerState.playing = false;
+                this.readerState.paused = false;
+                this.removeReaderBar();
+                const readerInput = document.querySelector('[data-a11y="reader"]');
+                if (readerInput) {
+                    readerInput.checked = false;
+                    readerInput.setAttribute('aria-checked', 'false');
+                    this.save(this.getState());
+                }
+            };
+            this.buildReaderBar();
+            speechSynthesis.speak(this.readerState.utterance);
+            this.readerState.playing = true;
+            this.updateReaderBar();
+        },
+
+        stopReader() {
+            speechSynthesis.cancel();
+            this.readerState.playing = false;
+            this.readerState.paused = false;
+            this.removeReaderBar();
+        },
+
+        pauseReader() {
+            speechSynthesis.pause();
+            this.readerState.paused = true;
+            this.updateReaderBar();
+        },
+
+        resumeReader() {
+            speechSynthesis.resume();
+            this.readerState.paused = false;
+            this.updateReaderBar();
+        },
+
+        toggleReaderPlay() {
+            if (this.readerState.paused) {
+                this.resumeReader();
+            } else if (this.readerState.playing) {
+                this.pauseReader();
+            }
+        },
+
+        buildReaderBar() {
+            if (this.readerState.bar) return;
+            const bar = document.createElement('div');
+            bar.className = 'a11y-reader-bar';
+            bar.id = 'a11y-reader-bar';
+            bar.setAttribute('role', 'toolbar');
+            bar.setAttribute('aria-label', 'Control del lector de pantalla');
+            bar.innerHTML = `
+                <button class="a11y-reader-btn a11y-reader-play" id="a11y-reader-play" aria-label="Pausar" title="Pausar">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2">
+                        <rect x="6" y="4" width="4" height="16" />
+                        <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+                </button>
+                <button class="a11y-reader-btn a11y-reader-stop" id="a11y-reader-stop" aria-label="Detener" title="Detener">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2">
+                        <rect x="6" y="6" width="12" height="12" />
+                    </svg>
+                </button>
+                <span class="a11y-reader-status" id="a11y-reader-status">Leyendo...</span>
+            `;
+            document.body.appendChild(bar);
+            this.readerState.bar = bar;
+            document.getElementById('a11y-reader-play')?.addEventListener('click', () => this.toggleReaderPlay());
+            document.getElementById('a11y-reader-stop')?.addEventListener('click', () => {
+                this.stopReader();
+                const readerInput = document.querySelector('[data-a11y="reader"]');
+                if (readerInput) {
+                    readerInput.checked = false;
+                    readerInput.setAttribute('aria-checked', 'false');
+                    this.save(this.getState());
+                }
+            });
+        },
+
+        removeReaderBar() {
+            if (this.readerState.bar) {
+                this.readerState.bar.remove();
+                this.readerState.bar = null;
+            }
+        },
+
+        updateReaderBar() {
+            const playBtn = document.getElementById('a11y-reader-play');
+            const status = document.getElementById('a11y-reader-status');
+            if (!playBtn || !status) return;
+            if (this.readerState.paused) {
+                playBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3" /></svg>';
+                playBtn.setAttribute('aria-label', 'Reanudar');
+                playBtn.setAttribute('title', 'Reanudar');
+                status.textContent = 'En pausa';
+            } else {
+                playBtn.innerHTML = '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;" stroke-width="2"><rect x="6" y="4" width="4" height="16" /><rect x="14" y="4" width="4" height="16" /></svg>';
+                playBtn.setAttribute('aria-label', 'Pausar');
+                playBtn.setAttribute('title', 'Pausar');
+                status.textContent = 'Leyendo...';
+            }
+        },
+
+        bindEvents() {
+            this.toggle?.addEventListener('click', () => {
+                if (this.panel?.classList.contains('is-open')) {
+                    this.close();
+                } else {
+                    this.open();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.panel?.classList.contains('is-open')) {
+                    this.close();
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (this.panel?.classList.contains('is-open') &&
+                    !this.panel.contains(e.target) &&
+                    !this.toggle?.contains(e.target)) {
+                    this.close();
+                }
+            });
+
+            document.querySelectorAll('[data-a11y="text-size"]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('[data-a11y="text-size"]').forEach(b => {
+                        b.classList.remove('is-active');
+                        b.setAttribute('aria-checked', 'false');
+                    });
+                    btn.classList.add('is-active');
+                    btn.setAttribute('aria-checked', 'true');
+                    this.apply(this.getState());
+                    this.save(this.getState());
+                });
+            });
+
+            document.querySelectorAll('.a11y-panel input[type="checkbox"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    input.setAttribute('aria-checked', input.checked);
+                    if (input.dataset.a11y === 'reader') {
+                        if (input.checked) {
+                            this.startReader();
+                        } else {
+                            this.stopReader();
+                        }
+                    }
+                    this.apply(this.getState());
+                    this.save(this.getState());
+                });
+            });
+
+            this.resetBtn?.addEventListener('click', () => {
+                this.apply(this.defaults);
+                this.syncUI(this.defaults);
+                this.save(this.defaults);
+            });
+        },
+    };
+
+    a11y.init();
+
+    // 5b. Protección de créditos (MutationObserver)
+    function buildCreditsHTML() {
+        const div = document.createElement('div');
+        div.className = 'footer-dev';
+        div.innerHTML = `
+            <div class="footer-dev-divider"></div>
+            <p class="footer-dev-label">Desarrollado por</p>
+            <div class="footer-dev-names">
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Kendra Aiman</span>
+                    <span class="footer-dev-last">de la Vega Anaya</span>
+                </div>
+                <span class="footer-dev-ampersand">&amp;</span>
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Cristhian Emanuel</span>
+                    <span class="footer-dev-last">Meza Acevedo</span>
+                </div>
+            </div>
+        `;
+        return div;
+    }
+
+    function injectCredits() {
+        if (!document.querySelector('.footer-dev')) {
+            const footer = document.querySelector('.premium-footer');
+            if (footer) {
+                footer.appendChild(buildCreditsHTML());
+            }
+        }
+    }
+
+    injectCredits();
+
+    const creditObserver = new MutationObserver(() => {
+        const el = document.querySelector('.footer-dev');
+        if (!el || el.innerHTML.indexOf('Kendra Aiman') === -1 || el.innerHTML.indexOf('Cristhian Emanuel') === -1) {
+            const existing = document.querySelector('.footer-dev');
+            if (existing) existing.remove();
+            injectCredits();
+        }
+    });
+
+    const footer = document.querySelector('.premium-footer');
+    if (footer) {
+        creditObserver.observe(footer, { childList: true, subtree: true, characterData: true });
+    }
+
+    // 5b. Carrusel de imágenes (Instalaciones / Clases)
     document.querySelectorAll('[data-carousel]').forEach(container => {
         const track = container.querySelector('[data-track]');
         const slides = track.querySelectorAll('.carousel-slide');

@@ -39,4 +39,20 @@
             <a href="{{ url('/terminos-y-condiciones') }}" style="color: var(--color-footer-legal-text); text-decoration: none; font-size: 0.75rem; transition: color 0.3s;" onmouseover="this.style.color='var(--color-accent-gold)'" onmouseout="this.style.color='var(--color-footer-legal-text)'">{{ setting('footer_terms_text', 'Términos y Condiciones') }}</a>
         </div>
     </div>
+
+    <div class="footer-dev">
+        <div class="footer-dev-divider"></div>
+        <p class="footer-dev-label">Desarrollado por</p>
+        <div class="footer-dev-names">
+            <div class="footer-dev-name">
+                <span class="footer-dev-first">Kendra Aiman</span>
+                <span class="footer-dev-last">de la Vega Anaya</span>
+            </div>
+            <span class="footer-dev-ampersand">&amp;</span>
+            <div class="footer-dev-name">
+                <span class="footer-dev-first">Cristhian Emanuel</span>
+                <span class="footer-dev-last">Meza Acevedo</span>
+            </div>
+        </div>
+    </div>
 </footer>

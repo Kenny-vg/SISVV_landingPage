@@ -26,6 +26,7 @@
 
     <x-footer />
 
+    <x-accessibility-panel />
     <x-theme-floating-toggle />
     <x-admin-widget />
 
