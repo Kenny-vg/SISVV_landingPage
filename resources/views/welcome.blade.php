@@ -58,6 +58,8 @@
 
     <x-about-section />
 
+    <x-mapa-interactivo />
+
     <x-instalaciones-section />
 
     <x-facilities-section />
