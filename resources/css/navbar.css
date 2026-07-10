@@ -12,7 +12,7 @@
     width: 100%;
     box-sizing: border-box;
     z-index: 1000;
-    overflow: hidden;
+    overflow-x: clip;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -47,12 +47,12 @@
 
 .navbar-left {
     justify-content: flex-end;
-    padding-right: 3rem;
+    padding-right: 48px;
 }
 
 .navbar-right {
     justify-content: flex-start;
-    padding-left: 3rem;
+    padding-left: 48px;
 }
 
 /* ─── Logo centrado ────────────────────────────────────────────── */
@@ -191,6 +191,14 @@
     .navbar-links a {
         font-size: 0.65rem;
         letter-spacing: 1px;
+    }
+
+    .navbar-left {
+        padding-right: 24px;
+    }
+
+    .navbar-right {
+        padding-left: 24px;
     }
 }
 
