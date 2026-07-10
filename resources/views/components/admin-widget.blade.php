@@ -28,7 +28,7 @@
 <style>
 .admin-floating-widget {
     position: fixed;
-    bottom: calc(1.5rem + 48px);
+    bottom: calc(1.5rem + 96px);
     right: 1.5rem;
     z-index: 999;
 }
