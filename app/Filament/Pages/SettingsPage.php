@@ -78,12 +78,14 @@ class SettingsPage extends Page
                                 FileUpload::make('about_image')
                                     ->label('Imagen principal (homepage)')
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                                     ->maxSize(5120)
                                     ->directory('about')
                                     ->disk('public'),
                                 FileUpload::make('about_image_float')
                                     ->label('Imagen secundaria circular')
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                                     ->maxSize(5120)
                                     ->directory('about')
                                     ->disk('public'),
@@ -272,7 +274,17 @@ class SettingsPage extends Page
     {
         $data = $this->form->getState();
 
+        $richtextKeys = [
+            'hero_title', 'hero_subtitle', 'about_heading',
+            'instalaciones_heading', 'facilities_heading',
+            'events_heading', 'contact_heading', 'contact_schedule',
+        ];
+
         foreach ($data as $key => $value) {
+            if (in_array($key, $richtextKeys)) {
+                $value = sanitize_html($value);
+            }
+
             Setting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value]

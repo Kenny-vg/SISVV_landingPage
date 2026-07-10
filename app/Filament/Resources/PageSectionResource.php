@@ -48,12 +48,14 @@ class PageSectionResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen principal')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                     ->maxSize(2048)
                     ->directory('sections')
                     ->disk('public'),
                 Forms\Components\FileUpload::make('image_float')
                     ->label('Imagen secundaria (circular)')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                     ->maxSize(2048)
                     ->directory('sections')
                     ->disk('public'),
@@ -91,6 +93,20 @@ class PageSectionResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['content'] = sanitize_html($data['content'] ?? null);
+
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['content'] = sanitize_html($data['content'] ?? null);
+
+        return $data;
     }
 
     public static function getPages(): array

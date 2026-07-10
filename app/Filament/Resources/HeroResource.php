@@ -6,9 +6,11 @@ use App\Filament\Resources\HeroResource\Pages;
 use App\Models\Hero;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 
 class HeroResource extends Resource
 {
@@ -45,6 +47,8 @@ class HeroResource extends Resource
                 Forms\Components\FileUpload::make('background_image')
                     ->label('Imagen de fondo')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                    ->maxSize(10240)
                     ->directory('heroes')
                     ->disk('public')
                     ->columnSpanFull(),
@@ -78,13 +82,49 @@ class HeroResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->before(function (Tables\Actions\DeleteAction $action, Hero $record) {
+                        if ($record->id === 1) {
+                            Notification::make()
+                                ->danger()
+                                ->title('No se puede eliminar')
+                                ->body('El primer slide del hero no puede eliminarse.')
+                                ->send();
+                            $action->cancel();
+                        }
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->before(function (Tables\Actions\DeleteBulkAction $action, Collection $records) {
+                            if ($records->contains('id', 1)) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title('No se puede eliminar')
+                                    ->body('El primer slide del hero no puede eliminarse.')
+                                    ->send();
+                                $action->cancel();
+                            }
+                        }),
                 ]),
             ]);
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['title'] = sanitize_html($data['title'] ?? null);
+        $data['subtitle'] = sanitize_html($data['subtitle'] ?? null);
+
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['title'] = sanitize_html($data['title'] ?? null);
+        $data['subtitle'] = sanitize_html($data['subtitle'] ?? null);
+
+        return $data;
     }
 
     public static function getPages(): array

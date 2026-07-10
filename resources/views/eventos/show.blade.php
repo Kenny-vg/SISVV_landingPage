@@ -29,7 +29,7 @@
 
             @if($event->description)
             <div class="evento-pdf-description">
-                {!! $event->description !!}
+                {{ nl2br(e($event->description)) }}
             </div>
             @endif
 

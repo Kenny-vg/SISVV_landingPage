@@ -14,3 +14,14 @@ if (!function_exists('setting')) {
         return $settings[$key] ?? $default;
     }
 }
+
+if (!function_exists('sanitize_html')) {
+    function sanitize_html(?string $html): ?string
+    {
+        if ($html === null || $html === '') {
+            return $html;
+        }
+
+        return strip_tags($html, '<p><br><strong><em><i><b><u><span><a><ul><ol><li><h1><h2><h3><h4><h5><h6><blockquote><pre><code>');
+    }
+}

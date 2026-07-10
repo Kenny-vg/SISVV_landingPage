@@ -61,6 +61,8 @@ class DisciplineResource extends Resource
                                 Forms\Components\FileUpload::make('image_path')
                                     ->label('Imagen')
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                    ->maxSize(5120)
                                     ->directory('disciplines')
                                     ->disk('public')
                                     ->required(),
