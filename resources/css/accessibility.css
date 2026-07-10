@@ -54,8 +54,8 @@ html.a11y-highlight-links a:not(.btn-gold):not(.btn-link) {
 /* Botón flotante accesibilidad (mismo estilo que theme-float-btn) */
 .a11y-toggle {
     position: fixed;
-    bottom: 1.5rem;
-    left: 1.5rem;
+    bottom: calc(1.5rem + 48px);
+    right: 1.5rem;
     z-index: 998;
     width: 40px;
     height: 40px;
@@ -82,19 +82,19 @@ html.a11y-highlight-links a:not(.btn-gold):not(.btn-link) {
 .a11y-panel {
     position: fixed;
     bottom: calc(1.5rem + 48px);
-    left: -320px;
+    right: -320px;
     z-index: 999;
     width: 280px;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: 12px;
-    box-shadow: 4px 0 24px var(--color-shadow-hover);
+    box-shadow: 0 4px 24px var(--color-shadow-hover);
     padding: 1.5rem;
-    transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .a11y-panel.is-open {
-    left: 1.5rem;
+    right: calc(1.5rem + 48px);
 }
 
 .a11y-panel-title {
