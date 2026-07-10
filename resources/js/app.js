@@ -109,17 +109,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 5a. Protección de créditos (MutationObserver)
-    const CREDIT_TEXT = 'Desarrollado por Kendra Aiman de la Vega Anaya y Cristhian Emanuel Meza Acevedo';
+    function buildCreditsHTML() {
+        const div = document.createElement('div');
+        div.className = 'footer-dev';
+        div.innerHTML = `
+            <div class="footer-dev-divider"></div>
+            <p class="footer-dev-label">Desarrollado por</p>
+            <div class="footer-dev-names">
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Kendra Aiman</span>
+                    <span class="footer-dev-last">de la Vega Anaya</span>
+                </div>
+                <span class="footer-dev-ampersand">&amp;</span>
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Cristhian Emanuel</span>
+                    <span class="footer-dev-last">Meza Acevedo</span>
+                </div>
+            </div>
+        `;
+        return div;
+    }
 
     function injectCredits() {
-        let creditEl = document.querySelector('.footer-dev-credits');
-        if (!creditEl) {
-            const footerBottom = document.querySelector('.footer-bottom');
-            if (footerBottom) {
-                creditEl = document.createElement('p');
-                creditEl.className = 'footer-dev-credits';
-                creditEl.textContent = CREDIT_TEXT;
-                footerBottom.appendChild(creditEl);
+        if (!document.querySelector('.footer-dev')) {
+            const footer = document.querySelector('.premium-footer');
+            if (footer) {
+                footer.appendChild(buildCreditsHTML());
             }
         }
     }
@@ -127,15 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
     injectCredits();
 
     const creditObserver = new MutationObserver(() => {
-        const el = document.querySelector('.footer-dev-credits');
-        if (!el || el.textContent !== CREDIT_TEXT) {
+        const el = document.querySelector('.footer-dev');
+        if (!el || el.innerHTML.indexOf('Kendra Aiman') === -1 || el.innerHTML.indexOf('Cristhian Emanuel') === -1) {
+            const existing = document.querySelector('.footer-dev');
+            if (existing) existing.remove();
             injectCredits();
         }
     });
 
-    const footerBottom = document.querySelector('.footer-bottom');
-    if (footerBottom) {
-        creditObserver.observe(footerBottom, { childList: true, subtree: true, characterData: true });
+    const footer = document.querySelector('.premium-footer');
+    if (footer) {
+        creditObserver.observe(footer, { childList: true, subtree: true, characterData: true });
     }
 
     // 5b. Carrusel de imágenes (Instalaciones / Clases)
