@@ -54,6 +54,13 @@
                 <span class="a11y-switch-slider"></span>
             </label>
         </div>
+        <div class="a11y-toggle-option">
+            <span class="a11y-toggle-option-label" id="a11y-label-reader">Lector de pantalla</span>
+            <label class="a11y-switch">
+                <input type="checkbox" data-a11y="reader" role="switch" aria-checked="false" aria-labelledby="a11y-label-reader">
+                <span class="a11y-switch-slider"></span>
+            </label>
+        </div>
     </div>
 
     <button class="a11y-reset-btn" id="a11y-reset">Restablecer todo</button>
