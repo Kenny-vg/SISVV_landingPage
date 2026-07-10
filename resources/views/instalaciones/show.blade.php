@@ -46,7 +46,7 @@
                 </h1>
                 
                 <p style="color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 3rem;">
-                    {!! $area->description !!}
+                    {{ nl2br(e($area->description)) }}
                 </p>
 
                 <!-- Caja de Horario Estilo Premium -->

@@ -56,6 +56,8 @@ class EventResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                    ->maxSize(5120)
                     ->directory('events')
                     ->disk('public'),
                 Forms\Components\FileUpload::make('pdf_path')

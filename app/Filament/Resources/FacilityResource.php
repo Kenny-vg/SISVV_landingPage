@@ -61,6 +61,8 @@ class FacilityResource extends Resource
                                 Forms\Components\FileUpload::make('image_path')
                                     ->label('Imagen')
                                     ->image()
+                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                    ->maxSize(5120)
                                     ->directory('facilities')
                                     ->disk('public')
                                     ->required(),
@@ -74,6 +76,7 @@ class FacilityResource extends Resource
                         Forms\Components\FileUpload::make('panorama_path')
                             ->label('Imagen panorámica')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png'])
                             ->directory('facilities/panoramas')
                             ->disk('public')
                             ->maxSize(20480)

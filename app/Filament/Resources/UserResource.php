@@ -6,9 +6,11 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 
 class UserResource extends Resource
 {
@@ -48,9 +50,7 @@ class UserResource extends Resource
                     ->password()
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->dehydrated(false),
-                Forms\Components\Toggle::make('is_admin')
-                    ->label('Administrador')
-                    ->default(false),
+
             ]);
     }
 
@@ -83,11 +83,34 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->before(function (Tables\Actions\DeleteAction $action, User $record) {
+                        if ($record->is_admin && User::where('is_admin', true)->count() <= 1) {
+                            Notification::make()
+                                ->danger()
+                                ->title('No se puede eliminar')
+                                ->body('Debe haber al menos un administrador en el sistema.')
+                                ->send();
+                            $action->cancel();
+                        }
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->before(function (Tables\Actions\DeleteBulkAction $action, Collection $records) {
+                            $totalAdmins = User::where('is_admin', true)->count();
+                            $adminsToDelete = $records->where('is_admin', true)->count();
+
+                            if ($totalAdmins - $adminsToDelete <= 0) {
+                                Notification::make()
+                                    ->danger()
+                                    ->title('No se puede eliminar')
+                                    ->body('Debe haber al menos un administrador en el sistema.')
+                                    ->send();
+                                $action->cancel();
+                            }
+                        }),
                 ]),
             ]);
     }
@@ -102,6 +125,7 @@ class UserResource extends Resource
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['password'] = bcrypt($data['password']);
+        $data['is_admin'] = true;
 
         return $data;
     }
