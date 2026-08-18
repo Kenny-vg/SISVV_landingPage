@@ -49,14 +49,14 @@ class PageSectionResource extends Resource
                     ->label('Imagen principal')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                    ->maxSize(2048)
+                    ->maxSize(10240)
                     ->directory('sections')
                     ->disk('public'),
                 Forms\Components\FileUpload::make('image_float')
                     ->label('Imagen secundaria (circular)')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                    ->maxSize(2048)
+                    ->maxSize(10240)
                     ->directory('sections')
                     ->disk('public'),
                 Forms\Components\Toggle::make('is_active')

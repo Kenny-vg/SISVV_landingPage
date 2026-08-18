@@ -46,7 +46,7 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen de portada')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(10240)
                     ->directory('menus')
                     ->disk('public')
                     ->imageEditor()

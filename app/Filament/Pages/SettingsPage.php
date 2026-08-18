@@ -75,20 +75,7 @@ class SettingsPage extends Page
                                 RichEditor::make('about_heading')
                                     ->label('Encabezado de la sección')
                                     ->toolbarButtons(['italic', 'bold']),
-                                FileUpload::make('about_image')
-                                    ->label('Imagen principal (homepage)')
-                                    ->image()
-                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                                    ->maxSize(5120)
-                                    ->directory('about')
-                                    ->disk('public'),
-                                FileUpload::make('about_image_float')
-                                    ->label('Imagen secundaria circular')
-                                    ->image()
-                                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                                    ->maxSize(5120)
-                                    ->directory('about')
-                                    ->disk('public'),
+
                             ]),
 
                         Tab::make('Instalaciones')
