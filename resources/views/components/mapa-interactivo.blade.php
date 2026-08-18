@@ -51,14 +51,14 @@
                     </button>
 
                     <button class="mapa-pin-ring" id="mapaPinRing" aria-hidden="true"></button>
-
-                    <button class="mapa-back-btn" id="mapaBackBtn">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                        </svg>
-                        Vista general
-                    </button>
                 </div>
+
+                <button class="mapa-back-btn" id="mapaBackBtn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    Vista general
+                </button>
             </div>
         </div>
     </div>
@@ -97,6 +97,7 @@
     overflow: hidden;
     background: var(--color-bg);
     cursor: default;
+    container-type: inline-size;
 }
 
 .mapa-zoom-container {
@@ -115,6 +116,16 @@
     width: 100%;
     height: auto;
     display: block;
+    opacity: 0;
+}
+
+.mapa-img.is-visible {
+    animation: mapa-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mapa-fade-in {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .mapa-detalle-overlay {
@@ -162,11 +173,13 @@
 }
 
 .hotspot-dot {
-    width: 22px;
-    height: 22px;
+    width: clamp(14px, 1.85cqw, 22px);
+    height: clamp(14px, 1.85cqw, 22px);
     border-radius: 50%;
     background: var(--color-accent-gold);
-    border: 3px solid #fff;
+    border-width: clamp(2px, 0.3cqw, 3px);
+    border-style: solid;
+    border-color: #fff;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: transform 0.2s ease;
     animation: hotspot-pulse 2s ease-in-out infinite;
@@ -179,7 +192,7 @@
 
 @keyframes hotspot-pulse {
     0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 rgba(212,175,55,0.4); }
-    50% { box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 10px rgba(212,175,55,0); }
+    50% { box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 clamp(7px, 0.85cqw, 10px) rgba(212,175,55,0); }
 }
 
 .hotspot-modal {
@@ -385,6 +398,26 @@
         width: 24px;
         height: 24px;
     }
+    .mapa-detalle-overlay {
+        padding-bottom: 0;
+    }
+    .mapa-back-btn {
+        position: static;
+        display: none;
+        transform: none;
+        margin: 1.5rem auto 0;
+        padding: 0.5rem 1.4rem;
+        font-size: 0.68rem;
+    }
+    .mapa-back-btn.is-visible {
+        display: flex;
+    }
+    .mapa-back-btn:hover {
+        transform: scale(1.05);
+    }
+    #mapa-club .section-header-editorial {
+        margin-bottom: 2.5rem !important;
+    }
 }
 </style>
 
@@ -470,6 +503,27 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeModal();
         });
+    }
+
+    /* ─── Animación al hacer scroll ─────────────── */
+    const fullMapImg = document.querySelector('.mapa-img');
+    if (fullMapImg) {
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        fullMapImg.classList.remove('is-visible');
+                        void fullMapImg.offsetWidth;
+                        fullMapImg.classList.add('is-visible');
+                    } else {
+                        fullMapImg.classList.remove('is-visible');
+                    }
+                });
+            }, { rootMargin: '0px 0px -80px 0px', threshold: 0 });
+            observer.observe(fullMapImg);
+        } else {
+            fullMapImg.classList.add('is-visible');
+        }
     }
 });
 </script>

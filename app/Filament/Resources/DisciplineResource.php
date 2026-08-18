@@ -62,7 +62,7 @@ class DisciplineResource extends Resource
                                     ->label('Imagen')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                                    ->maxSize(5120)
+                                    ->maxSize(10240)
                                     ->directory('disciplines')
                                     ->disk('public')
                                     ->required(),

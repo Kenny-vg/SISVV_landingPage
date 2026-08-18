@@ -62,7 +62,7 @@ class FacilityResource extends Resource
                                     ->label('Imagen')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                                    ->maxSize(5120)
+                                    ->maxSize(10240)
                                     ->directory('facilities')
                                     ->disk('public')
                                     ->required(),
@@ -79,8 +79,8 @@ class FacilityResource extends Resource
                             ->acceptedFileTypes(['image/jpeg', 'image/png'])
                             ->directory('facilities/panoramas')
                             ->disk('public')
-                            ->maxSize(20480)
-                            ->hint('Proporción 2:1 equirectangular, mínimo 4000×2000px, máximo 20MB'),
+                            ->maxSize(10240)
+                            ->hint('Proporción 2:1 equirectangular, mínimo 4000×2000px, máximo 10MB'),
                     ]),
             ]);
     }
