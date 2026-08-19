@@ -1114,102 +1114,140 @@
     padding: 5rem 1.5rem 7rem;
 }
 
-.membresias-table-wrap {
+/* ─── Membresías: Tabla Comparativa Matriz ───────── */
+.comparison-table-wrap {
     background: var(--color-surface);
-    border-radius: 20px;
+    border-radius: 24px;
     border: 1px solid var(--color-border-subtle);
     overflow-x: auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
 }
 
-.membresias-table {
+.comparison-table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    min-width: 560px;
+    min-width: 800px;
 }
 
-.membresias-table th {
+.comparison-table th,
+.comparison-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    border-right: 1px solid var(--color-border-subtle);
+    font-size: 0.93rem;
+}
+
+.comparison-table th:last-child,
+.comparison-table td:last-child {
+    border-right: none;
+}
+
+.comparison-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table thead th {
+    background: var(--color-bg);
+    vertical-align: top;
+}
+
+.feature-col-header {
+    width: 280px;
     font-family: var(--font-alt);
     font-size: 0.72rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--color-accent-gold);
-    padding: 1.25rem 1.75rem;
-    border-bottom: 1px solid var(--color-border-subtle);
-    background: var(--color-bg);
-    white-space: nowrap;
 }
 
-.membresias-table td {
-    padding: 1.25rem 1.75rem;
-    border-bottom: 1px solid var(--color-border-subtle);
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
+.membership-col-header {
+    text-align: center;
+    position: relative;
 }
 
-.membresias-table tbody tr:last-child td {
-    border-bottom: none;
+.membership-col-header.featured {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.02) 100%);
+    border-bottom: 2px solid var(--color-accent-gold);
 }
 
-.membresias-table tbody tr.featured {
-    background: rgba(212, 175, 55, 0.07);
-}
-
-.membresias-table-name {
-    font-weight: 600;
-    color: var(--color-text-primary);
-}
-
-.membresias-table-price {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-accent-gold);
-    white-space: nowrap;
-}
-
-.membresias-table-badge {
+.comparison-badge {
+    display: inline-block;
     font-family: var(--font-alt);
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--color-accent-gold);
     border: 1px solid var(--color-accent-gold);
     padding: 0.15rem 0.55rem;
     border-radius: 100px;
-    display: inline-block;
-    margin-left: 0.75rem;
-    vertical-align: middle;
+    margin-bottom: 0.5rem;
+    background: rgba(212, 175, 55, 0.08);
 }
 
-.membresias-benefits-shared {
-    margin-top: 3rem;
+.membership-name {
+    display: block;
+    font-family: var(--font-editorial);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.membership-area {
+    display: block;
+    font-family: var(--font-alt);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.membership-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    font-family: var(--font-alt);
+}
+
+.membership-price small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+
+.feature-label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.comparison-table td:not(.feature-label) {
+    color: var(--color-text-secondary);
     text-align: center;
 }
 
-.membresias-benefits-shared h3 {
-    font-family: var(--font-editorial);
-    font-size: 1.6rem;
-    color: var(--color-text-primary);
-    margin: 0 0 1.5rem 0;
-}
-
-.membresias-benefits-shared ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
+.check-icon-wrap {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 0.85rem;
+    width: 28px;
+    height: 28px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    color: var(--color-accent-gold);
 }
 
-.membresias-benefits-shared li {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 100px;
-    padding: 0.55rem 1.25rem;
-    font-size: 0.9rem;
+.check-icon-wrap svg {
+    width: 16px;
+    height: 16px;
+}
+
+.dash-symbol {
     color: var(--color-text-secondary);
+    opacity: 0.4;
+    font-weight: 300;
 }
 
 .membresias-empty {
@@ -1218,12 +1256,37 @@
     color: var(--color-text-secondary);
 }
 
-[data-theme="dark"] .membresias-table-wrap {
-    background: #111;
+.price-footer-row {
+    background: var(--color-bg);
+    border-top: 2px solid var(--color-border-subtle);
 }
 
-[data-theme="dark"] .membresias-benefits-shared li {
-    background: #111;
+.price-footer-row .feature-label {
+    font-size: 0.95rem;
+    color: var(--color-accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.membership-price-footer {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    font-family: var(--font-alt);
+}
+
+.price-footer-cell small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .feature-label {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="dark"] .comparison-table thead th {
+    background: #161616;
 }
 
 /* ─── Reglamento del socio ───────────────────────── */

@@ -38,6 +38,7 @@ class SettingSeeder extends Seeder
             ['key' => 'menu_btn_text', 'value' => 'Ver Carta Interactiva', 'group' => 'general'],
 
             // Membresías - Reglamento
+            ['key' => 'show_membership_prices', 'value' => '1', 'group' => 'general'],
             ['key' => 'membresias_reglamento_heading', 'value' => 'Reglamento del socio', 'group' => 'general'],
             ['key' => 'membresias_actualizacion', 'value' => 'El costo de la membresía será actualizado al inicio de cada año, de acuerdo con las políticas y ajustes establecidos por el club.', 'group' => 'general'],
             ['key' => 'membresias_consumos', 'value' => '<p><strong>Casa Club:</strong></p><p>Membresía individual: $300 mensuales.<br>Membresía familiar: $500 mensuales.</p><p><strong>Campo de Golf:</strong></p><p>Membresía individual y familiar: $500 mensuales.</p><p><em>El consumo mínimo debe realizarse durante el mes correspondiente. Para registrar sus consumos, es obligatorio proporcionar su número de membresía en cada punto de venta.</em></p>', 'group' => 'general'],

@@ -28,56 +28,99 @@
                 <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Pronto publicaremos nuestros planes.</p>
             </div>
         @else
-            <div class="membresias-table-wrap">
-                <table class="membresias-table">
+            <div class="comparison-table-wrap">
+                <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Membresía</th>
-                            <th>Área</th>
-                            <th>Monto mensual</th>
+                            <th class="feature-col-header">Característica</th>
+                            @foreach($memberships as $membership)
+                            <th class="membership-col-header @if($membership->is_featured) featured @endif">
+                                @if($membership->is_featured)
+                                <span class="comparison-badge">Recomendado</span>
+                                @endif
+                                <span class="membership-name">{{ $membership->name }}</span>
+                                <span class="membership-area">{{ $membership->area ?: '—' }}</span>
+                            </th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($memberships as $membership)
-                        <tr class="@if($membership->is_featured) featured @endif">
-                            <td data-label="Membresía" class="membresias-table-name">
-                                {{ $membership->name }}
-                                @if($membership->is_featured)
-                                <span class="membresias-table-badge">Recomendado</span>
+                        <!-- Row: Tipo / Integrantes -->
+                        <tr>
+                            <td class="feature-label">Número de Integrantes</td>
+                            @foreach($memberships as $membership)
+                            <td>
+                                {{ $membership->members_text ?: '—' }}
+                            </td>
+                            @endforeach
+                        </tr>
+
+                        <!-- Row: Área de Acceso -->
+                        <tr>
+                            <td class="feature-label">Área Principal</td>
+                            @foreach($memberships as $membership)
+                            <td>{{ $membership->area ?: '—' }}</td>
+                            @endforeach
+                        </tr>
+
+                        <!-- Row: Acceso a Campo de Golf -->
+                        <tr>
+                            <td class="feature-label">Acceso a Campo de Golf</td>
+                            @foreach($memberships as $membership)
+                            <td class="feature-check-cell">
+                                @if($membership->has_golf_access)
+                                    <span class="check-icon-wrap" title="Incluido">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                    </span>
+                                @else
+                                    <span class="dash-symbol">—</span>
                                 @endif
                             </td>
-                            <td data-label="Área">
-                                {{ $membership->area ?: '—' }}
-                            </td>
-                            <td data-label="Monto mensual" class="membresias-table-price">
-                                @if($membership->show_price && $membership->price)
-                                    {{ $membership->price }}
+                            @endforeach
+                        </tr>
+
+                        <!-- Rows for all unique benefits -->
+                        @php
+                            $allBenefits = collect();
+                            foreach ($memberships as $membership) {
+                                $allBenefits = $allBenefits->merge($membership->benefits->pluck('benefit'));
+                            }
+                            $allBenefits = $allBenefits->unique()->values();
+                        @endphp
+
+                        @foreach($allBenefits as $benefit)
+                        <tr>
+                            <td class="feature-label">{{ $benefit }}</td>
+                            @foreach($memberships as $membership)
+                            <td class="feature-check-cell">
+                                @if($membership->benefits->contains('benefit', $benefit))
+                                    <span class="check-icon-wrap" title="Incluido">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                    </span>
+                                @else
+                                    <span class="dash-symbol">—</span>
                                 @endif
                             </td>
+                            @endforeach
                         </tr>
                         @endforeach
+
+                        <!-- Row: Inversión Mensual (At the bottom) -->
+                        <tr class="price-footer-row">
+                            <td class="feature-label">Inversión Mensual</td>
+                            @foreach($memberships as $membership)
+                            <td class="price-footer-cell">
+                                @if(setting('show_membership_prices', true) && $membership->show_price && $membership->price)
+                                    <span class="membership-price-footer">{{ $membership->price }}</span> <small>/ mes</small>
+                                @else
+                                    <span class="dash-symbol">Consultar</span>
+                                @endif
+                            </td>
+                            @endforeach
+                        </tr>
                     </tbody>
                 </table>
             </div>
-
-            @php
-                $beneficiosUnicos = collect();
-                foreach ($memberships as $membership) {
-                    $beneficiosUnicos = $beneficiosUnicos->merge($membership->benefits->pluck('benefit'));
-                }
-                $beneficiosUnicos = $beneficiosUnicos->unique()->values();
-            @endphp
-
-            @if($beneficiosUnicos->isNotEmpty())
-            <div class="membresias-benefits-shared">
-                <h3>Incluye acceso a:</h3>
-                <ul>
-                    @foreach($beneficiosUnicos as $beneficio)
-                    <li>{{ $beneficio }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
         @endif
 
         @php

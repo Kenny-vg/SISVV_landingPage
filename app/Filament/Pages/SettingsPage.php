@@ -145,6 +145,10 @@ class SettingsPage extends Page
                         Tab::make('Membresías')
                             ->icon('heroicon-o-credit-card')
                             ->schema([
+                                Toggle::make('show_membership_prices')
+                                    ->label('Mostrar precios de membresías')
+                                    ->helperText('Permite mostrar u ocultar los precios de todas las membresías en el sitio web')
+                                    ->default(true),
                                 TextInput::make('membresias_reglamento_heading')
                                     ->label('Título de la sección "Reglamento del socio"')
                                     ->helperText('Encabezado mostrado debajo de las tarjetas de membresías'),
