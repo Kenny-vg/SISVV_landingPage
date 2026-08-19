@@ -43,7 +43,7 @@
                     <div class="bento-fullbleed-bottom">
                         <h3 class="bento-fullbleed-title">{{ $discipline->title }}</h3>
                         <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($discipline->description), 120) }}</p>
-                        <span class="bento-fullbleed-link">{!! setting('facilities_link_text', 'Ver Clase →') !!}</span>
+                        <span class="bento-fullbleed-link">{{ setting('facilities_link_text', 'Ver Clase →') }}</span>
                     </div>
                 </div>
             </a>

@@ -85,11 +85,11 @@
 
 </div>
 
-<!-- Carga de la librería oficial PDF.js de Mozilla -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-<script>
+<!-- PDF.js 4.x auto-hospedado localmente -->
+<script type="module">
+    import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
     // Configuración del worker de PDF.js
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';
 
     document.addEventListener('DOMContentLoaded', () => {
         // Estado del documento
@@ -106,10 +106,10 @@
         let scrollLeft, scrollTop;
 
         // Datos de la categoría desde el backend
-        const categorySlug = '{{ $category->slug }}';
-        const categoryName = '{{ $category->name }}';
-        const categoryTitle = 'Menú de {{ $category->name }}';
-        const categoryDesc = `{{ strip_tags($category->description) }}`;
+        const categorySlug = @json($category->slug);
+        const categoryName = @json($category->name);
+        const categoryTitle = @json('Menú de '.$category->name);
+        const categoryDesc = @json(strip_tags($category->description));
 
         // Actualizar textos e interfaz dinámicamente
         document.querySelector('.pdf-category-tag').textContent = categoryName;
@@ -118,7 +118,7 @@
 
         // URL dinámica del PDF correspondiente
         const hasPdf = {{ $category->pdf ? 'true' : 'false' }};
-        const pdfUrl = hasPdf ? '{{ $category->pdf ? asset("storage/".$category->pdf) : '' }}' : null;
+        const pdfUrl = hasPdf ? @json($category->pdf ? asset('storage/'.$category->pdf) : '') : null;
 
         // Actualizar botón de descarga flotante
         const downloadBtn = document.getElementById('download-pdf');

@@ -85,7 +85,7 @@
 .navbar-links {
     list-style: none;
     display: flex;
-    gap: 3rem;
+    gap: clamp(16px, 1.5vw, 28px);
     margin: 0;
     padding: 0;
     align-items: center;
@@ -337,4 +337,41 @@
 .mobile-drawer-links a:hover {
     color: var(--color-accent-gold);
     padding-left: 0.5rem;
+}
+
+/* ─── Tamaño de texto accesible ────────────────────────── */
+html.a11y-text-lg .navbar-left {
+    padding-right: 32px;
+}
+
+html.a11y-text-lg .navbar-right {
+    padding-left: 32px;
+}
+
+html.a11y-text-xl .navbar-left {
+    padding-right: 24px;
+}
+
+html.a11y-text-xl .navbar-right {
+    padding-left: 24px;
+}
+
+@media (max-width: 1199px) {
+    html.a11y-text-lg .navbar-left,
+    html.a11y-text-xl .navbar-left {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+    }
+
+    html.a11y-text-lg .navbar-left .navbar-links,
+    html.a11y-text-lg .navbar-right .navbar-links,
+    html.a11y-text-xl .navbar-left .navbar-links,
+    html.a11y-text-xl .navbar-right .navbar-links {
+        display: none;
+    }
+
+    html.a11y-text-lg .hamburger-btn,
+    html.a11y-text-xl .hamburger-btn {
+        display: flex;
+    }
 }

@@ -17,28 +17,28 @@
                             <img src="{{ asset('images/mapa-club.jpg') }}" alt="Detalle del club" class="mapa-img-detalle" id="mapaDetalleImg">
 
                             <div class="hotspot" style="left: 64.5%; top: 30.97%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-canchas.jpg') }}" data-label="AREA DE JUEGOS"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-canchas.jpg') }}" data-label="AREA DE JUEGOS" aria-label="Ver AREA DE JUEGOS"></button>
                             </div>
                             <div class="hotspot" style="left: 59%; top: 24.2%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-piscina.jpg') }}" data-label="CANCHA DE FUTBOL"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-piscina.jpg') }}" data-label="CANCHA DE FUTBOL" aria-label="Ver CANCHA DE FUTBOL"></button>
                             </div>
                             <div class="hotspot" style="left: 18.47%; top: 41.58%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-clubhouse.jpg') }}" data-label="CADDIE HOUSE"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-clubhouse.jpg') }}" data-label="CADDIE HOUSE" aria-label="Ver CADDIE HOUSE"></button>
                             </div>
                             <div class="hotspot" style="left: 31.73%; top: 22.68%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-canchas2.jpg') }}" data-label="CANCHAS DE TENIS"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-canchas2.jpg') }}" data-label="CANCHAS DE TENIS" aria-label="Ver CANCHAS DE TENIS"></button>
                             </div>
                             <div class="hotspot" style="left: 48.72%; top: 36.85%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-padel.jpg') }}" data-label="CANCHA DE PADEL"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-padel.jpg') }}" data-label="CANCHA DE PADEL" aria-label="Ver CANCHA DE PADEL"></button>
                             </div>
                             <div class="hotspot" style="left: 14.41%; top: 59.83%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-padel2.jpg') }}" data-label="CANCHAS DE PADEL"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-padel2.jpg') }}" data-label="CANCHAS DE PADEL" aria-label="Ver CANCHAS DE PADEL"></button>
                             </div>
                             <div class="hotspot" style="left: 55.48%; top: 79.27%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-restaurante.jpg') }}" data-label="RESTAURANTE"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-restaurante.jpg') }}" data-label="RESTAURANTE" aria-label="Ver RESTAURANTE"></button>
                             </div>
                             <div class="hotspot" style="left: 68.95%; top: 76.33%;">
-                                <div class="hotspot-dot" data-img="{{ asset('images/hotspot-gimnasio.jpg') }}" data-label="GIMNASIO"></div>
+                                <button type="button" class="hotspot-dot" data-img="{{ asset('images/hotspot-gimnasio.jpg') }}" data-label="GIMNASIO" aria-label="Ver GIMNASIO"></button>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <div class="hotspot-modal" id="hotspotModal">
+    <div class="hotspot-modal" id="hotspotModal" role="dialog" aria-modal="true" aria-labelledby="hotspotModalLabel">
         <div class="hotspot-modal-backdrop" id="hotspotModalBackdrop"></div>
         <div class="hotspot-modal-content">
             <button class="hotspot-modal-close" id="hotspotModalClose" aria-label="Cerrar">
@@ -180,9 +180,11 @@
     border-width: clamp(2px, 0.3cqw, 3px);
     border-style: solid;
     border-color: #fff;
+    padding: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     transition: transform 0.2s ease;
     animation: hotspot-pulse 2s ease-in-out infinite;
+    cursor: pointer;
 }
 
 .hotspot:hover .hotspot-dot {
