@@ -1,2 +1,4 @@
-*
+# Los medios subidos desde el panel (carpetas about/, disciplines/, events/,
+# facilities/, menus/, sections/) se versionan para que cualquier persona
+# que clone el proyecto vea el mismo contenido.
 !.gitignore
