@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Instalaciones — Vista Verde Country Club')
+@section('meta_description', 'Explora las instalaciones de Vista Verde Country Club: campo de golf, canchas, alberca, gimnasio y más.')
+
 @section('content')
 <div class="instalaciones-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
 

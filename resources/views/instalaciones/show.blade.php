@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', $area->title . ' — Instalaciones Vista Verde Country Club')
+@section('meta_description', Str::limit(strip_tags($area->description ?? ''), 160))
+
 @section('content')
 <div class="instalacion-detalle-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
     

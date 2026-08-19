@@ -26,6 +26,9 @@
 
 @extends('layouts.public')
 
+@section('title', 'Nosotros — Vista Verde Country Club')
+@section('meta_description', 'Conoce la historia, misión, visión y valores de Vista Verde Country Club.')
+
 @section('content')
 <div style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
 

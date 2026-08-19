@@ -14,6 +14,9 @@
 @endphp
 @extends('layouts.public')
 
+@section('title', 'VistaVerde | Golf & Country Club — Campo de golf, canchas y membresías')
+@section('meta_description', 'Vista Verde Country Club: campo de golf, canchas deportivas, clases, eventos y membresías en un entorno único. Descubre el club.')
+
 @section('content')
 
     <section class="hero-asymmetric" style="background-image: url('{{ $hero && $hero->background_image ? (str_starts_with($hero->background_image, 'images/') ? asset($hero->background_image) : asset('storage/' . $hero->background_image)) : asset('images/hero.jpg') }}');">
@@ -36,7 +39,7 @@
         </style>
         <div class="hero-overlay"></div>
         @if(setting('hero_show_golfista', true))
-        <img src="{{ asset('images/golfista.png') }}" alt="" class="hero-golfista">
+        <img src="{{ asset('images/golfista.webp') }}" alt="" class="hero-golfista">
         <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
         @endif
         <div class="hero-content">
