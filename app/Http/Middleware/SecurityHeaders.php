@@ -19,12 +19,12 @@ class SecurityHeaders
 
         $response->headers->set('Content-Security-Policy', implode('; ', [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com",
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
-            "font-src 'self' https://fonts.gstatic.com data:",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://fonts.googleapis.com",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.bunny.net https://cdn.jsdelivr.net",
+            "font-src 'self' https://fonts.gstatic.com https://fonts.bunny.net data:",
             "img-src 'self' data: blob: https:",
             "frame-src 'self' https://www.google.com https://google.com https://maps.google.com",
-            "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
+            "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://fonts.bunny.net",
             "worker-src 'self' blob:",
             "object-src 'none'",
             "base-uri 'self'",

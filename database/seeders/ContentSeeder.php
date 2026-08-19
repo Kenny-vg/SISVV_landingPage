@@ -165,82 +165,75 @@ class ContentSeeder extends Seeder
         }
 
         // ─── Membresías ───────────────────────────────────────────────────
+        $beneficios = [
+            'Tenis y pádel',
+            'Gimnasio',
+            'Natación',
+            'Vapor y sauna',
+            'Restaurante',
+            'Cafetería',
+            'Bar lounge y más',
+        ];
+
         $memberships = [
             [
-                'name' => 'Membresía Individual',
-                'price' => '$1,500/mes',
+                'name' => 'MENSUALIDAD INDIVIDUAL',
+                'price' => '$3,900.00',
+                'tipo' => 'MEN',
+                'area' => 'Campo de Golf',
                 'sort_order' => 1,
                 'is_published' => true,
-                'benefits' => [
-                    'Acceso ilimitado a todas las instalaciones del club',
-                    'Clases grupales incluidas (Yoga, Natación, Funcional)',
-                    '2 pases de invitado al mes',
-                    '10% de descuento en restaurante y spa',
-                    'Acceso a eventos sociales del club',
-                ],
+                'show_price' => true,
+                'is_featured' => false,
             ],
             [
-                'name' => 'Membresía Familiar',
-                'price' => '$2,800/mes',
+                'name' => 'MENSUALIDAD INDIVIDUAL',
+                'price' => '$1,600.00',
+                'tipo' => 'MEN',
+                'area' => 'Casa Club',
                 'sort_order' => 2,
                 'is_published' => true,
-                'benefits' => [
-                    'Todos los beneficios de Individual para titular + cónyuge',
-                    'Acceso para hijos menores de 18 años',
-                    '4 pases de invitado al mes',
-                    '15% de descuento en restaurante y spa',
-                    'Eventos familiares exclusivos cada mes',
-                    'Clases infantiles de natación y tenis incluidas',
-                ],
+                'show_price' => true,
+                'is_featured' => true,
             ],
             [
-                'name' => 'Membresía Ejecutiva',
-                'price' => '$4,500/mes',
+                'name' => 'MENSUALIDAD FAMILIAR',
+                'price' => '$5,120.00',
+                'tipo' => 'MEN',
+                'area' => 'Casa Club',
                 'sort_order' => 3,
                 'is_published' => true,
-                'benefits' => [
-                    'Acceso prioritario a reservaciones en todas las áreas',
-                    'Spa de bienestar con 2 sesiones al mes incluidas',
-                    '6 pases de invitado al mes',
-                    '20% de descuento en restaurante, spa y tienda',
-                    'Acceso a torneos y clinics exclusivos',
-                    'Estacionamiento preferente',
-                ],
+                'show_price' => true,
+                'is_featured' => false,
             ],
             [
-                'name' => 'Membresía Premium',
-                'price' => '$7,500/mes',
+                'name' => 'MENSUALIDAD FAMILIAR',
+                'price' => '$7,500.00',
+                'tipo' => 'MEN',
+                'area' => 'Campo de Golf',
                 'sort_order' => 4,
                 'is_published' => true,
-                'benefits' => [
-                    'Acceso ilimitado 24/7 a todas las instalaciones',
-                    'Servicio de valet parking incluido',
-                    'Invitados ilimitados (sujeto a capacidad)',
-                    'Spa ilimitado y prioritario',
-                    '25% de descuento en restaurante, spa y tienda',
-                    'Categoría de juego prioritario en Golf y Tenis',
-                    'Eventos VIP y catas de vino exclusivas',
-                ],
+                'show_price' => true,
+                'is_featured' => false,
             ],
         ];
 
         foreach ($memberships as $data) {
-            $benefits = $data['benefits'];
-            unset($data['benefits']);
-
             $membership = Membership::updateOrCreate(
-                ['name' => $data['name']],
+                ['name' => $data['name'], 'area' => $data['area']],
                 $data
             );
 
             $membership->benefits()->delete();
 
-            foreach ($benefits as $i => $benefit) {
+            foreach ($beneficios as $i => $beneficio) {
                 $membership->benefits()->create([
-                    'benefit' => $benefit,
+                    'benefit' => $beneficio,
                     'sort_order' => $i + 1,
                 ]);
             }
         }
+
+        Membership::whereNotIn('name', array_column($memberships, 'name'))->delete();
     }
 }

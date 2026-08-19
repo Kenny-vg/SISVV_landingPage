@@ -37,6 +37,17 @@ class SettingSeeder extends Seeder
             ['key' => 'facilities_all_link_text', 'value' => 'Ver todas las clases', 'group' => 'general'],
             ['key' => 'menu_btn_text', 'value' => 'Ver Carta Interactiva', 'group' => 'general'],
 
+            // Membresías - Reglamento
+            ['key' => 'membresias_reglamento_heading', 'value' => 'Reglamento del socio', 'group' => 'general'],
+            ['key' => 'membresias_actualizacion', 'value' => 'El costo de la membresía será actualizado al inicio de cada año, de acuerdo con las políticas y ajustes establecidos por el club.', 'group' => 'general'],
+            ['key' => 'membresias_consumos', 'value' => '<p><strong>Casa Club:</strong></p><p>Membresía individual: $300 mensuales.<br>Membresía familiar: $500 mensuales.</p><p><strong>Campo de Golf:</strong></p><p>Membresía individual y familiar: $500 mensuales.</p><p><em>El consumo mínimo debe realizarse durante el mes correspondiente. Para registrar sus consumos, es obligatorio proporcionar su número de membresía en cada punto de venta.</em></p>', 'group' => 'general'],
+            ['key' => 'membresias_pagos', 'value' => 'Para evitar recargos, los pagos mensuales deben realizarse durante los primeros 10 días de cada mes.', 'group' => 'general'],
+            ['key' => 'membresias_cortesia', 'value' => 'Los pases de cortesía estarán disponibles únicamente durante los primeros 5 días de cada mes, siempre y cuando la membresía se encuentre pagada en su totalidad.', 'group' => 'general'],
+            ['key' => 'membresias_baja', 'value' => '<p>Para tramitar su baja, debe realizarse dentro de los primeros 10 días de cada mes, cumpliendo con los siguientes requisitos:</p><p>Completar el formato de baja correspondiente.<br>Asegurar que el estado de cuenta esté en $0.</p><p>La baja no podrá exceder los tres meses. En caso de superar este periodo, se requerirá el pago de una cuota de incorporación para reactivar la membresía.</p>', 'group' => 'general'],
+            ['key' => 'membresias_visitas', 'value' => 'Todas las visitas deben ser informadas previamente en la recepción para que el personal del pórtico pueda autorizar el acceso. Los visitantes deberán registrarse en recepción antes de ingresar a las instalaciones.', 'group' => 'general'],
+            ['key' => 'membresias_fotografia', 'value' => 'Todos los miembros de la membresía deben tomarse una fotografía en nuestras instalaciones para completar su registro.', 'group' => 'general'],
+            ['key' => 'membresias_contacto', 'value' => 'Cualquier duda, aclaración o pago debe comunicarse al correo <a href="mailto:caja@vistaverde.com.mx">caja@vistaverde.com.mx</a>, al teléfono 238 374 5011 ext. 101 o por WhatsApp al 238 204 1659.', 'group' => 'general'],
+
             // Contacto
             ['key' => 'contact_phone', 'value' => '238 37 4 50 11 ext. 101 o 108', 'group' => 'contact'],
             ['key' => 'contact_cell', 'value' => '238 129 0316', 'group' => 'contact'],

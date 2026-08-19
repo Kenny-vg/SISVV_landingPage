@@ -12,14 +12,20 @@ class Membership extends Model
     protected $fillable = [
         'name',
         'price',
+        'tipo',
+        'area',
         'sort_order',
         'is_published',
+        'show_price',
+        'is_featured',
     ];
 
     protected function casts(): array
     {
         return [
             'is_published' => 'boolean',
+            'show_price' => 'boolean',
+            'is_featured' => 'boolean',
         ];
     }
 
