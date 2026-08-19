@@ -14,6 +14,8 @@ class Membership extends Model
         'price',
         'tipo',
         'area',
+        'members_text',
+        'has_golf_access',
         'sort_order',
         'is_published',
         'show_price',
@@ -26,6 +28,7 @@ class Membership extends Model
             'is_published' => 'boolean',
             'show_price' => 'boolean',
             'is_featured' => 'boolean',
+            'has_golf_access' => 'boolean',
         ];
     }
 

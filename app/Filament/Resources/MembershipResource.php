@@ -36,9 +36,17 @@ class MembershipResource extends Resource
                     ->maxLength(20)
                     ->helperText('Ej: MEN (mensualidad)'),
                 Forms\Components\TextInput::make('area')
-                    ->label('Área')
+                    ->label('Área Principal')
                     ->maxLength(50)
                     ->helperText('Ej: Casa Club o Campo de Golf'),
+                Forms\Components\TextInput::make('members_text')
+                    ->label('Número de Integrantes')
+                    ->maxLength(100)
+                    ->helperText('Ej: 1 Persona (Individual) o Núcleo Familiar'),
+                Forms\Components\Toggle::make('has_golf_access')
+                    ->label('Acceso a Campo de Golf')
+                    ->helperText('Marca si esta membresía incluye acceso al campo de golf')
+                    ->default(false),
                 Forms\Components\TextInput::make('price')
                     ->label('Monto mensual')
                     ->required()
@@ -85,6 +93,13 @@ class MembershipResource extends Resource
                     ->label('Área')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('members_text')
+                    ->label('Integrantes')
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('has_golf_access')
+                    ->label('Golf')
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label('Precio')
                     ->searchable(),
