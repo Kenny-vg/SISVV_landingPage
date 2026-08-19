@@ -132,7 +132,6 @@
                 'baja' => ['Solicitud de baja de membresía', setting('membresias_baja')],
                 'visitas' => ['Registro de visitas', setting('membresias_visitas')],
                 'fotografia' => ['Fotografía obligatoria', setting('membresias_fotografia')],
-                'contacto' => ['Contacto', setting('membresias_contacto')],
             ];
             $reglamentoItems = array_filter($reglamentoItems, fn ($item) => !empty($item[1]));
         @endphp
