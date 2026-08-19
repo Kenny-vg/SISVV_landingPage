@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VistaVerde | Golf & Country Club</title>
+    <title>@yield('title', 'VistaVerde | Golf & Country Club')</title>
+    <meta name="description" content="@yield('meta_description', 'Vista Verde Country Club: golf, canchas deportivas, clases y membresías en un entorno único.')">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ config('app.name') }}">
+    <meta property="og:title" content="@yield('title', 'VistaVerde | Golf & Country Club')">
+    <meta property="og:description" content="@yield('meta_description', 'Vista Verde Country Club: golf, canchas deportivas, clases y membresías en un entorno único.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:locale" content="es_MX">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" integrity="sha512-UoT/Ca6+2kRekuB1IDZgwtDt0ZUfsweWmyNhMqhG4hpnf7sFnhrLrO0zHJr2vFp7eZEvJ3FN58dhVx+YMJMt2A==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script>

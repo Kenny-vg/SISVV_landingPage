@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Carta y Menú — Vista Verde Country Club')
+@section('meta_description', 'Explora la carta y menú de los restaurantes de Vista Verde Country Club.')
+
 @section('content')
 <div class="lector-page" style="min-height: 100vh; background-color: var(--color-bg); transition: background-color 0.3s ease;">
     <div class="lector-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 8rem 1.5rem;">

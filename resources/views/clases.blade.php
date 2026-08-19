@@ -1,5 +1,8 @@
 @extends('layouts.public')
 
+@section('title', 'Clases — Vista Verde Country Club')
+@section('meta_description', 'Clases y disciplinas deportivas en Vista Verde Country Club: golf, tenis, natación, padel y más.')
+
 @section('content')
 <div class="clases-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
 
