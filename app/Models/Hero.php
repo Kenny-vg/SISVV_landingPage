@@ -25,4 +25,12 @@ class Hero extends Model
             'is_active' => 'boolean',
         ];
     }
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $model) {
+            $model->title = sanitize_html($model->title);
+            $model->subtitle = sanitize_html($model->subtitle);
+        });
+    }
 }

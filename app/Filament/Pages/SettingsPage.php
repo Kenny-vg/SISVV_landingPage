@@ -20,13 +20,23 @@ class SettingsPage extends Page
     use InteractsWithForms;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+
     protected static ?string $navigationLabel = 'Configuración';
+
     protected static ?string $navigationGroup = 'Configuración';
+
     protected static ?int $navigationSort = 1;
+
     protected static ?string $title = 'Configuración del sitio';
+
     protected static ?string $slug = 'configuracion';
 
     protected static string $view = 'filament.pages.settings-page';
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->is_admin ?? false;
+    }
 
     public ?array $data = [];
 
@@ -267,9 +277,22 @@ class SettingsPage extends Page
             'events_heading', 'contact_heading', 'contact_schedule',
         ];
 
+        $urlKeys = [
+            'social_facebook', 'social_instagram', 'social_whatsapp',
+            'contact_maps_url',
+        ];
+
+        $iframeKeys = [
+            'contact_maps_embed',
+        ];
+
         foreach ($data as $key => $value) {
             if (in_array($key, $richtextKeys)) {
                 $value = sanitize_html($value);
+            } elseif (in_array($key, $urlKeys)) {
+                $value = safe_url((string) $value);
+            } elseif (in_array($key, $iframeKeys)) {
+                $value = safe_iframe_src((string) $value);
             }
 
             Setting::updateOrCreate(

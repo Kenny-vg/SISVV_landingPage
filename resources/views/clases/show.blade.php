@@ -80,8 +80,8 @@
                     </div>
 
                     @if($area->images->count() > 1)
-                        <button class="carousel-btn carousel-prev" data-prev>&lsaquo;</button>
-                        <button class="carousel-btn carousel-next" data-next>&rsaquo;</button>
+                        <button class="carousel-btn carousel-prev" data-prev aria-label="Imagen anterior">&lsaquo;</button>
+                        <button class="carousel-btn carousel-next" data-next aria-label="Imagen siguiente">&rsaquo;</button>
 
                         <div class="carousel-dots" data-dots>
                             @foreach($area->images as $index => $img)

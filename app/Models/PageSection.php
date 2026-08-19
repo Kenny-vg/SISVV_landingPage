@@ -24,4 +24,11 @@ class PageSection extends Model
             'is_active' => 'boolean',
         ];
     }
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $model) {
+            $model->content = sanitize_html($model->content);
+        });
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Rules\StrictEmail;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -12,7 +13,7 @@ use Livewire\Form;
 
 class LoginForm extends Form
 {
-    #[Validate('required|string|email')]
+    #[Validate(['required', 'string', 'max:255', new StrictEmail])]
     public string $email = '';
 
     #[Validate('required|string')]
@@ -24,7 +25,7 @@ class LoginForm extends Form
     /**
      * Attempt to authenticate the request's credentials.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function authenticate(): void
     {

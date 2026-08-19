@@ -76,9 +76,9 @@
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-<script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+<script type="module">
+    import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';
 
     document.addEventListener('DOMContentLoaded', () => {
         let pdfDoc = null;
@@ -112,8 +112,8 @@
         const sliderPageMin = document.getElementById('slider-page-min');
         const sliderPageMax = document.getElementById('slider-page-max');
 
-        const hasPdf = {{ setting('terms_pdf') ? 'true' : 'false' }};
-        const pdfUrl = hasPdf ? '{{ setting("terms_pdf") ? asset("storage/" . setting("terms_pdf")) : '' }}' : null;
+        const hasPdf = @json((bool) setting('terms_pdf'));
+        const pdfUrl = hasPdf ? @json(setting('terms_pdf') ? asset('storage/' . setting('terms_pdf')) : '') : null;
 
         const downloadBtn = document.getElementById('download-pdf');
         if (downloadBtn) {

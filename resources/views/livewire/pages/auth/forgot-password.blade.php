@@ -1,6 +1,9 @@
 <?php
 
+use App\Rules\StrictEmail;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
@@ -14,25 +17,45 @@ new #[Layout('layouts.guest')] class extends Component
     public function sendPasswordResetLink(): void
     {
         $this->validate([
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'max:255', new StrictEmail],
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+        $this->ensureIsNotRateLimited();
+
         $status = Password::sendResetLink(
             $this->only('email')
         );
 
-        if ($status != Password::RESET_LINK_SENT) {
-            $this->addError('email', __($status));
+        // Siempre mostramos el mismo mensaje genérico para no revelar
+        // qué correos están registrados (evita enumeración de cuentas).
+        session()->flash('status', __('passwords.sent'));
 
+        if ($status == Password::RESET_LINK_SENT) {
+            $this->reset('email');
+        }
+
+        RateLimiter::hit($this->throttleKey());
+    }
+
+    protected function ensureIsNotRateLimited(): void
+    {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
-        $this->reset('email');
+        $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        session()->flash('status', __($status));
+        throw ValidationException::withMessages([
+            'email' => __('auth.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / 60),
+            ]),
+        ]);
+    }
+
+    protected function throttleKey(): string
+    {
+        return 'forgot-password:'.request()->ip();
     }
 }; ?>
 

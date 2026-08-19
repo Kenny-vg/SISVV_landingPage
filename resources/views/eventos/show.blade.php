@@ -109,9 +109,9 @@
 </div>
 
 @if($event->pdf_path)
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-<script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+<script type="module">
+    import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';
 
     document.addEventListener('DOMContentLoaded', () => {
         let pdfDoc = null;
@@ -125,7 +125,7 @@
         let startX, startY;
         let scrollLeft, scrollTop;
 
-        const pdfUrl = '{{ asset("storage/" . $event->pdf_path) }}';
+        const pdfUrl = @json(asset('storage/' . $event->pdf_path));
 
         const canvas = document.getElementById('pdf-canvas');
         const ctx = canvas.getContext('2d');

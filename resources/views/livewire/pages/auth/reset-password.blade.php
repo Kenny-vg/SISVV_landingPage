@@ -1,5 +1,6 @@
 <?php
 
+use App\Rules\StrictEmail;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -35,7 +36,7 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $this->validate([
             'token' => ['required'],
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'max:255', new StrictEmail],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
