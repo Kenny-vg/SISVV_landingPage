@@ -137,14 +137,17 @@
             $reglamentoItems = array_filter($reglamentoItems, fn ($item) => !empty($item[1]));
         @endphp
 
-        @if(count($reglamentoItems))
+        @if(setting('show_membresias_reglamento', true) && count($reglamentoItems))
         <section class="reglamento-section">
             <h2 class="reglamento-heading">{{ setting('membresias_reglamento_heading', 'Reglamento del socio') }}</h2>
-            <div class="reglamento-grid">
+            <div class="reglamento-card-full">
                 @foreach($reglamentoItems as [$reglamentoTitle, $reglamentoBody])
-                <div class="reglamento-item">
-                    <h3 class="reglamento-item-title">{{ $reglamentoTitle }}</h3>
-                    <div class="reglamento-item-body">{!! $reglamentoBody !!}</div>
+                <div class="reglamento-row">
+                    <div class="reglamento-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</div>
+                    <div class="reglamento-content">
+                        <h3 class="reglamento-row-title">{{ $reglamentoTitle }}</h3>
+                        <div class="reglamento-row-body">{!! $reglamentoBody !!}</div>
+                    </div>
                 </div>
                 @endforeach
             </div>

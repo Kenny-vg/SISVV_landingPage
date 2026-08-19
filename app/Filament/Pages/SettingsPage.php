@@ -149,6 +149,10 @@ class SettingsPage extends Page
                                     ->label('Mostrar precios de membresías')
                                     ->helperText('Permite mostrar u ocultar los precios de todas las membresías en el sitio web')
                                     ->default(true),
+                                Toggle::make('show_membresias_reglamento')
+                                    ->label('Mostrar sección de reglamento')
+                                    ->helperText('Permite mostrar u ocultar toda la sección de reglamento del socio en la página de membresías')
+                                    ->default(true),
                                 TextInput::make('membresias_reglamento_heading')
                                     ->label('Título de la sección "Reglamento del socio"')
                                     ->helperText('Encabezado mostrado debajo de las tarjetas de membresías'),
