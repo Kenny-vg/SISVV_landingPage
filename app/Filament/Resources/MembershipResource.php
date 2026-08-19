@@ -28,14 +28,28 @@ class MembershipResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Nombre')
+                    ->label('Título / Descripción')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('tipo')
+                    ->label('Tipo')
+                    ->maxLength(20)
+                    ->helperText('Ej: MEN (mensualidad)'),
+                Forms\Components\TextInput::make('area')
+                    ->label('Área')
+                    ->maxLength(50)
+                    ->helperText('Ej: Casa Club o Campo de Golf'),
                 Forms\Components\TextInput::make('price')
-                    ->label('Precio')
+                    ->label('Monto mensual')
                     ->required()
                     ->maxLength(255)
-                    ->helperText('Texto libre. Ej: "$1,500/mes" o "Consultar"'),
+                    ->helperText('Texto libre. Ej: "$3,900.00"'),
+                Forms\Components\Toggle::make('show_price')
+                    ->label('Mostrar precio en el sitio')
+                    ->default(true),
+                Forms\Components\Toggle::make('is_featured')
+                    ->label('Destacada (Recomendado)')
+                    ->helperText('Muestra la etiqueta "Recomendado" en la tarjeta'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')
                     ->default(true),
@@ -64,9 +78,24 @@ class MembershipResource extends Resource
                     ->label('Nombre')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('tipo')
+                    ->label('Tipo')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('area')
+                    ->label('Área')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->label('Precio')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('show_price')
+                    ->label('Muestra precio')
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('is_featured')
+                    ->label('Destacada')
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publicado')
                     ->boolean()

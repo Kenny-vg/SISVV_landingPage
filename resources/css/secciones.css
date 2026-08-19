@@ -1114,91 +1114,102 @@
     padding: 5rem 1.5rem 7rem;
 }
 
-.membresias-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2.5rem;
-    align-items: stretch;
-}
-
-.membresia-card {
+.membresias-table-wrap {
     background: var(--color-surface);
     border-radius: 20px;
-    padding: 3rem 2.5rem;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--color-border-subtle);
+    overflow-x: auto;
 }
 
-.membresia-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+.membresias-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 560px;
 }
 
-.membresia-card.featured {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+.membresias-table th {
+    font-family: var(--font-alt);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg);
+    white-space: nowrap;
 }
 
-.membresia-card.featured:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+.membresias-table td {
+    padding: 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
 }
 
-.membresia-card-name {
-    font-family: var(--font-editorial);
-    font-size: 1.5rem;
-    margin: 0 0 0.2rem 0;
+.membresias-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.membresias-table tbody tr.featured {
+    background: rgba(212, 175, 55, 0.07);
+}
+
+.membresias-table-name {
+    font-weight: 600;
     color: var(--color-text-primary);
 }
 
-.membresia-card-price {
-    font-size: 2rem;
+.membresias-table-price {
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-accent-gold);
-    letter-spacing: -0.5px;
-    margin-bottom: 2rem;
+    white-space: nowrap;
 }
 
-.membresia-card-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-}
-
-.membresia-card-benefits li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-.membresia-card-benefits li svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    stroke: var(--color-accent-gold);
-}
-
-.membresia-card-badge {
+.membresias-table-badge {
     font-family: var(--font-alt);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--color-accent-gold);
     border: 1px solid var(--color-accent-gold);
-    padding: 0.25rem 0.75rem;
+    padding: 0.15rem 0.55rem;
     border-radius: 100px;
     display: inline-block;
-    margin-bottom: 1rem;
-    align-self: flex-start;
+    margin-left: 0.75rem;
+    vertical-align: middle;
+}
+
+.membresias-benefits-shared {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.membresias-benefits-shared h3 {
+    font-family: var(--font-editorial);
+    font-size: 1.6rem;
+    color: var(--color-text-primary);
+    margin: 0 0 1.5rem 0;
+}
+
+.membresias-benefits-shared ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+}
+
+.membresias-benefits-shared li {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 100px;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
 }
 
 .membresias-empty {
@@ -1207,14 +1218,75 @@
     color: var(--color-text-secondary);
 }
 
-[data-theme="dark"] .membresia-card {
+[data-theme="dark"] .membresias-table-wrap {
+    background: #111;
+}
+
+[data-theme="dark"] .membresias-benefits-shared li {
+    background: #111;
+}
+
+/* ─── Reglamento del socio ───────────────────────── */
+.reglamento-section {
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.reglamento-heading {
+    font-family: var(--font-editorial);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--color-text-primary);
+    line-height: 1.1;
+    margin: 0 0 2.5rem 0;
+    text-align: center;
+}
+
+.reglamento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.reglamento-item {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 1.75rem 1.75rem;
+    border: 1px solid var(--color-border-subtle);
+}
+
+.reglamento-item-title {
+    font-family: var(--font-alt);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent-gold);
+    margin: 0 0 0.85rem 0;
+}
+
+.reglamento-item-body {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.reglamento-item-body p {
+    margin: 0 0 0.75rem 0;
+}
+
+.reglamento-item-body p:last-child {
+    margin-bottom: 0;
+}
+
+[data-theme="dark"] .reglamento-item {
     background: #111;
 }
 
 @media (max-width: 768px) {
     .membresias-hero { min-height: 40vh; }
-    .membresias-grid { grid-template-columns: 1fr; }
-    .membresia-card { padding: 2rem 1.5rem; }
+    .membresias-table th,
+    .membresias-table td { padding: 1rem; }
+    .reglamento-section { margin-top: 4rem; }
 }
 
 /* ==========================================

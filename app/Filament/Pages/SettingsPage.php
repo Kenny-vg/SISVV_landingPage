@@ -142,6 +142,46 @@ class SettingsPage extends Page
                                     ->helperText('Botón que lleva a la página de eventos'),
                             ]),
 
+                        Tab::make('Membresías')
+                            ->icon('heroicon-o-credit-card')
+                            ->schema([
+                                TextInput::make('membresias_reglamento_heading')
+                                    ->label('Título de la sección "Reglamento del socio"')
+                                    ->helperText('Encabezado mostrado debajo de las tarjetas de membresías'),
+                                RichEditor::make('membresias_actualizacion')
+                                    ->label('Actualización del costo de la membresía')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Nota sobre la actualización anual del costo'),
+                                RichEditor::make('membresias_consumos')
+                                    ->label('Consumos mínimos mensuales')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Consumos de Casa Club y Campo de Golf'),
+                                RichEditor::make('membresias_pagos')
+                                    ->label('Pagos mensuales y recargos')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Primeros 10 días de cada mes'),
+                                RichEditor::make('membresias_cortesia')
+                                    ->label('Pases de cortesía')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Disponibles los primeros 5 días del mes'),
+                                RichEditor::make('membresias_baja')
+                                    ->label('Solicitud de baja de membresía')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Requisitos y condiciones de la baja'),
+                                RichEditor::make('membresias_visitas')
+                                    ->label('Registro de visitas')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Cómo registrar visitas'),
+                                RichEditor::make('membresias_fotografia')
+                                    ->label('Fotografía obligatoria')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Registro fotográfico de los miembros'),
+                                RichEditor::make('membresias_contacto')
+                                    ->label('Contacto de membresías')
+                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->helperText('Correo, teléfono y WhatsApp para dudas o pagos'),
+                            ]),
+
                         Tab::make('Gastronomía')
                             ->icon('heroicon-o-cake')
                             ->schema([
@@ -275,6 +315,10 @@ class SettingsPage extends Page
             'hero_title', 'hero_subtitle', 'about_heading',
             'instalaciones_heading', 'facilities_heading',
             'events_heading', 'contact_heading', 'contact_schedule',
+            'membresias_actualizacion', 'membresias_consumos',
+            'membresias_pagos', 'membresias_cortesia',
+            'membresias_baja', 'membresias_visitas',
+            'membresias_fotografia', 'membresias_contacto',
         ];
 
         $urlKeys = [

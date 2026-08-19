@@ -28,36 +28,84 @@
                 <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Pronto publicaremos nuestros planes.</p>
             </div>
         @else
-            <div class="membresias-grid">
-
-                @foreach($memberships as $membership)
-                <div class="membresia-card @if($loop->iteration == 2) featured @endif">
-
-                    @if($loop->iteration == 2)
-                    <span class="membresia-card-badge">Recomendado</span>
-                    @endif
-
-                    <h3 class="membresia-card-name">{{ $membership->name }}</h3>
-
-                    <div class="membresia-card-price">{{ $membership->price }}</div>
-
-                    @if($membership->benefits->isNotEmpty())
-                    <ul class="membresia-card-benefits">
-                        @foreach($membership->benefits as $benefit)
-                        <li>
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                            </svg>
-                            <span>{{ $benefit->benefit }}</span>
-                        </li>
+            <div class="membresias-table-wrap">
+                <table class="membresias-table">
+                    <thead>
+                        <tr>
+                            <th>Membresía</th>
+                            <th>Área</th>
+                            <th>Monto mensual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($memberships as $membership)
+                        <tr class="@if($membership->is_featured) featured @endif">
+                            <td data-label="Membresía" class="membresias-table-name">
+                                {{ $membership->name }}
+                                @if($membership->is_featured)
+                                <span class="membresias-table-badge">Recomendado</span>
+                                @endif
+                            </td>
+                            <td data-label="Área">
+                                {{ $membership->area ?: '—' }}
+                            </td>
+                            <td data-label="Monto mensual" class="membresias-table-price">
+                                @if($membership->show_price && $membership->price)
+                                    {{ $membership->price }}
+                                @endif
+                            </td>
+                        </tr>
                         @endforeach
-                    </ul>
-                    @endif
+                    </tbody>
+                </table>
+            </div>
 
+            @php
+                $beneficiosUnicos = collect();
+                foreach ($memberships as $membership) {
+                    $beneficiosUnicos = $beneficiosUnicos->merge($membership->benefits->pluck('benefit'));
+                }
+                $beneficiosUnicos = $beneficiosUnicos->unique()->values();
+            @endphp
+
+            @if($beneficiosUnicos->isNotEmpty())
+            <div class="membresias-benefits-shared">
+                <h3>Incluye acceso a:</h3>
+                <ul>
+                    @foreach($beneficiosUnicos as $beneficio)
+                    <li>{{ $beneficio }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        @endif
+
+        @php
+            $reglamentoItems = [
+                'actualizacion' => ['Actualización del costo de la membresía', setting('membresias_actualizacion')],
+                'consumos' => ['Consumos mínimos mensuales', setting('membresias_consumos')],
+                'pagos' => ['Pagos mensuales y recargos', setting('membresias_pagos')],
+                'cortesia' => ['Pases de cortesía', setting('membresias_cortesia')],
+                'baja' => ['Solicitud de baja de membresía', setting('membresias_baja')],
+                'visitas' => ['Registro de visitas', setting('membresias_visitas')],
+                'fotografia' => ['Fotografía obligatoria', setting('membresias_fotografia')],
+                'contacto' => ['Contacto', setting('membresias_contacto')],
+            ];
+            $reglamentoItems = array_filter($reglamentoItems, fn ($item) => !empty($item[1]));
+        @endphp
+
+        @if(count($reglamentoItems))
+        <section class="reglamento-section">
+            <h2 class="reglamento-heading">{{ setting('membresias_reglamento_heading', 'Reglamento del socio') }}</h2>
+            <div class="reglamento-grid">
+                @foreach($reglamentoItems as [$reglamentoTitle, $reglamentoBody])
+                <div class="reglamento-item">
+                    <h3 class="reglamento-item-title">{{ $reglamentoTitle }}</h3>
+                    <div class="reglamento-item-body">{!! $reglamentoBody !!}</div>
                 </div>
                 @endforeach
-
             </div>
+        </section>
         @endif
 
     </section>
