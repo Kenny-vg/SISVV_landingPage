@@ -52,7 +52,7 @@ class SettingSeeder extends Seeder
 
             // Contacto
             ['key' => 'contact_phone', 'value' => '238 37 4 50 11 ext. 101 o 108', 'group' => 'contact'],
-            ['key' => 'contact_cell', 'value' => '238 129 0316', 'group' => 'contact'],
+            ['key' => 'contact_cell', 'value' => '238 204 1659', 'group' => 'contact'],
             ['key' => 'contact_email', 'value' => 'sistemas@vistaverde.com.mx', 'group' => 'contact'],
             ['key' => 'contact_schedule', 'value' => 'Mar - Sáb: 8:00 am - 8:00 pm<br>Dom: 8:00 am - 6:00 pm', 'group' => 'contact'],
             ['key' => 'contact_address_name', 'value' => 'Casa Club Vista Verde', 'group' => 'contact'],
@@ -91,8 +91,8 @@ class SettingSeeder extends Seeder
             // Redes sociales
             ['key' => 'social_facebook', 'value' => 'https://www.facebook.com/p/Vista-Verde-Country-Club-AC-100063650045982/', 'group' => 'social'],
             ['key' => 'social_instagram', 'value' => 'https://www.instagram.com/clubvistaverdecountry/', 'group' => 'social'],
-            ['key' => 'social_whatsapp', 'value' => 'https://wa.me/522381290316', 'group' => 'social'],
-            ['key' => 'social_whatsapp_number', 'value' => '522381290316', 'group' => 'social'],
+            ['key' => 'social_whatsapp', 'value' => 'https://wa.me/5212382041659', 'group' => 'social'],
+            ['key' => 'social_whatsapp_number', 'value' => '5212382041659', 'group' => 'social'],
         ];
 
         foreach ($settings as $setting) {
