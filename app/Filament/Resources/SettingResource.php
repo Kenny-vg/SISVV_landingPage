@@ -30,6 +30,11 @@ class SettingResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'key';
 
+    public static function canAccess(): bool
+    {
+        return false;
+    }
+
     private const ALLOWED_KEYS = [
         'site_name', 'site_description', 'hero_title', 'hero_subtitle',
         'hero_default_button', 'hero_show_golfista',

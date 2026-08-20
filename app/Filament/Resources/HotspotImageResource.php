@@ -16,9 +16,11 @@ class HotspotImageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map-pin';
 
-    protected static ?string $navigationGroup = 'Mapa Interactivo';
+    protected static ?string $navigationLabel = 'Mapa Interactivo';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?string $navigationGroup = 'Portada';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

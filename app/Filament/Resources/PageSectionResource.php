@@ -14,10 +14,10 @@ class PageSectionResource extends Resource
 {
     protected static ?string $model = PageSection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationLabel = 'Secciones de página';
-    protected static ?string $navigationGroup = 'Portada';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationIcon = 'heroicon-o-information-circle';
+    protected static ?string $navigationLabel = 'Contenido de Nosotros';
+    protected static ?string $navigationGroup = 'Nosotros';
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Sección de página';
     protected static ?string $pluralModelLabel = 'Secciones de página';
@@ -29,8 +29,8 @@ class PageSectionResource extends Resource
             ->schema([
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
-                        'title' => 'Esto edita NOSOTROS y GASTRONOMÍA',
-                        'description' => 'Los textos de la sección "Nosotros" (introducción, misión, visión, valores, filosofía) y el texto de la sección de gastronomía de la portada.',
+                        'title' => 'Esto edita la sección NOSOTROS',
+                        'description' => 'Introducción, misión, visión, valores y filosofía de la página "Nosotros". La introducción también se muestra en la portada.',
                     ])
                     ->columnSpanFull(),
                 Forms\Components\Select::make('key')
@@ -42,9 +42,14 @@ class PageSectionResource extends Resource
                         'about_vision' => 'Nosotros - Visión',
                         'about_values' => 'Nosotros - Valores',
                         'about_philosophy' => 'Nosotros - Filosofía',
-                        'menu_intro' => 'Gastronomía',
                     ])
                     ->helperText('Selecciona la sección de la página que este contenido representa.'),
+                Forms\Components\RichEditor::make('heading')
+                    ->label('Encabezado de la portada')
+                    ->toolbarButtons(['italic', 'bold'])
+                    ->helperText('Título grande de la sección "Nosotros" que se muestra en la portada.')
+                    ->visible(fn (Forms\Get $get): bool => $get('key') === 'about_intro')
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
                     ->maxLength(255),
@@ -104,6 +109,7 @@ class PageSectionResource extends Resource
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['content'] = sanitize_html($data['content'] ?? null);
+        $data['heading'] = sanitize_html($data['heading'] ?? null);
 
         return $data;
     }
@@ -111,6 +117,7 @@ class PageSectionResource extends Resource
     public static function mutateFormDataBeforeSave(array $data): array
     {
         $data['content'] = sanitize_html($data['content'] ?? null);
+        $data['heading'] = sanitize_html($data['heading'] ?? null);
 
         return $data;
     }

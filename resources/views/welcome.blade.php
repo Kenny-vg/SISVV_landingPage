@@ -43,9 +43,9 @@
         <img src="{{ asset('images/pelota-golf.png') }}" alt="" class="hero-golf-ball">
         @endif
         <div class="hero-content">
-            <h1>{!! $hero?->title ?? setting('hero_title') !!}</h1>
+            <h1>{!! $hero?->title ?? 'Donde cada día se disfruta diferente' !!}</h1>
             <p>
-                {!! $hero?->subtitle ?? setting('hero_subtitle') !!}
+                {!! $hero?->subtitle ?? 'Naturaleza, bienestar y experiencias que elevan tu estilo de vida.' !!}
             </p>
             @if ($hero?->button_text)
                 <a href="{{ $hero->button_link ? url($hero->button_link) : '#instalaciones' }}" class="btn-gold" style="text-decoration: none; display: inline-block;">
@@ -53,7 +53,7 @@
                 </a>
             @else
                 <button class="btn-gold" data-scroll-to="instalaciones">
-                    {{ setting('hero_default_button', 'Explorar el Club') }}
+                    Explorar el Club
                 </button>
             @endif
         </div>

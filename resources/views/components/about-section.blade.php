@@ -4,7 +4,7 @@
     }
     $section = $pageSections['about_intro'] ?? null;
     $aboutTitle = $section?->title ?? 'Quiénes somos';
-    $aboutHeading = setting('about_heading', 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>');
+    $aboutHeading = $section?->heading ?? 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>';
     $aboutBody = $section?->content ?? 'Vista Verde Country Club nació como un sueño: crear un espacio donde la excelencia deportiva, el bienestar y la naturaleza se fundieran en perfecta armonía.';
 @endphp
 <section class="premium-section bg-obsidian fade-in-section" id="nosotros">

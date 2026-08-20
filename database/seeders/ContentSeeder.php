@@ -28,6 +28,7 @@ class ContentSeeder extends Seeder
         foreach ([
             'about_intro' => [
                 'title' => 'Quiénes somos',
+                'heading' => 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>',
                 'content' => 'Vista Verde Country Club nació como un sueño: crear un espacio donde la excelencia deportiva, el bienestar y la naturaleza se fundieran en perfecta armonía. Hoy somos un destino exclusivo para quienes buscan más que un club, un estilo de vida.',
             ],
             'about_mission' => [
@@ -53,6 +54,7 @@ class ContentSeeder extends Seeder
         ] as $key => $data) {
             PageSection::updateOrCreate(['key' => $key], [
                 'title' => $data['title'],
+                'heading' => $data['heading'] ?? null,
                 'content' => $data['content'],
                 'is_active' => true,
             ]);

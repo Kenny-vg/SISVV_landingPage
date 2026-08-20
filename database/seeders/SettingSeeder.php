@@ -15,13 +15,9 @@ class SettingSeeder extends Seeder
             ['key' => 'site_description', 'value' => 'Un refugio privado de golf y bienestar termal en sintonía con la naturaleza.', 'group' => 'general'],
 
             // Hero
-            ['key' => 'hero_title', 'value' => 'Donde cada día se disfruta diferente', 'group' => 'general'],
-            ['key' => 'hero_subtitle', 'value' => 'Naturaleza, bienestar y experiencias que elevan tu estilo de vida.', 'group' => 'general'],
-            ['key' => 'hero_default_button', 'value' => 'Explorar el Club', 'group' => 'general'],
             ['key' => 'hero_show_golfista', 'value' => '1', 'group' => 'general'],
 
             // Secciones - Encabezados y textos
-            ['key' => 'about_heading', 'value' => 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>', 'group' => 'general'],
             ['key' => 'instalaciones_heading', 'value' => 'Espacios del<br><span>Club.</span>', 'group' => 'general'],
             ['key' => 'instalaciones_subtext', 'value' => 'Cada rincón de Vista Verde ha sido diseñado para ofrecerte una experiencia de exclusividad y confort sin igual, desde la Casa Club hasta nuestro Spa de bienestar.', 'group' => 'general'],
             ['key' => 'instalaciones_btn_text', 'value' => 'Ver Todas', 'group' => 'general'],

@@ -12,6 +12,7 @@ class PageSection extends Model
     protected $fillable = [
         'key',
         'title',
+        'heading',
         'content',
         'image',
         'image_float',
@@ -29,6 +30,7 @@ class PageSection extends Model
     {
         static::saving(function (self $model) {
             $model->content = sanitize_html($model->content);
+            $model->heading = sanitize_html($model->heading);
         });
     }
 }

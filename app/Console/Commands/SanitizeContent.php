@@ -16,9 +16,12 @@ class SanitizeContent extends Command
     protected $description = 'Sanitiza el contenido HTML existente en la base de datos';
 
     private array $richtextKeys = [
-        'hero_title', 'hero_subtitle', 'about_heading',
         'instalaciones_heading', 'facilities_heading',
         'events_heading', 'contact_heading', 'contact_schedule',
+        'membresias_actualizacion', 'membresias_consumos',
+        'membresias_pagos', 'membresias_cortesia',
+        'membresias_baja', 'membresias_visitas',
+        'membresias_fotografia', 'membresias_contacto',
     ];
 
     private int $totalChanges = 0;
@@ -79,9 +82,12 @@ class SanitizeContent extends Command
             $original = $section->content;
             $section->content = sanitize_html($section->content);
 
-            if ($section->content !== $original) {
+            $originalHeading = $section->heading;
+            $section->heading = sanitize_html($section->heading);
+
+            if ($section->content !== $original || $section->heading !== $originalHeading) {
                 $this->totalChanges++;
-                $this->warn("  PageSection '{$section->key}': content modificado");
+                $this->warn("  PageSection '{$section->key}': content/heading modificados");
 
                 if (!$this->option('dry-run')) {
                     $section->save();
