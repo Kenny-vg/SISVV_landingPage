@@ -1,0 +1,47 @@
+<?php $__env->startSection('title', 'Instalaciones — Vista Verde Country Club'); ?>
+<?php $__env->startSection('meta_description', 'Explora las instalaciones de Vista Verde Country Club: campo de golf, canchas, alberca, gimnasio y más.'); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="instalaciones-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
+
+    <!-- Banner de Encabezado Asimétrico -->
+    <header class="section-header-editorial" style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
+        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+        <h1 style="font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Nuestras<br><span>Instalaciones.</span></h1>
+        <p style="max-width: 650px;">
+            Espacios concebidos para la excelencia y el esparcimiento social, donde el diseño de vanguardia se funde con el entorno natural del club.
+        </p>
+    </header>
+
+    <!-- Grid de Instalaciones (bento-fullbleed como Clases) -->
+    <section style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 6rem 1.5rem;">
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $facilities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $facility): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+            <a href="<?php echo e(url('/instalaciones/'.$facility->slug)); ?>" class="bento-fullbleed">
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($facility->panorama_path): ?>
+                <span style="position:absolute;top:1rem;right:1rem;z-index:3;background:rgba(0,0,0,0.7);color:var(--color-accent-gold);padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:700;font-family:var(--font-alt);letter-spacing:1px;backdrop-filter:blur(4px);">360°</span>
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                <img src="<?php echo e(($img = $facility->images->first()) ? asset('storage/' . $img->image_path) : asset('images/hero.jpg')); ?>" alt="<?php echo e($facility->title); ?>" class="bento-fullbleed-img">
+                <div class="bento-fullbleed-overlay"></div>
+                <div class="bento-fullbleed-content">
+                    <span class="bento-fullbleed-number"><?php echo e(str_pad($loop->iteration, 2, '0', STR_PAD_LEFT)); ?></span>
+                    <div class="bento-fullbleed-bottom">
+                        <h3 class="bento-fullbleed-title"><?php echo e($facility->title); ?></h3>
+                        <p class="bento-fullbleed-desc"><?php echo e(Str::limit(strip_tags($facility->description), 120)); ?></p>
+                        <span class="bento-fullbleed-link">Conocer más &rarr;</span>
+                    </div>
+                </div>
+            </a>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">No hay espacios disponibles actualmente.</p>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+        </div>
+    </section>
+
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.public', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\mezaX\OneDrive\Desktop\Landing page VV\resources\views/instalaciones.blade.php ENDPATH**/ ?>

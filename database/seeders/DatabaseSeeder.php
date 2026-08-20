@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ContentSeeder::class,
             EventSeeder::class,
+            HotspotImageSeeder::class,
         ]);
     }
 }
