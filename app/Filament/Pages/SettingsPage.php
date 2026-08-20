@@ -10,6 +10,7 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\View;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -51,6 +52,12 @@ class SettingsPage extends Page
     {
         return $form
             ->schema([
+                View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Configuración general del sitio',
+                        'description' => 'Aquí se editan los textos y datos de varias partes de la web: portada, nosotros, instalaciones, clases, eventos, membresías, gastronomía, contacto, redes sociales y footer. Usa las pestañas para navegar.',
+                    ])
+                    ->columnSpanFull(),
                 Tabs::make('Configuración')
                     ->tabs([
                         Tab::make('Portada')

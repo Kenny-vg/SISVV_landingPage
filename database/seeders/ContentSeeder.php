@@ -241,7 +241,5 @@ class ContentSeeder extends Seeder
                 ]);
             }
         }
-
-        Membership::whereNotIn('name', array_column($memberships, 'name'))->delete();
     }
 }

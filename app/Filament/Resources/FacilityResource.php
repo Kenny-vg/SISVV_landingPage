@@ -16,7 +16,7 @@ class FacilityResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
     protected static ?string $navigationLabel = 'Instalaciones';
-    protected static ?string $navigationGroup = 'Nuestro Club';
+    protected static ?string $navigationGroup = 'Instalaciones';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Instalación';
@@ -27,8 +27,15 @@ class FacilityResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita la página INSTALACIONES',
+                        'description' => 'Los espacios del club que aparecen en el carrusel de la portada y en la página "Instalaciones": fotos, descripción, horario y tour 360°.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
+                    ->helperText('Nombre del espacio tal como lo verá el visitante')
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
@@ -37,6 +44,7 @@ class FacilityResource extends Resource
                     ->hidden(),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
+                    ->helperText('Usada para agrupar las instalaciones')
                     ->options([
                         'Social' => 'Social',
                         'Deportivo' => 'Deportivo',
@@ -45,10 +53,12 @@ class FacilityResource extends Resource
                     ]),
                 Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->helperText('Texto que aparece en la página de la instalación')
                     ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('schedule')
                     ->label('Horario')
+                    ->helperText('Ej: Lun - Sáb: 6:00 am - 10:00 pm')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')
@@ -60,6 +70,7 @@ class FacilityResource extends Resource
                             ->schema([
                                 Forms\Components\FileUpload::make('image_path')
                                     ->label('Imagen')
+                                    ->helperText('Fotos que se muestran en la galería de la instalación')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                                     ->maxSize(10240)

@@ -1,4 +1,3 @@
-<?php echo "\xEF\xBB\xBF"; ?>
 @php
     $hotspotImages = \App\Models\HotspotImage::where('is_published', true)->orderBy('key')->get();
 @endphp
@@ -38,7 +37,7 @@
                         </svg>
                     </button>
 
-                    <button class="mapa-pin-ring" id="mapaPinRing" aria-hidden="true"></button>
+                    <div class="mapa-pin-ring" id="mapaPinRing" aria-hidden="true"></div>
                 </div>
 
                 <button class="mapa-back-btn" id="mapaBackBtn">
@@ -53,7 +52,7 @@
 
     <div class="hotspot-modal" id="hotspotModal" role="dialog" aria-modal="true" aria-labelledby="hotspotModalLabel">
         <div class="hotspot-modal-backdrop" id="hotspotModalBackdrop"></div>
-        <div class="hotspot-modal-content">
+        <div class="hotspot-modal-content" tabindex="-1">
             <button class="hotspot-modal-close" id="hotspotModalClose" aria-label="Cerrar">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -123,7 +122,8 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0s linear 0.6s;
     will-change: opacity;
     pointer-events: none;
     z-index: 5;
@@ -135,6 +135,8 @@
 
 .mapa-detalle-overlay.is-visible {
     opacity: 1;
+    visibility: visible;
+    transition: opacity 0.6s ease, visibility 0s;
     pointer-events: auto;
 }
 
@@ -193,12 +195,15 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .hotspot-modal.is-open {
     opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s;
     pointer-events: auto;
 }
 
@@ -297,6 +302,7 @@
 
 .mapa-pin.is-hidden {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     animation: none;
 }
@@ -332,14 +338,17 @@
     border-radius: 50px;
     cursor: pointer;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
     z-index: 15;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.4s;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .mapa-back-btn.is-visible {
     opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
     pointer-events: auto;
 }
 
@@ -451,17 +460,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /* ─── Hotspot modal ─────────────────────────── */
-const hotspotDots = document.querySelectorAll('.hotspot-dot');
+    const hotspotDots = document.querySelectorAll('.hotspot-dot');
     const hotspotModal = document.getElementById('hotspotModal');
     const hotspotBackdrop = document.getElementById('hotspotModalBackdrop');
     const hotspotClose = document.getElementById('hotspotModalClose');
+    const hotspotContent = document.querySelector('.hotspot-modal-content');
     const modalImg = document.getElementById('hotspotModalImg');
     const modalLabel = document.getElementById('hotspotModalLabel');
 
     if (hotspotDots.length && hotspotModal && hotspotBackdrop && hotspotClose && modalLabel && modalImg) {
+        let lastFocusedDot = null;
+
         hotspotDots.forEach(function (dot) {
             dot.addEventListener('click', function (e) {
                 e.stopPropagation();
+                lastFocusedDot = dot;
                 modalLabel.textContent = dot.getAttribute('data-label');
 
                 const imgSrc = dot.getAttribute('data-img');
@@ -473,17 +486,25 @@ const hotspotDots = document.querySelectorAll('.hotspot-dot');
                 }
 
                 hotspotModal.classList.add('is-open');
+                if (hotspotContent) {
+                    hotspotContent.focus();
+                } else {
+                    hotspotClose.focus();
+                }
             });
         });
 
         function closeModal() {
             hotspotModal.classList.remove('is-open');
+            if (lastFocusedDot && lastFocusedDot.isConnected) {
+                lastFocusedDot.focus();
+            }
         }
 
         hotspotClose.addEventListener('click', closeModal);
         hotspotBackdrop.addEventListener('click', closeModal);
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape' && hotspotModal.classList.contains('is-open')) closeModal();
         });
     }
 

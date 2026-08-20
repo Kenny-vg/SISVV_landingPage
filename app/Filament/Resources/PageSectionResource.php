@@ -27,6 +27,12 @@ class PageSectionResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita NOSOTROS y GASTRONOMÍA',
+                        'description' => 'Los textos de la sección "Nosotros" (introducción, misión, visión, valores, filosofía) y el texto de la sección de gastronomía de la portada.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\Select::make('key')
                     ->label('Sección')
                     ->required()

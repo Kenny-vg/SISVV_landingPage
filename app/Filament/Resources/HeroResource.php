@@ -29,6 +29,12 @@ class HeroResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita la PORTADA',
+                        'description' => 'Los slides principales del hero: título, subtítulo, botón e imagen de fondo que el visitante ve al entrar a la página de inicio.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\RichEditor::make('title')
                     ->label('Título')
                     ->required()

@@ -24,6 +24,12 @@ class HotspotImageResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita el MAPA INTERACTIVO de la portada',
+                        'description' => 'Solo puedes cambiar la imagen de cada punto del mapa. La posición y la etiqueta están fijas para que los puntos no se muevan.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\Select::make('key')
                     ->label('Punto (clave)')
                     ->options([
@@ -79,6 +85,10 @@ class HotspotImageResource extends Resource
                     ->nullable()
                     ->imagePreviewHeight('150')
                     ->columnSpanFull(),
+                Forms\Components\Toggle::make('is_published')
+                    ->label('Publicado')
+                    ->helperText('Desactiva para ocultar este punto del mapa interactivo')
+                    ->default(true),
             ]);
     }
 
@@ -113,6 +123,11 @@ class HotspotImageResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Actualizado')
                     ->dateTime('d/m/Y H:i')
+                    ->sortable(),
+
+                Tables\Columns\IconColumn::make('is_published')
+                    ->label('Publicado')
+                    ->boolean()
                     ->sortable(),
             ])
             ->defaultSort('key')

@@ -77,7 +77,7 @@
                             </div>
                         @empty
                             <div class="carousel-slide">
-                                <img src="{{ asset('images/hero.jpg') }}" alt="{{ $area->title }}">
+                                <img src="{{ asset('images/fallback-clases.svg') }}" alt="{{ $area->title }}">
                             </div>
                         @endforelse
                     </div>

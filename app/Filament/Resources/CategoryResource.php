@@ -20,7 +20,7 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationLabel = 'Carta';
-    protected static ?string $navigationGroup = 'Carta';
+    protected static ?string $navigationGroup = 'Gastronomía';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Sección de la Carta';

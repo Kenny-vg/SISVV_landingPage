@@ -31,12 +31,12 @@
     </div>
 
     <!-- Carousel -->
-    <div class="facilities-carousel-wrapper" id="wrapper-deportivo" style="display: block;">
+    <div class="facilities-carousel-wrapper" id="wrapper-deportivo" style="display: block;" data-section-carousel data-track="track-deportivo" data-prev="fac-prev-btn" data-next="fac-next-btn" data-auto="4000">
         <div class="facilities-carousel-track" id="track-deportivo">
 
             @forelse($disciplines as $discipline)
             <a href="{{ url('/clases/'.$discipline->slug) }}" class="bento-fullbleed">
-                <img src="{{ ($img = $discipline->images->first()) ? asset('storage/' . $img->image_path) : asset('images/hero.jpg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
+                <img src="{{ ($img = $discipline->images->first()) ? asset('storage/' . $img->image_path) : asset('images/fallback-clases.svg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
@@ -62,93 +62,3 @@
     </div>
 
 </section>
-
-<!-- ==========================================
-   LÓGICA DEL CARRUSEL E INTERACCIÓN
-   ========================================== -->
-<script>
-    let activeCategory = 'deportivo';
-
-    function scrollCarousel(direction) {
-        const track = document.getElementById(`track-${activeCategory}`);
-        if (!track) return;
-
-        const scrollAmount = 375 * direction;
-        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-
-        setTimeout(updateButtonStates, 400);
-    }
-
-    function updateButtonStates() {
-        const track = document.getElementById(`track-${activeCategory}`);
-        if (!track) return;
-
-        const prevBtn = document.getElementById('fac-prev-btn');
-        const nextBtn = document.getElementById('fac-next-btn');
-
-        prevBtn.disabled = track.scrollLeft <= 10;
-        nextBtn.disabled = (track.scrollLeft + track.clientWidth) >= (track.scrollWidth - 10);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const prevBtn = document.getElementById('fac-prev-btn');
-        const nextBtn = document.getElementById('fac-next-btn');
-        if (prevBtn) prevBtn.addEventListener('click', () => scrollCarousel(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => scrollCarousel(1));
-
-        const el = document.getElementById('track-deportivo');
-        if (el) {
-            el.addEventListener('scroll', () => {
-                clearTimeout(el.scrollTimeout);
-                el.scrollTimeout = setTimeout(updateButtonStates, 100);
-            });
-        }
-
-        setTimeout(updateButtonStates, 200);
-        window.addEventListener('resize', updateButtonStates);
-    });
-</script>
-
-<script>
-/* Auto-scroll para el carrusel de Clases & Disciplinas */
-(function () {
-    const TRACK_ID      = 'track-deportivo';
-    const WRAPPER_ID    = 'wrapper-deportivo';
-    const AUTO_INTERVAL = 4000;
-    const SCROLL_AMOUNT = 375;
-
-    let facAutoTimer = null;
-    let facPaused    = false;
-
-    function autoAdvance() {
-        const track = document.getElementById(TRACK_ID);
-        if (!track) return;
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScroll - 10) {
-            track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            track.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
-        }
-        setTimeout(updateButtonStates, 400);
-    }
-
-    function startFacAutoScroll() {
-        if (facAutoTimer) clearInterval(facAutoTimer);
-        facAutoTimer = setInterval(function () {
-            if (!facPaused) autoAdvance();
-        }, AUTO_INTERVAL);
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const wrapper = document.getElementById(WRAPPER_ID);
-        if (!wrapper) return;
-
-        wrapper.addEventListener('mouseenter',  function () { facPaused = true;  });
-        wrapper.addEventListener('mouseleave',  function () { facPaused = false; });
-        wrapper.addEventListener('touchstart',  function () { facPaused = true;  }, { passive: true });
-        wrapper.addEventListener('touchend',    function () { facPaused = false; }, { passive: true });
-
-        startFacAutoScroll();
-    });
-})();
-</script>

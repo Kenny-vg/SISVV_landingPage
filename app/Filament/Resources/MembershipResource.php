@@ -16,8 +16,8 @@ class MembershipResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
     protected static ?string $navigationLabel = 'Membresías';
-    protected static ?string $navigationGroup = 'Nuestro Club';
-    protected static ?int $navigationSort = 5;
+    protected static ?string $navigationGroup = 'Membresías';
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Membresía';
     protected static ?string $pluralModelLabel = 'Membresías';
@@ -27,6 +27,12 @@ class MembershipResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita la página MEMBRESÍAS',
+                        'description' => 'Los planes de membresía que aparecen en la página "Membresías": título, área, integrantes, acceso a golf, precio y beneficios.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
                     ->label('Título / Descripción')
                     ->required()

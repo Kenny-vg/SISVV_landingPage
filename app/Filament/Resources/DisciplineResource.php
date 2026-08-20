@@ -16,8 +16,8 @@ class DisciplineResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-fire';
     protected static ?string $navigationLabel = 'Clases / Disciplinas';
-    protected static ?string $navigationGroup = 'Nuestro Club';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationGroup = 'Clases';
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Clase / Disciplina';
     protected static ?string $pluralModelLabel = 'Clases / Disciplinas';
@@ -27,8 +27,15 @@ class DisciplineResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita la página CLASES',
+                        'description' => 'Las clases / disciplinas que aparecen en el carrusel de la portada y en la página "Clases": fotos, descripción y horario.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
+                    ->helperText('Nombre de la clase tal como lo verá el visitante')
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
@@ -37,6 +44,7 @@ class DisciplineResource extends Resource
                     ->hidden(),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
+                    ->helperText('Usada para agrupar las clases')
                     ->options([
                         'Social' => 'Social',
                         'Deportivo' => 'Deportivo',
@@ -45,10 +53,12 @@ class DisciplineResource extends Resource
                     ]),
                 Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->helperText('Texto que aparece en la página de la clase')
                     ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('schedule')
                     ->label('Horario')
+                    ->helperText('Ej: Mar - Dom: 7:00 am - 6:00 pm')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')
@@ -60,6 +70,7 @@ class DisciplineResource extends Resource
                             ->schema([
                                 Forms\Components\FileUpload::make('image_path')
                                     ->label('Imagen')
+                                    ->helperText('Fotos que se muestran en la galería de la clase')
                                     ->image()
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                                     ->maxSize(10240)

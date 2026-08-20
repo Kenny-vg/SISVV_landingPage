@@ -19,7 +19,7 @@ class EventResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?string $navigationLabel = 'Eventos';
-    protected static ?string $navigationGroup = 'Experiencia';
+    protected static ?string $navigationGroup = 'Eventos';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Evento';
@@ -30,8 +30,15 @@ class EventResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Esto edita la página EVENTOS',
+                        'description' => 'Los tipos de evento que aparecen en el carrusel de la portada y en la página "Eventos": título, categoría, descripción, imagen y PDF informativo.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('Título')
+                    ->helperText('Título del evento tal como lo verá el visitante')
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
@@ -40,6 +47,7 @@ class EventResource extends Resource
                     ->hidden(),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
+                    ->helperText('Etiqueta que se muestra sobre la imagen del evento')
                     ->options([
                         'Boda' => 'Boda',
                         'Baby Shower' => 'Baby Shower',
@@ -49,8 +57,12 @@ class EventResource extends Resource
                         'Corporativo' => 'Corporativo',
                         'Otro' => 'Otro',
                     ]),
+                Forms\Components\DatePicker::make('date')
+                    ->label('Fecha del evento')
+                    ->helperText('Fecha que se muestra en el sello del evento (opcional)'),
                 Forms\Components\Textarea::make('description')
                     ->label('Descripción')
+                    ->helperText('Texto que aparece en la página de detalle del evento')
                     ->rows(4)
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
@@ -83,6 +95,11 @@ class EventResource extends Resource
                 Tables\Columns\TextColumn::make('category')
                     ->label('Categoría')
                     ->badge()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Fecha')
+                    ->date('d/m/Y')
+                    ->placeholder('—')
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Imagen')
@@ -118,5 +135,19 @@ class EventResource extends Resource
         return [
             'index' => Pages\ManageEvents::route('/'),
         ];
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['description'] = sanitize_html($data['description'] ?? null);
+
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['description'] = sanitize_html($data['description'] ?? null);
+
+        return $data;
     }
 }
