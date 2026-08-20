@@ -41,6 +41,13 @@ class SettingSeeder extends Seeder
             ['key' => 'show_membership_prices', 'value' => '1', 'group' => 'general'],
             ['key' => 'show_membresias_reglamento', 'value' => '1', 'group' => 'general'],
             ['key' => 'membresias_reglamento_heading', 'value' => 'Reglamento del socio', 'group' => 'general'],
+            ['key' => 'membresias_titulo_actualizacion', 'value' => 'Actualización del costo de la membresía', 'group' => 'general'],
+            ['key' => 'membresias_titulo_consumos', 'value' => 'Consumos mínimos mensuales', 'group' => 'general'],
+            ['key' => 'membresias_titulo_pagos', 'value' => 'Pagos mensuales y recargos', 'group' => 'general'],
+            ['key' => 'membresias_titulo_cortesia', 'value' => 'Pases de cortesía', 'group' => 'general'],
+            ['key' => 'membresias_titulo_baja', 'value' => 'Solicitud de baja de membresía', 'group' => 'general'],
+            ['key' => 'membresias_titulo_visitas', 'value' => 'Registro de visitas', 'group' => 'general'],
+            ['key' => 'membresias_titulo_fotografia', 'value' => 'Fotografía obligatoria', 'group' => 'general'],
             ['key' => 'membresias_actualizacion', 'value' => 'El costo de la membresía será actualizado al inicio de cada año, de acuerdo con las políticas y ajustes establecidos por el club.', 'group' => 'general'],
             ['key' => 'membresias_consumos', 'value' => '<p><strong>Casa Club:</strong></p><p>Membresía individual: $300 mensuales.<br>Membresía familiar: $500 mensuales.</p><p><strong>Campo de Golf:</strong></p><p>Membresía individual y familiar: $500 mensuales.</p><p><em>El consumo mínimo debe realizarse durante el mes correspondiente. Para registrar sus consumos, es obligatorio proporcionar su número de membresía en cada punto de venta.</em></p>', 'group' => 'general'],
             ['key' => 'membresias_pagos', 'value' => 'Para evitar recargos, los pagos mensuales deben realizarse durante los primeros 10 días de cada mes.', 'group' => 'general'],
@@ -49,6 +56,26 @@ class SettingSeeder extends Seeder
             ['key' => 'membresias_visitas', 'value' => 'Todas las visitas deben ser informadas previamente en la recepción para que el personal del pórtico pueda autorizar el acceso. Los visitantes deberán registrarse en recepción antes de ingresar a las instalaciones.', 'group' => 'general'],
             ['key' => 'membresias_fotografia', 'value' => 'Todos los miembros de la membresía deben tomarse una fotografía en nuestras instalaciones para completar su registro.', 'group' => 'general'],
             ['key' => 'membresias_contacto', 'value' => 'Cualquier duda, aclaración o pago debe comunicarse al correo <a href="mailto:caja@vistaverde.com.mx">caja@vistaverde.com.mx</a>, al teléfono 238 374 5011 ext. 101 o por WhatsApp al 238 204 1659.', 'group' => 'general'],
+
+            // Textos de página - Botones y enlaces
+            ['key' => 'about_btn_text', 'value' => 'Conócenos más →', 'group' => 'general'],
+            ['key' => 'lector_btn_text', 'value' => 'Ver Menú →', 'group' => 'general'],
+            ['key' => 'volver_eventos_text', 'value' => 'Volver a Eventos', 'group' => 'general'],
+            ['key' => 'volver_instalaciones_text', 'value' => 'Volver a Instalaciones', 'group' => 'general'],
+            ['key' => 'volver_clases_text', 'value' => 'Volver a Clases', 'group' => 'general'],
+            ['key' => 'volver_carta_text', 'value' => 'Volver a la Carta', 'group' => 'general'],
+            ['key' => 'download_pdf_text', 'value' => 'Descargar PDF', 'group' => 'general'],
+            ['key' => 'download_menu_text', 'value' => 'Descargar Menú', 'group' => 'general'],
+
+            // Textos de página - Estados vacíos
+            ['key' => 'empty_events_title', 'value' => 'No hay eventos publicados actualmente.', 'group' => 'general'],
+            ['key' => 'empty_events_subtitle', 'value' => 'Vuelve pronto para ver las próximas actividades del club.', 'group' => 'general'],
+            ['key' => 'empty_clases_text', 'value' => 'No hay clases disponibles actualmente.', 'group' => 'general'],
+            ['key' => 'empty_instalaciones_text', 'value' => 'No hay espacios disponibles actualmente.', 'group' => 'general'],
+            ['key' => 'empty_membresias_title', 'value' => 'No hay membresías disponibles actualmente.', 'group' => 'general'],
+            ['key' => 'empty_membresias_subtitle', 'value' => 'Pronto publicaremos nuestros planes.', 'group' => 'general'],
+            ['key' => 'empty_lector_text', 'value' => 'No hay categorías disponibles en este momento.', 'group' => 'general'],
+            ['key' => 'empty_pdf_text', 'value' => 'No hay PDF disponible para este evento.', 'group' => 'general'],
 
             // Contacto
             ['key' => 'contact_phone', 'value' => '238 37 4 50 11 ext. 101 o 108', 'group' => 'contact'],

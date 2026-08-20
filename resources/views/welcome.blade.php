@@ -156,7 +156,7 @@
     </section>
 
 @push('scripts')
-<script>
+<script nonce="{{ csp_nonce() }}">
     document.querySelector('[data-scroll-to]')?.addEventListener('click', function () {
         document.getElementById(this.dataset.scrollTo)?.scrollIntoView({ behavior: 'smooth' });
     });

@@ -25,8 +25,8 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 64px; height: 64px; margin: 0 auto 1.5rem; opacity: 0.3; display: block;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <p style="font-size: 1.1rem;">No hay eventos publicados actualmente.</p>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Vuelve pronto para ver las próximas actividades del club.</p>
+                <p style="font-size: 1.1rem;">{{ setting('empty_events_title', 'No hay eventos publicados actualmente.') }}</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">{{ setting('empty_events_subtitle', 'Vuelve pronto para ver las próximas actividades del club.') }}</p>
             </div>
         @else
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">

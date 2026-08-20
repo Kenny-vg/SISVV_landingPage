@@ -29,13 +29,8 @@ Route::get('/eventos/{slug}', function ($slug) {
     return view('eventos.show', compact('event'));
 })->name('eventos.show');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+Route::redirect('dashboard', '/admin')->name('dashboard');
+Route::redirect('profile', '/admin')->name('profile');
 
 Route::get('/lector', function () {
     $categories = Category::where('is_visible', true)->get();

@@ -29,12 +29,12 @@
                     @endif
                     <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">{{ $cat->name }}</h3>
                     <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">{{ strip_tags($cat->description) }}</p>
-                    <a href="{{ url('/lector-pdf?category='.$cat->slug) }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">Ver Menú &rarr;</a>
+                    <a href="{{ url('/lector-pdf?category='.$cat->slug) }}" class="btn-link" style="margin-top: auto; align-self: flex-start; text-decoration: none; color: var(--color-text-primary); font-weight: 600;">{{ setting('lector_btn_text', 'Ver Menú →') }}</a>
                 </div>
             </div>
             @empty
             <div class="bento-item bento-col-12" style="text-align: center; padding: 4rem;">
-                <p style="color: var(--color-text-secondary);">No hay categorías disponibles en este momento.</p>
+                <p style="color: var(--color-text-secondary);">{{ setting('empty_lector_text', 'No hay categorías disponibles en este momento.') }}</p>
             </div>
             @endforelse
         </div>

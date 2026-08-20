@@ -32,7 +32,7 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
-            Volver a Instalaciones
+            {{ setting('volver_instalaciones_text', 'Volver a Instalaciones') }}
         </a>
 
         <!-- Contenedor Asimétrico de 2 Columnas -->
@@ -109,7 +109,7 @@
 </div>
 
 @push('scripts')
-<script>
+<script nonce="{{ csp_nonce() }}">
 document.addEventListener('DOMContentLoaded', function() {
     var panoEl = document.getElementById('pano');
     if (panoEl && typeof pannellum !== 'undefined') {

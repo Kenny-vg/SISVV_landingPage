@@ -17,7 +17,7 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                Volver a Eventos
+                {{ setting('volver_eventos_text', 'Volver a Eventos') }}
             </a>
 
             @if($event->date || $event->category)
@@ -41,7 +41,7 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
-                Descargar PDF
+                {{ setting('download_pdf_text', 'Descargar PDF') }}
             </a>
             @endif
 
@@ -103,7 +103,7 @@
                 </a>
             </div>
             @else
-            <p style="color: var(--color-text-secondary); padding: 2rem; text-align: center;">No hay PDF disponible para este evento.</p>
+            <p style="color: var(--color-text-secondary); padding: 2rem; text-align: center;">{{ setting('empty_pdf_text', 'No hay PDF disponible para este evento.') }}</p>
             @endif
 
         </main>
@@ -112,7 +112,7 @@
 </div>
 
 @if($event->pdf_path)
-<script type="module">
+<script type="module" nonce="{{ csp_nonce() }}">
     import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
     pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';
 

@@ -32,12 +32,12 @@
                     <div class="bento-fullbleed-bottom">
                         <h3 class="bento-fullbleed-title">{{ $facility->title }}</h3>
                         <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($facility->description), 120) }}</p>
-                        <span class="bento-fullbleed-link">Conocer más &rarr;</span>
+                        <span class="bento-fullbleed-link">{{ setting('instalaciones_link_text', 'Conocer más →') }}</span>
                     </div>
                 </div>
             </a>
             @empty
-            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">No hay espacios disponibles actualmente.</p>
+            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">{{ setting('empty_instalaciones_text', 'No hay espacios disponibles actualmente.') }}</p>
             @endforelse
 
         </div>

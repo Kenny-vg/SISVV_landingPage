@@ -405,7 +405,7 @@
 }
 </style>
 
-<script>
+<script nonce="{{ csp_nonce() }}">
 document.addEventListener('DOMContentLoaded', function () {
     const pin = document.getElementById('mapaPin');
     const pinRing = document.getElementById('mapaPinRing');

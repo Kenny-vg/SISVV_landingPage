@@ -20,10 +20,14 @@ if (! function_exists('setting')) {
     }
 }
 
-if (! function_exists('forget_settings_cache')) {
-    function forget_settings_cache(): void
+if (! function_exists('csp_nonce')) {
+    /**
+     * Nonce CSP por request, generado en SecurityHeaders y compartido con las
+     * vistas para marcar los <script> inline en producción.
+     */
+    function csp_nonce(): string
     {
-        Cache::forget('site_settings');
+        return app()->bound('csp.nonce') ? app('csp.nonce') : '';
     }
 }
 
