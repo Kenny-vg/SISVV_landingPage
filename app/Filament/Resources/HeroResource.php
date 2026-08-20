@@ -32,7 +32,7 @@ class HeroResource extends Resource
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
                         'title' => 'Esto edita la PORTADA',
-                        'description' => 'Los slides principales del hero: título, subtítulo, botón e imagen de fondo que el visitante ve al entrar a la página de inicio.',
+                        'description' => 'Los slides principales del hero: título, subtítulo, botón e imagen de fondo que el visitante ve al entrar a la página de inicio. Es el único lugar para editar estos textos.',
                     ])
                     ->columnSpanFull(),
                 Forms\Components\RichEditor::make('title')

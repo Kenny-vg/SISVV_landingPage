@@ -2,7 +2,15 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Pages\ClasesSettingsPage;
+use App\Filament\Pages\EventosSettingsPage;
+use App\Filament\Pages\GastronomiaSettingsPage;
+use App\Filament\Pages\InstalacionesSettingsPage;
+use App\Filament\Pages\MembresiasSettingsPage;
+use App\Filament\Pages\NosotrosSettingsPage;
+use App\Filament\Pages\PortadaSettingsPage;
 use App\Filament\Pages\SettingsPage;
+use App\Filament\Resources\CategoryResource;
 use App\Filament\Resources\DisciplineResource;
 use App\Filament\Resources\EventResource;
 use App\Filament\Resources\FacilityResource;
@@ -24,50 +32,68 @@ class EditGuideWidget extends Widget
     {
         return [
             [
-                'title' => 'Portada (Hero)',
-                'description' => 'Slides principales de la portada: título, subtítulo, botón e imagen de fondo.',
+                'title' => 'Portada (Slides del Hero)',
+                'description' => 'Título, subtítulo, botón e imagen de la portada.',
                 'url' => HeroResource::getUrl('index'),
                 'icon' => 'heroicon-o-photo',
             ],
             [
-                'title' => 'Nosotros y Gastronomía',
-                'description' => 'Textos de la sección "Nosotros" (misión, visión, valores) y de la sección de gastronomía.',
+                'title' => 'Ajustes de la Portada',
+                'description' => 'Mostrar u ocultar las ilustraciones de la portada.',
+                'url' => PortadaSettingsPage::getUrl(),
+                'icon' => 'heroicon-o-swatch',
+            ],
+            [
+                'title' => 'Nosotros',
+                'description' => 'Introducción, misión, visión, valores y filosofía.',
                 'url' => PageSectionResource::getUrl('index'),
-                'icon' => 'heroicon-o-document-text',
+                'icon' => 'heroicon-o-information-circle',
+            ],
+            [
+                'title' => 'Nosotros - Textos',
+                'description' => 'Botón de la portada e imagen de fondo de la página.',
+                'url' => NosotrosSettingsPage::getUrl(),
+                'icon' => 'heroicon-o-pencil-square',
             ],
             [
                 'title' => 'Instalaciones',
-                'description' => 'Espacios del club con fotos, horarios y tour 360° (página "Instalaciones").',
+                'description' => 'Espacios del club y textos de la sección (página "Instalaciones").',
                 'url' => FacilityResource::getUrl('index'),
                 'icon' => 'heroicon-o-building-office-2',
             ],
             [
-                'title' => 'Clases / Disciplinas',
-                'description' => 'Clases deportivas y de bienestar con fotos y horarios (página "Clases").',
+                'title' => 'Clases',
+                'description' => 'Disciplinas y textos de la sección (página "Clases").',
                 'url' => DisciplineResource::getUrl('index'),
                 'icon' => 'heroicon-o-fire',
             ],
             [
                 'title' => 'Membresías',
-                'description' => 'Planes, precios y beneficios de las membresías (página "Membresías").',
+                'description' => 'Planes, precios y reglamento (página "Membresías").',
                 'url' => MembershipResource::getUrl('index'),
                 'icon' => 'heroicon-o-credit-card',
             ],
             [
                 'title' => 'Eventos',
-                'description' => 'Tipos de eventos con imagen y PDF informativo (portada y página "Eventos").',
+                'description' => 'Eventos con imagen y PDF (portada y página "Eventos").',
                 'url' => EventResource::getUrl('index'),
                 'icon' => 'heroicon-o-calendar-days',
             ],
             [
+                'title' => 'Gastronomía',
+                'description' => 'Carta (menú PDF) y texto de la sección de gastronomía.',
+                'url' => CategoryResource::getUrl('index'),
+                'icon' => 'heroicon-o-cake',
+            ],
+            [
                 'title' => 'Mapa Interactivo',
-                'description' => 'Imágenes de cada punto del mapa del club (sección "Mapa Interactivo" de la portada).',
+                'description' => 'Imágenes de cada punto del mapa de la portada.',
                 'url' => HotspotImageResource::getUrl('index'),
                 'icon' => 'heroicon-o-map-pin',
             ],
             [
                 'title' => 'Configuración del sitio',
-                'description' => 'Textos de portada, contacto, redes sociales, footer y reglamento de membresías.',
+                'description' => 'Contacto, redes sociales, footer, navegación y mensajes.',
                 'url' => SettingsPage::getUrl(),
                 'icon' => 'heroicon-o-cog-6-tooth',
             ],
