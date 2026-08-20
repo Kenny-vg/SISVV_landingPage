@@ -1,7 +1,7 @@
 <?php echo "\xEF\xBB\xBF"; ?>
-@php
+<?php
     $hotspotImages = \App\Models\HotspotImage::where('is_published', true)->orderBy('key')->get();
-@endphp
+?>
 <section class="premium-section bg-obsidian" id="mapa-club">
     <div class="fade-in-section">
         <div style="max-width: 1200px; margin: 0 auto;">
@@ -13,21 +13,21 @@
             <div class="mapa-wrapper" id="mapaWrapper">
                 <div class="mapa-viewport" id="mapaViewport">
                     <div class="mapa-zoom-container" id="mapaZoomContainer">
-                        <img src="{{ asset('images/mapa-completo.jpg') }}" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg">
+                        <img src="<?php echo e(asset('images/mapa-completo.jpg')); ?>" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg">
                     </div>
 
                     <div class="mapa-detalle-overlay" id="mapaDetalleOverlay">
                         <div class="mapa-detalle-wrapper">
-                            <img src="{{ asset('images/mapa-club.jpg') }}" alt="Detalle del club" class="mapa-img-detalle" id="mapaDetalleImg">
+                            <img src="<?php echo e(asset('images/mapa-club.jpg')); ?>" alt="Detalle del club" class="mapa-img-detalle" id="mapaDetalleImg">
 
-                            @foreach($hotspotImages as $hotspot)
-                            <div class="hotspot" style="left: {{ $hotspot->left_percent }}%; top: {{ $hotspot->top_percent }}%;">
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $hotspotImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $hotspot): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="hotspot" style="left: <?php echo e($hotspot->left_percent); ?>%; top: <?php echo e($hotspot->top_percent); ?>%;">
                                 <button type="button" class="hotspot-dot"
-                                    data-label="{{ $hotspot->label }}"
-                                    @if($hotspot->image_path) data-img="{{ asset('storage/' . $hotspot->image_path) }}" @endif
-                                    aria-label="Ver {{ $hotspot->label }}"></button>
+                                    data-label="<?php echo e($hotspot->label); ?>"
+                                    <?php if($hotspot->image_path): ?> data-img="<?php echo e(asset('storage/' . $hotspot->image_path)); ?>" <?php endif; ?>
+                                    aria-label="Ver <?php echo e($hotspot->label); ?>"></button>
                             </div>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                         </div>
                     </div>
 
@@ -508,4 +508,4 @@ const hotspotDots = document.querySelectorAll('.hotspot-dot');
         }
     }
 });
-</script>
+</script><?php /**PATH C:\Users\mezaX\OneDrive\Desktop\Landing page VV\resources\views\components\mapa-interactivo.blade.php ENDPATH**/ ?>
