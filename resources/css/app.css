@@ -31,3 +31,12 @@ h3 {
     font-family: var(--font-editorial);
     font-weight: 400;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id],
+div[id="contacto"] {
+    scroll-margin-top: 90px;
+}

@@ -13,6 +13,7 @@ class Event extends Model
         'title',
         'slug',
         'category',
+        'date',
         'description',
         'image',
         'pdf_path',
@@ -21,6 +22,7 @@ class Event extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
+        'date' => 'date',
     ];
 
     protected static function booted(): void

@@ -2,6 +2,7 @@
 
 @section('title', $event->title . ' — Vista Verde Country Club')
 @section('meta_description', Str::limit(strip_tags($event->description ?? ''), 160))
+@section('og_image', $event->image ? asset('storage/' . $event->image) : asset('images/hero.jpg'))
 
 @section('content')
 <div class="evento-pdf-page">
@@ -19,8 +20,10 @@
                 Volver a Eventos
             </a>
 
-            @if($event->category)
-            <span class="evento-pdf-category-badge">{{ $event->category }}</span>
+            @if($event->date || $event->category)
+            <span class="evento-pdf-category-badge">
+                {{ $event->date ? \Carbon\Carbon::parse($event->date)->locale('es')->isoFormat('D MMM YYYY') : $event->category }}
+            </span>
             @endif
 
             <h1 class="evento-pdf-title">{{ $event->title }}</h1>
@@ -29,7 +32,7 @@
 
             @if($event->description)
             <div class="evento-pdf-description">
-                {{ nl2br(e($event->description)) }}
+                {!! sanitize_html($event->description) !!}
             </div>
             @endif
 

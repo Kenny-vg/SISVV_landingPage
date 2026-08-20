@@ -15,6 +15,7 @@ class HotspotImage extends Model
         'image_path',
         'left_percent',
         'top_percent',
+        'is_published',
     ];
 
     protected $casts = [

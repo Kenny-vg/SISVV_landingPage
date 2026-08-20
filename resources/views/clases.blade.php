@@ -22,7 +22,7 @@
 
             @forelse($disciplines as $discipline)
             <a href="{{ url('/clases/'.$discipline->slug) }}" class="bento-fullbleed">
-                <img src="{{ ($img = $discipline->images->first()) ? asset('storage/' . $img->image_path) : asset('images/hero.jpg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
+                <img src="{{ ($img = $discipline->images->first()) ? asset('storage/' . $img->image_path) : asset('images/fallback-clases.svg') }}" alt="{{ $discipline->title }}" class="bento-fullbleed-img">
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>

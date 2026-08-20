@@ -33,15 +33,15 @@
                 @foreach($events as $event)
                 <a href="{{ route('eventos.show', $event->slug) }}" class="bento-fullbleed">
 
-                    <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/hero.jpg') }}" alt="{{ $event->title }}" class="bento-fullbleed-img">
+                    <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/fallback-eventos.svg') }}" alt="{{ $event->title }}" class="bento-fullbleed-img">
                     <div class="bento-fullbleed-overlay"></div>
                     <div class="bento-fullbleed-content">
-                        @if($event->category)
+                        @if($event->date || $event->category)
                         <span class="event-date-badge" style="background:rgba(193,201,77,0.25);border-color:var(--color-accent-gold);">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 12px; height: 12px; flex-shrink: 0;">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                             </svg>
-                            {{ $event->category }}
+                            {{ $event->date ? \Carbon\Carbon::parse($event->date)->locale('es')->isoFormat('D MMM YYYY') : $event->category }}
                         </span>
                         @endif
                         <div class="bento-fullbleed-bottom">
@@ -64,6 +64,8 @@
                 @endforeach
             </div>
         @endif
+
+        {{ $events->links('pagination.site') }}
 
     </section>
 </div>

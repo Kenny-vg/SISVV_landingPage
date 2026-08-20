@@ -24,7 +24,7 @@ class SecurityHeaders
             "font-src 'self' https://fonts.gstatic.com https://fonts.bunny.net data:",
             "img-src 'self' data: blob: https:",
             "frame-src 'self' https://www.google.com https://google.com https://maps.google.com",
-            "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://fonts.bunny.net",
+            "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://fonts.bunny.net ws://localhost:5173 ws://127.0.0.1:5173 wss://localhost:5173 wss://127.0.0.1:5173",
             "worker-src 'self' blob:",
             "object-src 'none'",
             "base-uri 'self'",

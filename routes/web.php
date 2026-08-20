@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/eventos', function () {
-    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->get();
+    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->paginate(9);
     return view('eventos', compact('events'));
 })->name('eventos.index');
 

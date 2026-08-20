@@ -13,7 +13,7 @@
     <meta property="og:title" content="@yield('title', 'VistaVerde | Golf & Country Club')">
     <meta property="og:description" content="@yield('meta_description', 'Vista Verde Country Club: golf, canchas deportivas, clases y membresías en un entorno único.')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image" content="@yield('og_image', asset('images/hero.jpg'))">
     <meta property="og:locale" content="es_MX">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">

@@ -34,6 +34,12 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Usuarios del panel',
+                        'description' => 'Las personas con acceso a este panel de administración. Un usuario con "Administrador" desactivado no podrá entrar al panel.',
+                    ])
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
                     ->label('Nombre')
                     ->required()
@@ -55,6 +61,10 @@ class UserResource extends Resource
                     ->password()
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->dehydrated(false),
+                Forms\Components\Toggle::make('is_admin')
+                    ->label('Administrador')
+                    ->helperText('Desactiva para crear un usuario lector (sin acceso al panel de administración)')
+                    ->default(true),
 
             ]);
     }
@@ -130,7 +140,6 @@ class UserResource extends Resource
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['password'] = bcrypt($data['password']);
-        $data['is_admin'] = true;
 
         return $data;
     }
@@ -142,8 +151,6 @@ class UserResource extends Resource
         } else {
             unset($data['password']);
         }
-
-        $data['is_admin'] = true;
 
         return $data;
     }

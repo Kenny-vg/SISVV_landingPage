@@ -7,8 +7,8 @@
 <section class="premium-section bg-obsidian fade-in-section" id="gastronomia">
     <div class="gastronomy-asymmetric">
         <div class="gastronomy-media-wrapper">
-            <img src="{{ $menuSection?->image ? asset('storage/' . $menuSection->image) : asset('images/hero.jpg') }}" alt="Plato gourmet VistaVerde" class="gastronomy-main-img">
-            <img src="{{ $menuSection?->image_float ? asset('storage/' . $menuSection->image_float) : asset('images/hero.jpg') }}" alt="Ingredientes gastronómicos frescos" class="gastronomy-float-img">
+            <img src="{{ $menuSection?->image ? asset('storage/' . $menuSection->image) : asset('images/fallback-gastronomia.svg') }}" alt="Plato gourmet VistaVerde" class="gastronomy-main-img">
+            <img src="{{ $menuSection?->image_float ? asset('storage/' . $menuSection->image_float) : asset('images/fallback-gastronomia.svg') }}" alt="Ingredientes gastronómicos frescos" class="gastronomy-float-img">
         </div>
 
         <div class="gastronomy-content-wrapper">
