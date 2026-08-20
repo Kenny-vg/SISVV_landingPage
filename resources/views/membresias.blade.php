@@ -24,8 +24,8 @@
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 64px; height: 64px; margin: 0 auto 1.5rem; opacity: 0.3; display: block;">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <p style="font-size: 1.1rem;">No hay membresías disponibles actualmente.</p>
-                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Pronto publicaremos nuestros planes.</p>
+                <p style="font-size: 1.1rem;">{{ setting('empty_membresias_title', 'No hay membresías disponibles actualmente.') }}</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">{{ setting('empty_membresias_subtitle', 'Pronto publicaremos nuestros planes.') }}</p>
             </div>
         @else
             <div class="comparison-table-wrap">
@@ -125,13 +125,13 @@
 
         @php
             $reglamentoItems = [
-                'actualizacion' => ['Actualización del costo de la membresía', setting('membresias_actualizacion')],
-                'consumos' => ['Consumos mínimos mensuales', setting('membresias_consumos')],
-                'pagos' => ['Pagos mensuales y recargos', setting('membresias_pagos')],
-                'cortesia' => ['Pases de cortesía', setting('membresias_cortesia')],
-                'baja' => ['Solicitud de baja de membresía', setting('membresias_baja')],
-                'visitas' => ['Registro de visitas', setting('membresias_visitas')],
-                'fotografia' => ['Fotografía obligatoria', setting('membresias_fotografia')],
+                'actualizacion' => [setting('membresias_titulo_actualizacion', 'Actualización del costo de la membresía'), setting('membresias_actualizacion')],
+                'consumos' => [setting('membresias_titulo_consumos', 'Consumos mínimos mensuales'), setting('membresias_consumos')],
+                'pagos' => [setting('membresias_titulo_pagos', 'Pagos mensuales y recargos'), setting('membresias_pagos')],
+                'cortesia' => [setting('membresias_titulo_cortesia', 'Pases de cortesía'), setting('membresias_cortesia')],
+                'baja' => [setting('membresias_titulo_baja', 'Solicitud de baja de membresía'), setting('membresias_baja')],
+                'visitas' => [setting('membresias_titulo_visitas', 'Registro de visitas'), setting('membresias_visitas')],
+                'fotografia' => [setting('membresias_titulo_fotografia', 'Fotografía obligatoria'), setting('membresias_fotografia')],
             ];
             $reglamentoItems = array_filter($reglamentoItems, fn ($item) => !empty($item[1]));
         @endphp

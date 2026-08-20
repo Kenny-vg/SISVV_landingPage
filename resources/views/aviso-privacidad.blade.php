@@ -76,7 +76,7 @@
 
 </div>
 
-<script type="module">
+<script type="module" nonce="{{ csp_nonce() }}">
     import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
     pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';
 

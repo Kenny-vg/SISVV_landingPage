@@ -8,7 +8,7 @@
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
-        <span>Volver a la Carta</span>
+        <span>{{ setting('volver_carta_text', 'Volver a la Carta') }}</span>
     </a>
 
     <!-- Cabecera Editorial Elegante -->
@@ -76,7 +76,7 @@
         <div class="pdf-divider"></div>
 
         <!-- Botón de Descarga -->
-        <a href="{{ $category->pdf ? asset('storage/'.$category->pdf) : '#' }}" download class="pdf-btn" id="download-pdf" title="Descargar Menú">
+        <a href="{{ $category->pdf ? asset('storage/'.$category->pdf) : '#' }}" download class="pdf-btn" id="download-pdf" title="{{ setting('download_menu_text', 'Descargar Menú') }}">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
@@ -86,7 +86,7 @@
 </div>
 
 <!-- PDF.js 4.x auto-hospedado localmente -->
-<script type="module">
+<script type="module" nonce="{{ csp_nonce() }}">
     import * as pdfjsLib from '{{ asset('js/pdf/pdf.min.mjs') }}';
     // Configuración del worker de PDF.js
     pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ asset('js/pdf/pdf.worker.min.mjs') }}';

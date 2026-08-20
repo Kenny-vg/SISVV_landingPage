@@ -29,12 +29,12 @@
                     <div class="bento-fullbleed-bottom">
                         <h3 class="bento-fullbleed-title">{{ $discipline->title }}</h3>
                         <p class="bento-fullbleed-desc">{{ Str::limit(strip_tags($discipline->description), 120) }}</p>
-                        <span class="bento-fullbleed-link">Ver Clase &rarr;</span>
+                        <span class="bento-fullbleed-link">{{ setting('facilities_link_text', 'Ver Clase →') }}</span>
                     </div>
                 </div>
             </a>
             @empty
-            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">No hay clases disponibles actualmente.</p>
+            <p style="color: var(--color-text-secondary); text-align: center; padding: 2rem; grid-column: 1 / -1;">{{ setting('empty_clases_text', 'No hay clases disponibles actualmente.') }}</p>
             @endforelse
 
         </div>

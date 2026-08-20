@@ -55,7 +55,7 @@ class AuthenticationTest extends TestCase
         $this->assertGuest();
     }
 
-    public function test_navigation_menu_can_be_rendered(): void
+    public function test_dashboard_redirects_to_admin(): void
     {
         $user = User::factory()->create();
 
@@ -63,9 +63,7 @@ class AuthenticationTest extends TestCase
 
         $response = $this->get('/dashboard');
 
-        $response
-            ->assertOk()
-            ->assertSeeVolt('layout.navigation');
+        $response->assertRedirect('/admin');
     }
 
     public function test_users_can_logout(): void

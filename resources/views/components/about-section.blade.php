@@ -18,7 +18,7 @@
                 {!! $aboutBody !!}
             </p>
             <a href="{{ url('/nosotros') }}" class="btn-gold" style="text-decoration: none; display: inline-block; margin-top: 0.5rem;">
-                Conócenos más →
+                {{ setting('about_btn_text', 'Conócenos más →') }}
             </a>
         </div>
         <div style="border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">

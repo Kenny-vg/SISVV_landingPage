@@ -163,6 +163,27 @@ class SettingsPage extends Page
                                 TextInput::make('membresias_reglamento_heading')
                                     ->label('Título de la sección "Reglamento del socio"')
                                     ->helperText('Encabezado mostrado debajo de las tarjetas de membresías'),
+                                TextInput::make('membresias_titulo_actualizacion')
+                                    ->label('Título: Actualización del costo')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_consumos')
+                                    ->label('Título: Consumos mínimos mensuales')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_pagos')
+                                    ->label('Título: Pagos mensuales y recargos')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_cortesia')
+                                    ->label('Título: Pases de cortesía')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_baja')
+                                    ->label('Título: Solicitud de baja de membresía')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_visitas')
+                                    ->label('Título: Registro de visitas')
+                                    ->helperText('Título mostrado junto a su contenido'),
+                                TextInput::make('membresias_titulo_fotografia')
+                                    ->label('Título: Fotografía obligatoria')
+                                    ->helperText('Título mostrado junto a su contenido'),
                                 RichEditor::make('membresias_actualizacion')
                                     ->label('Actualización del costo de la membresía')
                                     ->toolbarButtons(['bold', 'italic'])
@@ -191,10 +212,62 @@ class SettingsPage extends Page
                                     ->label('Fotografía obligatoria')
                                     ->toolbarButtons(['bold', 'italic'])
                                     ->helperText('Registro fotográfico de los miembros'),
-                                RichEditor::make('membresias_contacto')
+RichEditor::make('membresias_contacto')
                                     ->label('Contacto de membresías')
-                                    ->toolbarButtons(['bold', 'italic'])
+                                    ->toolbarButtons(['italic', 'bold'])
                                     ->helperText('Correo, teléfono y WhatsApp para dudas o pagos'),
+                            ]),
+
+                        Tab::make('Textos de página')
+                            ->icon('heroicon-o-pencil-square')
+                            ->schema([
+                                TextInput::make('about_btn_text')
+                                    ->label('Botón "Conócenos más"')
+                                    ->helperText('Enlace de la sección Nosotros en la portada'),
+                                TextInput::make('lector_btn_text')
+                                    ->label('Enlace "Ver Menú" de la carta')
+                                    ->helperText('Texto del enlace en las tarjetas de categorías'),
+                                TextInput::make('volver_eventos_text')
+                                    ->label('Botón "Volver a Eventos"')
+                                    ->helperText('Enlace en la página de detalle de un evento'),
+                                TextInput::make('volver_instalaciones_text')
+                                    ->label('Botón "Volver a Instalaciones"')
+                                    ->helperText('Enlace en la página de detalle de una instalación'),
+                                TextInput::make('volver_clases_text')
+                                    ->label('Botón "Volver a Clases"')
+                                    ->helperText('Enlace en la página de detalle de una clase'),
+                                TextInput::make('volver_carta_text')
+                                    ->label('Botón "Volver a la Carta"')
+                                    ->helperText('Enlace en el visor PDF de una categoría'),
+                                TextInput::make('download_pdf_text')
+                                    ->label('Botón "Descargar PDF" (eventos)')
+                                    ->helperText('Descarga del PDF de un evento'),
+                                TextInput::make('download_menu_text')
+                                    ->label('Título "Descargar Menú" (carta)')
+                                    ->helperText('Texto del tooltip de descarga en el visor PDF'),
+
+                                View::make('filament.components.section-guide')
+                                    ->viewData([
+                                        'title' => 'Estados vacíos',
+                                        'description' => 'Textos que se muestran cuando una sección o página no tiene contenido publicado.',
+                                    ])
+                                    ->columnSpanFull(),
+                                TextInput::make('empty_events_title')
+                                    ->label('Vacío — Eventos (título)'),
+                                TextInput::make('empty_events_subtitle')
+                                    ->label('Vacío — Eventos (subtítulo)'),
+                                TextInput::make('empty_clases_text')
+                                    ->label('Vacío — Clases'),
+                                TextInput::make('empty_instalaciones_text')
+                                    ->label('Vacío — Instalaciones'),
+                                TextInput::make('empty_membresias_title')
+                                    ->label('Vacío — Membresías (título)'),
+                                TextInput::make('empty_membresias_subtitle')
+                                    ->label('Vacío — Membresías (subtítulo)'),
+                                TextInput::make('empty_lector_text')
+                                    ->label('Vacío — Carta'),
+                                TextInput::make('empty_pdf_text')
+                                    ->label('Vacío — PDF del evento'),
                             ]),
 
                         Tab::make('Gastronomía')
