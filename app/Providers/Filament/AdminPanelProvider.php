@@ -7,6 +7,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use App\Filament\Pages\SettingsPage;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -42,6 +43,13 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
+            ])
+            ->userMenuItems([
+                // Enlace simple de salida: desloguea y redirige directo al login
+                'logout' => MenuItem::make()
+                    ->label('Salir')
+                    ->icon('heroicon-o-arrow-right-start-on-rectangle')
+                    ->url(fn (): string => route('admin.salir')),
             ])
             ->middleware([
                 EncryptCookies::class,
