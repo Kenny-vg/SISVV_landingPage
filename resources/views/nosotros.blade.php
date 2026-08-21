@@ -59,7 +59,7 @@
                 </p>
             </div>
             <div style="border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
-                <img src="{{ $mission->image ? asset('storage/'.$mission->image) : $aboutImage }}" alt="{{ $mission->title }}" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
+                <x-responsive-image :path="$mission->image" :alt="$mission->title" :fallback="$aboutImage" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;"/>
             </div>
         </div>
     </section>
@@ -82,7 +82,7 @@
                 </p>
             </div>
             <div style="direction: ltr; border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
-                <img src="{{ $vision->image ? asset('storage/'.$vision->image) : $aboutImage }}" alt="{{ $vision->title }}" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
+                <x-responsive-image :path="$vision->image" :alt="$vision->title" :fallback="$aboutImage" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;"/>
             </div>
         </div>
     </section>

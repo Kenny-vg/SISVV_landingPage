@@ -21,7 +21,7 @@
             @forelse($categories as $cat)
             <div class="bento-item bento-col-6" style="cursor: pointer;" role="link" tabindex="0" aria-label="Ver menú de {{ $cat->name }}" onclick="window.location.href='{{ url('/lector-pdf?category='.$cat->slug) }}'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.location.href='{{ url('/lector-pdf?category='.$cat->slug) }}'}">
                 <div class="bento-img-container" style="overflow: hidden; position: relative;">
-                    <img src="{{ $cat->image ? asset('storage/'.$cat->image) : asset('images/fallback-gastronomia.svg') }}" alt="{{ $cat->name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
+                    <x-responsive-image :path="$cat->image" :alt="$cat->name" fallback="{{ asset('images/fallback-gastronomia.svg') }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);"/>
                 </div>
                 <div class="bento-card-content" style="display: flex; flex-direction: column; flex-grow: 1;">
                     @if($cat->schedule)

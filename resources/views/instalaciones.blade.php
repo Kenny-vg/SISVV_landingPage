@@ -25,7 +25,7 @@
                 @if($facility->panorama_path)
                 <span style="position:absolute;top:1rem;right:1rem;z-index:3;background:rgba(0,0,0,0.7);color:var(--color-accent-gold);padding:0.25rem 0.6rem;border-radius:6px;font-size:0.7rem;font-weight:700;font-family:var(--font-alt);letter-spacing:1px;backdrop-filter:blur(4px);">360°</span>
                 @endif
-                <img src="{{ ($img = $facility->images->first()) ? asset('storage/' . $img->image_path) : asset('images/fallback-instalaciones.svg') }}" alt="{{ $facility->title }}" class="bento-fullbleed-img">
+                <x-responsive-image :path="$facility->images->first()?->image_path" :alt="$facility->title" fallback="{{ asset('images/fallback-instalaciones.svg') }}" class="bento-fullbleed-img"/>
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <span class="bento-fullbleed-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>

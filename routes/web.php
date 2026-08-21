@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Models\Category;
 use App\Models\Discipline;
 use App\Models\Event;
@@ -8,6 +9,10 @@ use App\Models\Hero;
 use App\Models\Membership;
 use App\Models\PageSection;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/img/{path}', ImageController::class)
+    ->where('path', '.*')
+    ->name('image.optimized');
 
 Route::get('/', function () {
     $hero = Hero::where('is_active', true)->orderBy('sort_order')->first();

@@ -33,7 +33,7 @@
                 @foreach($events as $event)
                 <a href="{{ route('eventos.show', $event->slug) }}" class="bento-fullbleed">
 
-                    <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/fallback-eventos.svg') }}" alt="{{ $event->title }}" class="bento-fullbleed-img">
+                    <img src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/fallback-eventos.svg') }}" alt="{{ $event->title }}" class="bento-fullbleed-img" loading="lazy" decoding="async">
                     <div class="bento-fullbleed-overlay"></div>
                     <div class="bento-fullbleed-content">
                         @if($event->date || $event->category)
