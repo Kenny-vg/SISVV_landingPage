@@ -32,8 +32,8 @@ class Membership extends Model
         ];
     }
 
-    public function benefits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function benefits(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(MembershipBenefit::class)->orderBy('sort_order');
+        return $this->belongsToMany(Benefit::class)->orderBy('benefits.sort_order');
     }
 }
