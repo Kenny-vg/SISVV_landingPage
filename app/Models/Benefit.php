@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MembershipBenefit extends Model
+class Benefit extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'membership_id',
-        'benefit',
+        'name',
         'sort_order',
     ];
 
-    public function membership(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function memberships(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(Membership::class);
+        return $this->belongsToMany(Membership::class);
     }
 }

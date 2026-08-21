@@ -83,17 +83,17 @@
                         @php
                             $allBenefits = collect();
                             foreach ($memberships as $membership) {
-                                $allBenefits = $allBenefits->merge($membership->benefits->pluck('benefit'));
+                                $allBenefits = $allBenefits->merge($membership->benefits);
                             }
-                            $allBenefits = $allBenefits->unique()->values();
+                            $allBenefits = $allBenefits->unique('id')->sortBy('sort_order')->values();
                         @endphp
 
                         @foreach($allBenefits as $benefit)
                         <tr>
-                            <td class="feature-label">{{ $benefit }}</td>
+                            <td class="feature-label">{{ $benefit->name }}</td>
                             @foreach($memberships as $membership)
                             <td class="feature-check-cell">
-                                @if($membership->benefits->contains('benefit', $benefit))
+                                @if($membership->benefits->contains('id', $benefit->id))
                                     <span class="check-icon-wrap" title="Incluido">
                                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                                     </span>
@@ -106,11 +106,12 @@
                         @endforeach
 
                         <!-- Row: Inversión Mensual (At the bottom) -->
+                        @if(setting('show_membership_prices', true))
                         <tr class="price-footer-row">
                             <td class="feature-label">Inversión Mensual</td>
                             @foreach($memberships as $membership)
                             <td class="price-footer-cell">
-                                @if(setting('show_membership_prices', true) && $membership->show_price && $membership->price)
+                                @if($membership->show_price && $membership->price)
                                     <span class="membership-price-footer">{{ $membership->price }}</span> <small>/ mes</small>
                                 @else
                                     <span class="dash-symbol">Consultar</span>
@@ -118,6 +119,7 @@
                             </td>
                             @endforeach
                         </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

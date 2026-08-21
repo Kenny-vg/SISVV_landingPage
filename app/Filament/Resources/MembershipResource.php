@@ -69,18 +69,14 @@ class MembershipResource extends Resource
                     ->default(true),
                 Forms\Components\Section::make('Beneficios')
                     ->schema([
-                        Forms\Components\Repeater::make('benefits')
-                            ->relationship('benefits')
-                            ->schema([
-                                Forms\Components\Textarea::make('benefit')
-                                    ->label('Beneficio')
-                                    ->required()
-                                    ->rows(2),
-                            ])
-                            ->orderable('sort_order')
-                            ->defaultItems(0)
-                            ->collapsible(),
-                    ]),
+                        Forms\Components\CheckboxList::make('benefits')
+                            ->relationship('benefits', 'name', fn ($query) => $query->orderBy('sort_order')->orderBy('name'))
+                            ->hiddenLabel()
+                            ->columns(2)
+                            ->bulkToggleable()
+                            ->helperText('Marca los beneficios incluidos en esta membresía. Para crear, editar o reordenar beneficios usa la sección "Beneficios" del menú Membresías.'),
+                    ])
+                    ->columnSpanFull(),
             ]);
     }
 
