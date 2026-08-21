@@ -23,7 +23,8 @@
                             <div class="hotspot" style="left: {{ $hotspot->left_percent }}%; top: {{ $hotspot->top_percent }}%;">
                                 <button type="button" class="hotspot-dot"
                                     data-label="{{ $hotspot->label }}"
-                                    @if($hotspot->image_path) data-img="{{ asset('storage/' . $hotspot->image_path) }}" @endif
+                                    @if($hotspot->panorama_path) data-pano="{{ asset('storage/' . $hotspot->panorama_path) }}"
+                                    @elseif($hotspot->image_path) data-img="{{ asset('storage/' . $hotspot->image_path) }}" @endif
                                     aria-label="Ver {{ $hotspot->label }}"></button>
                             </div>
                             @endforeach
@@ -59,6 +60,7 @@
                 </svg>
             </button>
             <img src="" alt="" class="hotspot-modal-img" id="hotspotModalImg" style="display: none;">
+            <div class="hotspot-modal-pano" id="hotspotModalPano" style="display: none;"></div>
             <span class="hotspot-modal-label" id="hotspotModalLabel"></span>
         </div>
     </div>
@@ -260,6 +262,22 @@
     height: auto;
     border-radius: 12px;
     margin: 0 auto 0.5rem;
+}
+
+.hotspot-modal-pano {
+    width: min(80vw, 960px);
+    max-width: 100%;
+    height: min(65vh, 540px);
+    border-radius: 12px;
+    margin: 0 auto 0.5rem;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .hotspot-modal-pano {
+        width: calc(90vw - 2rem);
+        height: min(55vh, 420px);
+    }
 }
 
 .hotspot-modal-label {
@@ -466,10 +484,48 @@ document.addEventListener('DOMContentLoaded', function () {
     const hotspotClose = document.getElementById('hotspotModalClose');
     const hotspotContent = document.querySelector('.hotspot-modal-content');
     const modalImg = document.getElementById('hotspotModalImg');
+    const modalPano = document.getElementById('hotspotModalPano');
     const modalLabel = document.getElementById('hotspotModalLabel');
 
     if (hotspotDots.length && hotspotModal && hotspotBackdrop && hotspotClose && modalLabel && modalImg) {
         let lastFocusedDot = null;
+        let pannellumViewer = null;
+
+        function destroyViewer() {
+            if (pannellumViewer) {
+                try { pannellumViewer.destroy(); } catch (err) {}
+                pannellumViewer = null;
+            }
+            if (modalPano) {
+                modalPano.style.display = 'none';
+                modalPano.innerHTML = '';
+            }
+        }
+
+        function showPanorama(src) {
+            if (!modalPano || typeof pannellum === 'undefined') return false;
+            destroyViewer();
+            modalImg.src = '';
+            modalImg.style.display = 'none';
+            modalPano.innerHTML = '';
+            modalPano.style.display = 'block';
+            try {
+                pannellumViewer = pannellum.viewer(modalPano, {
+                    type: 'equirectangular',
+                    panorama: src,
+                    autoLoad: true,
+                    compass: true,
+                    showZoomCtrl: false,
+                    keyboardZoom: true,
+                    mouseZoom: true,
+                    hotSpotDebug: false,
+                });
+                return true;
+            } catch (err) {
+                destroyViewer();
+                return false;
+            }
+        }
 
         hotspotDots.forEach(function (dot) {
             dot.addEventListener('click', function (e) {
@@ -477,12 +533,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 lastFocusedDot = dot;
                 modalLabel.textContent = dot.getAttribute('data-label');
 
+                const panoSrc = dot.getAttribute('data-pano');
                 const imgSrc = dot.getAttribute('data-img');
-                if (imgSrc) {
-                    modalImg.src = imgSrc;
-                    modalImg.style.display = 'block';
-                } else {
-                    modalImg.style.display = 'none';
+
+                let openedAsPano = false;
+                if (panoSrc) {
+                    openedAsPano = showPanorama(panoSrc);
+                }
+                if (!openedAsPano) {
+                    destroyViewer();
+                    if (imgSrc || panoSrc) {
+                        modalImg.src = imgSrc || panoSrc;
+                        modalImg.style.display = 'block';
+                    } else {
+                        modalImg.src = '';
+                        modalImg.style.display = 'none';
+                    }
                 }
 
                 hotspotModal.classList.add('is-open');
@@ -496,6 +562,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function closeModal() {
             hotspotModal.classList.remove('is-open');
+            destroyViewer();
+            modalImg.src = '';
             if (lastFocusedDot && lastFocusedDot.isConnected) {
                 lastFocusedDot.focus();
             }

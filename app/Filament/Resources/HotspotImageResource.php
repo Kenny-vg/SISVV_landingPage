@@ -29,7 +29,7 @@ class HotspotImageResource extends Resource
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
                         'title' => 'Esto edita el MAPA INTERACTIVO de la portada',
-                        'description' => 'Solo puedes cambiar la imagen de cada punto del mapa. La posición y la etiqueta están fijas para que los puntos no se muevan.',
+                        'description' => 'Solo puedes cambiar la imagen de cada punto del mapa. La posición y la etiqueta están fijas para que los puntos no se muevan. Cada punto admite una foto normal O una imagen 360°: si subes una, reemplaza a la otra automáticamente.',
                     ])
                     ->columnSpanFull(),
                 Forms\Components\Select::make('key')
@@ -85,6 +85,29 @@ class HotspotImageResource extends Resource
                     ->directory('hotspots')
                     ->maxSize(10240)
                     ->nullable()
+                    ->live()
+                    ->afterStateUpdated(function (Forms\Set $set, $state) {
+                        if (filled($state)) {
+                            $set('panorama_path', null);
+                        }
+                    })
+                    ->helperText('Si subes una imagen 360° en el campo de abajo, esta foto se reemplaza.')
+                    ->imagePreviewHeight('150')
+                    ->columnSpanFull(),
+
+                Forms\Components\FileUpload::make('panorama_path')
+                    ->label('Imagen 360° (panorámica)')
+                    ->image()
+                    ->directory('hotspots/panoramas')
+                    ->maxSize(20480)
+                    ->nullable()
+                    ->live()
+                    ->afterStateUpdated(function (Forms\Set $set, $state) {
+                        if (filled($state)) {
+                            $set('image_path', null);
+                        }
+                    })
+                    ->helperText('Debe ser una panorámica equirectangular (proporción 2:1, ej. 6000×3000). Al subirla reemplaza la foto normal y el punto abrirá con visor 360°.')
                     ->imagePreviewHeight('150')
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_published')
@@ -113,6 +136,20 @@ class HotspotImageResource extends Resource
                     ->disk('public')
                     ->circular()
                     ->size(50),
+
+                Tables\Columns\TextColumn::make('panorama_path')
+                    ->label('Tipo')
+                    ->badge()
+                    ->state(fn ($record) => match (true) {
+                        filled($record->panorama_path) => '360°',
+                        filled($record->image_path) => 'Foto',
+                        default => '—',
+                    })
+                    ->color(fn ($state) => match ($state) {
+                        '360°' => 'success',
+                        'Foto' => 'info',
+                        default => 'gray',
+                    }),
 
                 Tables\Columns\TextColumn::make('left_percent')
                     ->label('X %')

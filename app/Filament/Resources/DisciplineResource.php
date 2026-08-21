@@ -30,7 +30,7 @@ class DisciplineResource extends Resource
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
                         'title' => 'Esto edita la página CLASES',
-                        'description' => 'Las clases / disciplinas que aparecen en el carrusel de la portada y en la página "Clases": fotos, descripción y horario.',
+                        'description' => 'Las clases / disciplinas que aparecen en el carrusel de la portada y en la página "Clases": fotos, descripción y horario. En el campo Horario puedes separar diferentes horarios con comas: cada uno se mostrará en un renglón distinto.',
                     ])
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
@@ -40,8 +40,7 @@ class DisciplineResource extends Resource
                     ->maxLength(255)
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->hidden(),
+                Forms\Components\Hidden::make('slug'),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
                     ->helperText('Usada para agrupar las clases')
@@ -58,8 +57,15 @@ class DisciplineResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('schedule')
                     ->label('Horario')
-                    ->helperText('Ej: Mar - Dom: 7:00 am - 6:00 pm')
+                    ->helperText('Separa diferentes horarios con comas y cada uno se mostrará en un renglón. Ej: Mar - Vie: 7:00 am, Sáb: 9:00 am')
                     ->maxLength(255),
+                Forms\Components\TextInput::make('prioridad')
+                    ->label('Prioridad')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->default(0)
+                    ->helperText('Orden en el sitio: menor número aparece primero. Ej: prioridad 1 sale antes que 5.'),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')
                     ->default(true),
@@ -97,13 +103,15 @@ class DisciplineResource extends Resource
                     ->label('Categoría')
                     ->badge()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('prioridad')
+                    ->label('Prioridad')
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_published')
                     ->label('Publicado')
                     ->boolean()
                     ->sortable(),
             ])
-            ->defaultSort('sort_order')
-            ->reorderable('sort_order')
+            ->defaultSort('prioridad')
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_published')
                     ->label('Publicado'),
