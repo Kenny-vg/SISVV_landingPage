@@ -61,7 +61,7 @@
                             Horarios de Clases
                         </h4>
                         <p style="margin: 0; color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.5;">
-                            {{ $area->schedule }}
+                            <x-horario-lineas :schedule="$area->schedule" />
                         </p>
                     </div>
                 </div>

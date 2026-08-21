@@ -1,6 +1,6 @@
 @php
     if (!isset($disciplines)) {
-        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('sort_order')->get();
+        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->get();
     }
 @endphp
 <!-- resources/views/components/facilities-section.blade.php -->

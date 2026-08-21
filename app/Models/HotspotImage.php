@@ -13,6 +13,7 @@ class HotspotImage extends Model
         'key',
         'label',
         'image_path',
+        'panorama_path',
         'left_percent',
         'top_percent',
         'is_published',

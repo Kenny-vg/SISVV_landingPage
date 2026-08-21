@@ -1,6 +1,6 @@
 @php
     if (!isset($events)) {
-        $events = \App\Models\Event::where('is_published', true)->orderBy('created_at', 'desc')->take(6)->get();
+        $events = \App\Models\Event::where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->take(6)->get();
     }
 @endphp
 

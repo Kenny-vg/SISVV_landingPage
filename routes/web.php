@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $hero = Hero::where('is_active', true)->orderBy('sort_order')->first();
-    $disciplines = Discipline::with('images')->where('is_published', true)->orderBy('sort_order')->get();
+    $disciplines = Discipline::with('images')->where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->get();
     $facilities = Facility::with('images')->where('is_published', true)->orderBy('sort_order')->get();
     $pageSections = PageSection::where('is_active', true)->get()->keyBy('key');
-    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->take(6)->get();
+    $events = Event::where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->take(6)->get();
 
     return view('welcome', compact('hero', 'disciplines', 'facilities', 'pageSections', 'events'));
 });
 
 Route::get('/eventos', function () {
-    $events = Event::where('is_published', true)->orderBy('created_at', 'desc')->paginate(9);
+    $events = Event::where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->paginate(9);
     return view('eventos', compact('events'));
 })->name('eventos.index');
 
@@ -53,7 +53,7 @@ Route::get('/instalaciones/{slug}', function ($slug) {
 });
 
 Route::get('/clases', function () {
-    $disciplines = Discipline::with('images')->where('is_published', true)->orderBy('sort_order')->get();
+    $disciplines = Discipline::with('images')->where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->get();
     return view('clases', compact('disciplines'));
 });
 

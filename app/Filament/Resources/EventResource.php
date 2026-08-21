@@ -43,8 +43,7 @@ class EventResource extends Resource
                     ->maxLength(255)
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->hidden(),
+                Forms\Components\Hidden::make('slug'),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
                     ->helperText('Etiqueta que se muestra sobre la imagen del evento')
@@ -60,6 +59,13 @@ class EventResource extends Resource
                 Forms\Components\DatePicker::make('date')
                     ->label('Fecha del evento')
                     ->helperText('Fecha que se muestra en el sello del evento (opcional)'),
+                Forms\Components\TextInput::make('prioridad')
+                    ->label('Prioridad')
+                    ->numeric()
+                    ->step(0.01)
+                    ->minValue(0)
+                    ->default(0)
+                    ->helperText('Orden en el sitio: menor número aparece primero. Ej: prioridad 1 sale antes que 5.'),
                 Forms\Components\Textarea::make('description')
                     ->label('Descripción')
                     ->helperText('Texto que aparece en la página de detalle del evento')
@@ -101,6 +107,9 @@ class EventResource extends Resource
                     ->date('d/m/Y')
                     ->placeholder('—')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('prioridad')
+                    ->label('Prioridad')
+                    ->sortable(),
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Imagen')
                     ->square(),
@@ -114,7 +123,7 @@ class EventResource extends Resource
                     ->boolean()
                     ->sortable(),
             ])
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('prioridad')
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_published')
                     ->label('Publicado'),

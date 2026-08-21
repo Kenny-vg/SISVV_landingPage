@@ -25,7 +25,7 @@
                 </div>
                 <div class="bento-card-content" style="display: flex; flex-direction: column; flex-grow: 1;">
                     @if($cat->schedule)
-                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;">{{ $cat->schedule }}</span>
+                    <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: 0.5rem; display: block;"><x-horario-lineas :schedule="$cat->schedule" /></span>
                     @endif
                     <h3 style="font-family: var(--font-editorial); font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--color-text-primary);">{{ $cat->name }}</h3>
                     <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">{{ strip_tags($cat->description) }}</p>

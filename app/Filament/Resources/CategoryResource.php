@@ -37,8 +37,7 @@ class CategoryResource extends Resource
                     ->maxLength(255)
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->hidden(),
+                Forms\Components\Hidden::make('slug'),
                 Forms\Components\Textarea::make('description')
                     ->label('Descripción')
                     ->rows(4)
