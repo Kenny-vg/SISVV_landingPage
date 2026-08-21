@@ -18,7 +18,7 @@ return new class extends Migration
 
         DB::statement('
             INSERT INTO benefits (name, sort_order, created_at, updated_at)
-            SELECT benefit, MIN(sort_order), NOW(), NOW()
+            SELECT benefit, MIN(sort_order), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
             FROM membership_benefits
             GROUP BY benefit
         ');
@@ -51,7 +51,7 @@ return new class extends Migration
 
         DB::statement('
             INSERT INTO membership_benefits (membership_id, benefit, sort_order, created_at, updated_at)
-            SELECT bm.membership_id, b.name, b.sort_order, NOW(), NOW()
+            SELECT bm.membership_id, b.name, b.sort_order, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
             FROM benefit_membership bm
             JOIN benefits b ON b.id = bm.benefit_id
         ');
