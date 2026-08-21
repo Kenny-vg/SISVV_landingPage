@@ -29,37 +29,40 @@ class HotspotImageResource extends Resource
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
                         'title' => 'Esto edita el MAPA INTERACTIVO de la portada',
-                        'description' => 'Solo puedes cambiar la imagen de cada punto del mapa. La posición y la etiqueta están fijas para que los puntos no se muevan. Cada punto admite una foto normal O una imagen 360°: si subes una, reemplaza a la otra automáticamente.',
+'description' => 'Puedes cambiar la etiqueta, la posición (X/Y), la imagen y la publicación de cada punto. La clave identifica al punto y no se puede modificar después de crearlo. Cada punto admite una foto normal O una imagen 360°: si subes una, reemplaza a la otra automáticamente.',
                     ])
                     ->columnSpanFull(),
-                Forms\Components\Select::make('key')
+                Forms\Components\TextInput::make('key')
                     ->label('Punto (clave)')
-                    ->options([
-                        'AREA DE JUEGOS' => 'ÁREA DE JUEGOS',
-                        'CANCHA DE FUTBOL' => 'CANCHA DE FÚTBOL',
-                        'CADDIE HOUSE' => 'CADDIE HOUSE',
-                        'CANCHAS DE TENIS' => 'CANCHAS DE TENIS',
-                        'CANCHA DE PADEL 1' => 'CANCHA DE PADEL (1)',
-                        'CANCHA DE PADEL 2' => 'CANCHAS DE PADEL (2)',
-                        'RESTAURANTE' => 'RESTAURANTE',
-                        'GIMNASIO' => 'GIMNASIO',
-                        'PISCINA' => 'PISCINA',
-                        'SALÓN' => 'SALÓN',
-                        'CAFETERÍA' => 'CAFETERÍA',
-                        'BUGA BAR' => 'BUGA BAR',
-                        'LOCKERS CABALLEROS' => 'LOCKERS CABALLEROS',
-                        'LOCKERS DAMAS' => 'LOCKERS DAMAS',
+                    ->datalist([
+                        'AREA DE JUEGOS',
+                        'CANCHA DE FUTBOL',
+                        'CADDIE HOUSE',
+                        'CANCHAS DE TENIS',
+                        'CANCHA DE PADEL 1',
+                        'CANCHA DE PADEL 2',
+                        'RESTAURANTE',
+                        'GIMNASIO',
+                        'PISCINA',
+                        'SALÓN',
+                        'CAFETERÍA',
+                        'BUGA BAR',
+                        'LOCKERS CABALLEROS',
+                        'LOCKERS DAMAS',
                     ])
                     ->required()
+                    ->maxLength(100)
                     ->disabled(fn ($operation) => $operation === 'edit')
                     ->unique(ignoreRecord: true)
-                    ->native(false),
+                    ->validationMessages([
+                        'unique' => 'Ya existe un punto con esa clave. Para agregar un punto nuevo escribe una clave diferente.',
+                    ])
+                    ->helperText('Las claves predefinidas ya están en uso; escríbelas solo como referencia. Para un punto nuevo usa una clave distinta (p. ej. "ALBERCA 2").'),
 
                 Forms\Components\TextInput::make('label')
                     ->label('Etiqueta visible')
                     ->maxLength(100)
-                    ->required()
-                    ->disabled(),
+                    ->required(),
 
                 Forms\Components\TextInput::make('left_percent')
                     ->label('Posición X (%)')
@@ -67,7 +70,6 @@ class HotspotImageResource extends Resource
                     ->step(0.01)
                     ->minValue(0)
                     ->maxValue(100)
-                    ->disabled()
                     ->required(),
 
                 Forms\Components\TextInput::make('top_percent')
@@ -76,7 +78,6 @@ class HotspotImageResource extends Resource
                     ->step(0.01)
                     ->minValue(0)
                     ->maxValue(100)
-                    ->disabled()
                     ->required(),
 
                 Forms\Components\FileUpload::make('image_path')
@@ -177,6 +178,7 @@ class HotspotImageResource extends Resource
     {
         return [
             'index' => Pages\ListHotspotImages::route('/'),
+            'create' => Pages\CreateHotspotImage::route('/create'),
             'edit' => Pages\EditHotspotImage::route('/{record}/edit'),
         ];
     }
