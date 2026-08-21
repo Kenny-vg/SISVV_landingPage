@@ -30,7 +30,7 @@ class FacilityResource extends Resource
                 Forms\Components\View::make('filament.components.section-guide')
                     ->viewData([
                         'title' => 'Esto edita la página INSTALACIONES',
-                        'description' => 'Los espacios del club que aparecen en el carrusel de la portada y en la página "Instalaciones": fotos, descripción, horario y tour 360°.',
+                        'description' => 'Los espacios del club que aparecen en el carrusel de la portada y en la página "Instalaciones": fotos, descripción, horario y tour 360°. En el campo Horario puedes separar diferentes horarios con comas: cada uno se mostrará en un renglón distinto.',
                     ])
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
@@ -40,8 +40,7 @@ class FacilityResource extends Resource
                     ->maxLength(255)
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Str::slug($state))),
-                Forms\Components\TextInput::make('slug')
-                    ->hidden(),
+                Forms\Components\Hidden::make('slug'),
                 Forms\Components\Select::make('category')
                     ->label('Categoría')
                     ->helperText('Usada para agrupar las instalaciones')
@@ -58,7 +57,7 @@ class FacilityResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('schedule')
                     ->label('Horario')
-                    ->helperText('Ej: Lun - Sáb: 6:00 am - 10:00 pm')
+                    ->helperText('Separa diferentes horarios con comas y cada uno se mostrará en un renglón. Ej: Lun - Vie: 6:00 am, Sáb - Dom: 7:00 am')
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\AutoSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    use AutoSlug;
     use HasFactory;
 
     protected $fillable = [
@@ -14,6 +16,7 @@ class Event extends Model
         'slug',
         'category',
         'date',
+        'prioridad',
         'description',
         'image',
         'pdf_path',
@@ -23,14 +26,6 @@ class Event extends Model
     protected $casts = [
         'is_published' => 'boolean',
         'date' => 'date',
+        'prioridad' => 'decimal:2',
     ];
-
-    protected static function booted(): void
-    {
-        static::creating(function (Event $event) {
-            if (!$event->slug) {
-                $event->slug = \Str::slug($event->title);
-            }
-        });
-    }
 }

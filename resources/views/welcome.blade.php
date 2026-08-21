@@ -6,7 +6,7 @@
         $pageSections = \App\Models\PageSection::where('is_active', true)->get()->keyBy('key');
     }
     if (!isset($disciplines)) {
-        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('sort_order')->get();
+        $disciplines = \App\Models\Discipline::where('is_published', true)->orderBy('prioridad')->orderBy('created_at', 'desc')->get();
     }
     if (!isset($facilities)) {
         $facilities = \App\Models\Facility::where('is_published', true)->orderBy('sort_order')->get();

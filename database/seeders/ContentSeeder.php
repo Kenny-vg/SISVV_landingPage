@@ -121,7 +121,7 @@ class ContentSeeder extends Seeder
                 'category' => 'Deportivo',
                 'description' => 'Clases grupales e individuales con instructores certificados. Técnica de swing, juego corto y estrategia de campo para todos los niveles, desde principiantes hasta avanzados.',
                 'schedule' => 'Mar - Dom: 7:00 am - 6:00 pm',
-                'sort_order' => 1,
+                'prioridad' => 1,
                 'is_published' => true,
             ],
             [
@@ -130,7 +130,7 @@ class ContentSeeder extends Seeder
                 'category' => 'Bienestar',
                 'description' => 'Sesiones al aire libre al amanecer y atardecer en la pradera del club. Yoga vinyasa, pilates mat y meditación guiada para conectar cuerpo, mente y naturaleza.',
                 'schedule' => 'Mar - Sáb: 7:00 am y 5:00 pm',
-                'sort_order' => 2,
+                'prioridad' => 2,
                 'is_published' => true,
             ],
             [
@@ -139,7 +139,7 @@ class ContentSeeder extends Seeder
                 'category' => 'Fitness',
                 'description' => 'Clases para todas las edades y niveles, desde iniciación hasta entrenamiento avanzado. Técnica de estilos, resistencia acuática y aquafitness.',
                 'schedule' => 'Mar - Sáb: 8:00 am - 7:00 pm',
-                'sort_order' => 3,
+                'prioridad' => 3,
                 'is_published' => true,
             ],
             [
@@ -148,7 +148,7 @@ class ContentSeeder extends Seeder
                 'category' => 'Deportivo',
                 'description' => 'Canchas de arcilla profesional con iluminación nocturna. Clases particulares y en grupo, clinics de fin de semana y torneos internos para socios.',
                 'schedule' => 'Lun - Dom: 7:00 am - 9:00 pm',
-                'sort_order' => 4,
+                'prioridad' => 4,
                 'is_published' => true,
             ],
             [
@@ -157,7 +157,7 @@ class ContentSeeder extends Seeder
                 'category' => 'Fitness',
                 'description' => 'Circuitos de alta intensidad al aire libre en la pradera del club. Entrenamiento en grupo con peso corporal, kettlebells, TRX y cardio dinámico.',
                 'schedule' => 'Lun - Sáb: 6:30 am, 8:00 am y 6:00 pm',
-                'sort_order' => 5,
+                'prioridad' => 5,
                 'is_published' => true,
             ],
         ];
