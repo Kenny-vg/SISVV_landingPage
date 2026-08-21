@@ -234,14 +234,15 @@ class ContentSeeder extends Seeder
                 $data
             );
 
-            $membership->benefits()->delete();
-
+            $beneficioIds = [];
             foreach ($beneficios as $i => $beneficio) {
-                $membership->benefits()->create([
-                    'benefit' => $beneficio,
-                    'sort_order' => $i + 1,
-                ]);
+                $beneficioIds[] = \App\Models\Benefit::updateOrCreate(
+                    ['name' => $beneficio],
+                    ['sort_order' => $i + 1]
+                )->id;
             }
+
+            $membership->benefits()->sync($beneficioIds);
         }
     }
 }
