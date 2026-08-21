@@ -24,7 +24,7 @@
                                 <button type="button" class="hotspot-dot"
                                     data-label="{{ $hotspot->label }}"
                                     @if($hotspot->panorama_path) data-pano="{{ asset('storage/' . $hotspot->panorama_path) }}"
-                                    @elseif($hotspot->image_path) data-img="{{ asset('storage/' . $hotspot->image_path) }}" @endif
+                                    @elseif($hotspot->image_path) data-img="{{ url('/img/' . $hotspot->image_path . '?w=1200&f=auto') }}" @endif
                                     aria-label="Ver {{ $hotspot->label }}"></button>
                             </div>
                             @endforeach
