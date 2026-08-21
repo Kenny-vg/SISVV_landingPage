@@ -73,7 +73,7 @@
                     <div class="carousel-track" data-track>
                         @forelse($area->images as $img)
                             <div class="carousel-slide">
-                                <img src="{{ asset('storage/' . $img->image_path) }}" alt="{{ $area->title }}">
+                                <x-responsive-image :path="$img->image_path" :alt="$area->title" :eager="$loop->first"/>
                             </div>
                         @empty
                             <div class="carousel-slide">

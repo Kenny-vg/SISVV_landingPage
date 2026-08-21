@@ -12,12 +12,12 @@
             <div class="mapa-wrapper" id="mapaWrapper">
                 <div class="mapa-viewport" id="mapaViewport">
                     <div class="mapa-zoom-container" id="mapaZoomContainer">
-                        <img src="{{ asset('images/mapa-completo.jpg') }}" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg">
+                        <img src="{{ url('/img/images/mapa-completo.jpg?w=1600&f=auto') }}" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mapa-detalle-overlay" id="mapaDetalleOverlay">
                         <div class="mapa-detalle-wrapper">
-                            <img src="{{ asset('images/mapa-club.jpg') }}" alt="Detalle del club" class="mapa-img-detalle" id="mapaDetalleImg">
+                            <img src="{{ url('/img/images/mapa-club.jpg?w=1200&f=auto') }}" alt="Detalle del club" class="mapa-img-detalle" id="mapaDetalleImg" loading="lazy" decoding="async">
 
                             @foreach($hotspotImages as $hotspot)
                             <div class="hotspot" style="left: {{ $hotspot->left_percent }}%; top: {{ $hotspot->top_percent }}%;">
