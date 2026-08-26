@@ -10,13 +10,15 @@
 
     $valoresItems = [];
     if ($values && $values->content) {
-        $parts = explode(',', $values->content);
-        if (count($parts) >= 2) {
-            foreach ($parts as $part) {
-                $trimmed = trim($part);
-                if ($trimmed) {
-                    $valoresItems[] = ucfirst($trimmed);
-                }
+        $withBreaks = preg_replace(['/<br\s*\/?>/i', '/<\/(p|div|li|h[1-6])>/i'], "\n", $values->content);
+        $plain = trim(strip_tags($withBreaks));
+        if ($plain !== '') {
+            $items = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $plain)), fn ($line) => $line !== ''));
+            if (count($items) === 1 && str_contains($items[0], ',')) {
+                $items = array_values(array_filter(array_map('trim', explode(',', $items[0])), fn ($part) => $part !== ''));
+            }
+            foreach ($items as $item) {
+                $valoresItems[] = ucfirst($item);
             }
         }
     }
@@ -107,7 +109,7 @@
             </div>
             @else
             <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; max-width: 700px; margin: 0 auto;">
-                {!! $values->content !!}
+                {!! nl2br(e(trim(strip_tags($values->content)))) !!}
             </p>
             @endif
         </div>

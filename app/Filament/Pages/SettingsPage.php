@@ -65,9 +65,12 @@ class SettingsPage extends Page
                                 TextInput::make('contact_label')
                                     ->label('Etiqueta superior')
                                     ->helperText('Texto pequeño sobre la sección'),
-                                RichEditor::make('contact_heading')
+                                TextInput::make('contact_heading')
                                     ->label('Encabezado')
-                                    ->toolbarButtons(['bold', 'italic']),
+                                    ->helperText('Primera línea del título grande. Si dejas vacío el campo siguiente, se muestra en una sola línea.'),
+                                TextInput::make('contact_heading_accent')
+                                    ->label('Texto destacado del encabezado (opcional)')
+                                    ->helperText('Se muestra en cursiva dorada debajo del encabezado. Déjalo vacío para un título simple.'),
                                 Textarea::make('contact_subtext')
                                     ->label('Subtítulo')
                                     ->helperText('Texto descriptivo'),
@@ -251,7 +254,7 @@ class SettingsPage extends Page
         $data = $this->form->getState();
 
         $richtextKeys = [
-            'contact_heading', 'contact_schedule',
+            'contact_schedule',
         ];
 
         $urlKeys = [

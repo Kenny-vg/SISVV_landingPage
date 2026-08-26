@@ -37,19 +37,6 @@ Route::get('/eventos/{slug}', function ($slug) {
 Route::redirect('dashboard', '/admin')->name('dashboard');
 Route::redirect('profile', '/admin')->name('profile');
 
-// Cierre de sesión del panel: enlace simple que desloguea y regresa al login
-Route::get('/admin/salir', function (\Illuminate\Http\Request $request) {
-    if (! \Illuminate\Support\Facades\Auth::check()) {
-        return redirect()->route('filament.admin.auth.login');
-    }
-
-    \Illuminate\Support\Facades\Auth::guard('web')->logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect()->route('filament.admin.auth.login');
-})->middleware(['web'])->name('admin.salir');
-
 Route::get('/lector', function () {
     $categories = Category::where('is_visible', true)->get();
     return view('lector.index', compact('categories'));

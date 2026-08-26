@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Pages\Concerns\InteractsWithSettings;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\View;
@@ -43,9 +42,12 @@ class InstalacionesSettingsPage extends Page
                         'description' => 'Las tarjetas de cada espacio (fotos, horarios y tour 360°) se administran en "Instalaciones → Instalaciones".',
                     ])
                     ->columnSpanFull(),
-                RichEditor::make('instalaciones_heading')
+                TextInput::make('instalaciones_heading')
                     ->label('Encabezado')
-                    ->toolbarButtons(['bold', 'italic']),
+                    ->helperText('Primera línea del título grande. Si dejas vacío el campo siguiente, se muestra en una sola línea.'),
+                TextInput::make('instalaciones_heading_accent')
+                    ->label('Texto destacado del encabezado (opcional)')
+                    ->helperText('Se muestra en cursiva dorada debajo del encabezado. Déjalo vacío para un título simple.'),
                 Textarea::make('instalaciones_subtext')
                     ->label('Subtítulo')
                     ->helperText('Texto descriptivo debajo del título'),
@@ -57,10 +59,5 @@ class InstalacionesSettingsPage extends Page
                     ->helperText('Ej: "Conocer más"'),
             ])
             ->statePath('data');
-    }
-
-    protected function getRichTextKeys(): array
-    {
-        return ['instalaciones_heading'];
     }
 }

@@ -4,16 +4,15 @@
     }
     $section = $pageSections['about_intro'] ?? null;
     $aboutTitle = $section?->title ?? 'Quiénes somos';
-    $aboutHeading = $section?->heading ?? 'Un refugio privado<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">donde el deporte y la naturaleza convergen.</span>';
+    $aboutHeading = $section?->heading ?? 'Un refugio privado';
+    $aboutHeadingAccent = $section?->heading_accent ?? 'donde el deporte y la naturaleza convergen.';
     $aboutBody = $section?->content ?? 'Vista Verde Country Club nació como un sueño: crear un espacio donde la excelencia deportiva, el bienestar y la naturaleza se fundieran en perfecta armonía.';
 @endphp
 <section class="premium-section bg-obsidian fade-in-section" id="nosotros">
     <div class="about-home-grid">
         <div>
             <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">{{ $aboutTitle }}</span>
-            <h2 style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;">
-                {!! $aboutHeading !!}
-            </h2>
+            <x-section-heading style="font-family: var(--font-editorial); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); line-height: 1.1; margin: 0 0 1.5rem 0;" :text="$aboutHeading" :accent="$aboutHeadingAccent" />
             <p style="color: var(--color-about-text); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
                 {!! $aboutBody !!}
             </p>
