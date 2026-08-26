@@ -109,6 +109,53 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
+    // 5a-bis. Protección de créditos (MutationObserver)
+    function buildCreditsHTML() {
+        const div = document.createElement('div');
+        div.className = 'footer-dev';
+        div.innerHTML = `
+            <div class="footer-dev-divider"></div>
+            <p class="footer-dev-label">Desarrollado por</p>
+            <div class="footer-dev-names">
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Kendra Aiman</span>
+                    <span class="footer-dev-last">de la Vega Anaya</span>
+                </div>
+                <span class="footer-dev-ampersand">&amp;</span>
+                <div class="footer-dev-name">
+                    <span class="footer-dev-first">Cristhian Emanuel</span>
+                    <span class="footer-dev-last">Meza Acevedo</span>
+                </div>
+            </div>
+        `;
+        return div;
+    }
+
+    function injectCredits() {
+        if (!document.querySelector('.footer-dev')) {
+            const footer = document.querySelector('.premium-footer');
+            if (footer) {
+                footer.appendChild(buildCreditsHTML());
+            }
+        }
+    }
+
+    injectCredits();
+
+    const creditObserver = new MutationObserver(() => {
+        const el = document.querySelector('.footer-dev');
+        if (!el || el.innerHTML.indexOf('Kendra Aiman') === -1 || el.innerHTML.indexOf('Cristhian Emanuel') === -1) {
+            const existing = document.querySelector('.footer-dev');
+            if (existing) existing.remove();
+            injectCredits();
+        }
+    });
+
+    const footerEl = document.querySelector('.premium-footer');
+    if (footerEl) {
+        creditObserver.observe(footerEl, { childList: true, subtree: true, characterData: true });
+    }
+
     // 5a. Panel de accesibilidad
     const a11y = {
         html: document.documentElement,
