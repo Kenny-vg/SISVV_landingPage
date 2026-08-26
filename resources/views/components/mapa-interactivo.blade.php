@@ -12,7 +12,7 @@
             <div class="mapa-wrapper" id="mapaWrapper">
                 <div class="mapa-viewport" id="mapaViewport">
                     <div class="mapa-zoom-container" id="mapaZoomContainer">
-                        <img src="{{ url('/img/images/mapa-completo.jpg?w=1600&f=auto') }}" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg" loading="lazy" decoding="async">
+                        <img src="{{ url('/img/images/mapa-completo.jpg?w=1600&f=auto&v=' . filemtime(public_path('images/mapa-completo.jpg'))) }}" alt="Vista general del club" class="mapa-img" id="mapaCompletoImg" loading="lazy" decoding="async">
                     </div>
 
                     <div class="mapa-detalle-overlay" id="mapaDetalleOverlay">
@@ -92,7 +92,7 @@
 .mapa-zoom-container {
     width: 100%;
     position: relative;
-    transform-origin: 40% 53.47%;
+    transform-origin: 69.29% 48.54%;
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
 }
@@ -106,7 +106,6 @@
     height: auto;
     display: block;
     opacity: 0;
-    transform: scaleY(-1);
 }
 
 .mapa-img.is-visible {
@@ -114,8 +113,8 @@
 }
 
 @keyframes mapa-fade-in {
-    from { opacity: 0; transform: translateY(24px) scaleY(-1); }
-    to { opacity: 1; transform: translateY(0) scaleY(-1); }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .mapa-detalle-overlay {
@@ -302,8 +301,8 @@
 /* ─── Pin de mapa ──────────────────────────────────── */
 .mapa-pin {
     position: absolute;
-    left: 38%;
-    top: 53.47%;
+    left: 69.29%;
+    top: 48.54%;
     transform: translate(-50%, -100%);
     background: none;
     border: none;
