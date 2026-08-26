@@ -139,15 +139,14 @@ class UserResource extends Resource
 
     public static function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['password'] = bcrypt($data['password']);
-
+        // El modelo User (Authenticatable) hashea automáticamente via setPasswordAttribute
         return $data;
     }
 
     public static function mutateFormDataBeforeSave(array $data): array
     {
         if (isset($data['password']) && filled($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
+            // El modelo User (Authenticatable) hashea automáticamente via setPasswordAttribute
         } else {
             unset($data['password']);
         }
