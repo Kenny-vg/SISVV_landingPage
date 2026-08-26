@@ -9,7 +9,7 @@
     <!-- Encabezado con botones de navegación del carrusel -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem;">
         <div class="section-header-editorial" style="margin-bottom: 0; max-width: 700px;">
-            <h2>{!! setting('facilities_heading', 'Clases &<br><span>Disciplinas.</span>') !!}</h2>
+            <x-section-heading :text="setting('facilities_heading', 'Clases &')" :accent="setting('facilities_heading_accent', 'Disciplinas.')" />
             <p>
                 {{ setting('facilities_subtext', 'Instructores certificados, metodología de élite y espacios de primer nivel para elevar tu rendimiento y bienestar en cada sesión.') }}
             </p>

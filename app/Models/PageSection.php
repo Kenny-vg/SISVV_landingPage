@@ -13,6 +13,7 @@ class PageSection extends Model
         'key',
         'title',
         'heading',
+        'heading_accent',
         'content',
         'image',
         'image_float',
@@ -30,7 +31,8 @@ class PageSection extends Model
     {
         static::saving(function (self $model) {
             $model->content = sanitize_html($model->content);
-            $model->heading = sanitize_html($model->heading);
+            $model->heading = trim(strip_tags((string) $model->heading));
+            $model->heading_accent = trim(strip_tags((string) $model->heading_accent));
         });
     }
 }

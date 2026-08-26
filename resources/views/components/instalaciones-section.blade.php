@@ -9,7 +9,7 @@
     <!-- Encabezado -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 2rem;">
         <div class="section-header-editorial" style="margin-bottom: 0; max-width: 700px;">
-            <h2>{!! setting('instalaciones_heading', 'Espacios del<br><span>Club.</span>') !!}</h2>
+            <x-section-heading :text="setting('instalaciones_heading', 'Espacios del')" :accent="setting('instalaciones_heading_accent', 'Club.')" />
             <p>
                 {{ setting('instalaciones_subtext', 'Cada rincón de Vista Verde ha sido diseñado para ofrecerte una experiencia de exclusividad y confort sin igual, desde la Casa Club hasta nuestro Spa de bienestar.') }}
             </p>

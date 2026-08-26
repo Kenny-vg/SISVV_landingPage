@@ -45,11 +45,10 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
             ])
             ->userMenuItems([
-                // Enlace simple de salida: desloguea y redirige directo al login
+                // Etiqueta personalizada; la URL cae al logout nativo del panel (POST /admin/logout)
                 'logout' => MenuItem::make()
                     ->label('Salir')
-                    ->icon('heroicon-o-arrow-right-start-on-rectangle')
-                    ->url(fn (): string => route('admin.salir')),
+                    ->icon('heroicon-o-arrow-right-start-on-rectangle'),
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -95,7 +95,7 @@
                 <div>
                     <div class="section-header-editorial" style="margin-bottom: 3rem;">
                         <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">{{ setting('contact_label', 'Visítenos') }}</span>
-                        <h2 style="color: var(--color-text-primary);">{!! setting('contact_heading', 'Ubicación<br><span>y acceso.</span>') !!}</h2>
+                        <x-section-heading style="color: var(--color-text-primary);" :text="setting('contact_heading', 'Ubicación')" :accent="setting('contact_heading_accent', 'y acceso.')" />
                         <p style="margin-top: 1.5rem; line-height: 1.7; font-size: 0.95rem;">
                             {{ setting('contact_subtext', 'Vista Verde Country Club se encuentra ubicado en una zona privilegiada y de fácil acceso en Tehuacán, ofreciendo un entorno natural exclusivo de total privacidad para sus socios.') }}
                         </p>

@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Pages\Concerns\InteractsWithSettings;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\View;
@@ -43,9 +42,12 @@ class ClasesSettingsPage extends Page
                         'description' => 'Las tarjetas de cada clase se administran en "Clases → Clases / Disciplinas".',
                     ])
                     ->columnSpanFull(),
-                RichEditor::make('facilities_heading')
+                TextInput::make('facilities_heading')
                     ->label('Encabezado')
-                    ->toolbarButtons(['bold', 'italic']),
+                    ->helperText('Primera línea del título grande. Si dejas vacío el campo siguiente, se muestra en una sola línea.'),
+                TextInput::make('facilities_heading_accent')
+                    ->label('Texto destacado del encabezado (opcional)')
+                    ->helperText('Se muestra en cursiva dorada debajo del encabezado. Déjalo vacío para un título simple.'),
                 Textarea::make('facilities_subtext')
                     ->label('Subtítulo')
                     ->helperText('Texto descriptivo debajo del título'),
@@ -57,10 +59,5 @@ class ClasesSettingsPage extends Page
                     ->helperText('Botón que lleva a la página de clases'),
             ])
             ->statePath('data');
-    }
-
-    protected function getRichTextKeys(): array
-    {
-        return ['facilities_heading'];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Pages\Concerns\InteractsWithSettings;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\View;
@@ -46,9 +45,12 @@ class EventosSettingsPage extends Page
                 TextInput::make('events_label')
                     ->label('Etiqueta superior')
                     ->helperText('Texto pequeño sobre el encabezado'),
-                RichEditor::make('events_heading')
+                TextInput::make('events_heading')
                     ->label('Encabezado')
-                    ->toolbarButtons(['bold', 'italic']),
+                    ->helperText('Primera línea del título grande. Si dejas vacío el campo siguiente, se muestra en una sola línea.'),
+                TextInput::make('events_heading_accent')
+                    ->label('Texto destacado del encabezado (opcional)')
+                    ->helperText('Se muestra en cursiva dorada debajo del encabezado. Déjalo vacío para un título simple.'),
                 Textarea::make('events_subtext')
                     ->label('Subtítulo')
                     ->helperText('Texto descriptivo'),
@@ -60,10 +62,5 @@ class EventosSettingsPage extends Page
                     ->helperText('Botón que lleva a la página de eventos'),
             ])
             ->statePath('data');
-    }
-
-    protected function getRichTextKeys(): array
-    {
-        return ['events_heading'];
     }
 }

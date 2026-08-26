@@ -44,10 +44,14 @@ class PageSectionResource extends Resource
                         'about_philosophy' => 'Nosotros - Filosofía',
                     ])
                     ->helperText('Selecciona la sección de la página que este contenido representa.'),
-                Forms\Components\RichEditor::make('heading')
+                Forms\Components\TextInput::make('heading')
                     ->label('Encabezado de la portada')
-                    ->toolbarButtons(['italic', 'bold'])
-                    ->helperText('Título grande de la sección "Nosotros" que se muestra en la portada.')
+                    ->helperText('Primera línea del título grande que se muestra en la portada.')
+                    ->visible(fn (Forms\Get $get): bool => $get('key') === 'about_intro')
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('heading_accent')
+                    ->label('Texto destacado del encabezado (opcional)')
+                    ->helperText('Se muestra en cursiva dorada debajo del encabezado. Déjalo vacío para un título simple.')
                     ->visible(fn (Forms\Get $get): bool => $get('key') === 'about_intro')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
@@ -55,6 +59,13 @@ class PageSectionResource extends Resource
                     ->maxLength(255),
                 Forms\Components\RichEditor::make('content')
                     ->label('Contenido')
+                    ->visible(fn (Forms\Get $get): bool => $get('key') !== 'about_values')
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('content')
+                    ->label('Valores')
+                    ->helperText('Escribe un valor por línea. Cada línea se muestra como una etiqueta independiente en la página "Nosotros".')
+                    ->rows(6)
+                    ->visible(fn (Forms\Get $get): bool => $get('key') === 'about_values')
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
                     ->label('Imagen principal')
@@ -62,14 +73,8 @@ class PageSectionResource extends Resource
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                     ->maxSize(10240)
                     ->directory('sections')
-                    ->disk('public'),
-                Forms\Components\FileUpload::make('image_float')
-                    ->label('Imagen secundaria (circular)')
-                    ->image()
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
-                    ->maxSize(10240)
-                    ->directory('sections')
-                    ->disk('public'),
+                    ->disk('public')
+                    ->visible(fn (Forms\Get $get): bool => $get('key') !== 'about_values'),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Activo'),
             ]);
@@ -109,7 +114,8 @@ class PageSectionResource extends Resource
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['content'] = sanitize_html($data['content'] ?? null);
-        $data['heading'] = sanitize_html($data['heading'] ?? null);
+        $data['heading'] = isset($data['heading']) ? trim(strip_tags((string) $data['heading'])) : null;
+        $data['heading_accent'] = isset($data['heading_accent']) ? trim(strip_tags((string) $data['heading_accent'])) : null;
 
         return $data;
     }
@@ -117,7 +123,8 @@ class PageSectionResource extends Resource
     public static function mutateFormDataBeforeSave(array $data): array
     {
         $data['content'] = sanitize_html($data['content'] ?? null);
-        $data['heading'] = sanitize_html($data['heading'] ?? null);
+        $data['heading'] = isset($data['heading']) ? trim(strip_tags((string) $data['heading'])) : null;
+        $data['heading_accent'] = isset($data['heading_accent']) ? trim(strip_tags((string) $data['heading_accent'])) : null;
 
         return $data;
     }
