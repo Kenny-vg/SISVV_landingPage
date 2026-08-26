@@ -38,9 +38,13 @@
     <div class="about-hero" style="background-image: url('{{ $aboutImage }}');">
         <div class="about-hero-overlay"></div>
         <div class="about-hero-content">
-            <span class="about-hero-tag">Vista Verde Club</span>
-            <h1>Sobre<br><span>Nosotros.</span></h1>
-            <p>Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.</p>
+            <span class="about-hero-tag">{{ setting('nosotros_hero_tag', 'Vista Verde Club') }}</span>
+            @php
+                $heroTitle = setting('nosotros_hero_title', 'Sobre Nosotros.');
+                $heroParts = explode(';', $heroTitle, 2);
+            @endphp
+            <h1>{{ trim($heroParts[0]) }}<br>@if(isset($heroParts[1]))<span>{{ trim($heroParts[1]) }}</span>@endif</h1>
+            <p>{{ setting('nosotros_hero_subtitle', 'Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.') }}</p>
         </div>
     </div>
 
@@ -126,7 +130,7 @@
                 $pT = explode(' ', $philosophy->title, 2);
             @endphp
             <h2 class="about-banner-title">{{ $pT[0] }}<br><span>{{ $pT[1] ?? $philosophy->title }}.</span></h2>
-            <p class="about-banner-desc">{!! $philosophy->content !!}</p>
+            <div class="about-banner-desc">{!! $philosophy->content !!}</div>
         </div>
     </section>
     @endif
