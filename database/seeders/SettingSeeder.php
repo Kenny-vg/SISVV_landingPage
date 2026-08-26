@@ -58,6 +58,9 @@ class SettingSeeder extends Seeder
 
             // Textos de página - Botones y enlaces
             ['key' => 'about_btn_text', 'value' => 'Conócenos más →', 'group' => 'general'],
+            ['key' => 'nosotros_hero_tag', 'value' => 'Vista Verde Club', 'group' => 'general'],
+            ['key' => 'nosotros_hero_title', 'value' => 'Sobre Nosotros.', 'group' => 'general'],
+            ['key' => 'nosotros_hero_subtitle', 'value' => 'Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.', 'group' => 'general'],
             ['key' => 'lector_btn_text', 'value' => 'Ver Menú →', 'group' => 'general'],
             ['key' => 'volver_eventos_text', 'value' => 'Volver a Eventos', 'group' => 'general'],
             ['key' => 'volver_instalaciones_text', 'value' => 'Volver a Instalaciones', 'group' => 'general'],

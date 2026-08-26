@@ -1502,6 +1502,16 @@
     margin: 0 auto;
 }
 
+.about-banner-desc *,
+.about-banner-desc *::before,
+.about-banner-desc *::after {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.about-banner-desc a {
+    color: var(--color-accent-gold) !important;
+}
+
 /* Valores tags */
 .about-values-grid {
     display: flex;

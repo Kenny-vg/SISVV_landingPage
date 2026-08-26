@@ -60,6 +60,16 @@ class PageSectionResource extends Resource
                 Forms\Components\RichEditor::make('content')
                     ->label('Contenido')
                     ->visible(fn (Forms\Get $get): bool => $get('key') !== 'about_values')
+                    ->toolbarButtons([
+                        'bold',
+                        'italic',
+                        'underline',
+                        'bulletList',
+                        'orderedList',
+                        'link',
+                        'blockquote',
+                    ])
+                    ->helperText('No uses colores inline; el texto siempre se muestra en el color de la sección.')
                     ->columnSpanFull(),
                 Forms\Components\Textarea::make('content')
                     ->label('Valores')
