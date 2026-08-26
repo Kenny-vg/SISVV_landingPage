@@ -92,7 +92,7 @@
 .mapa-zoom-container {
     width: 100%;
     position: relative;
-    transform-origin: 40% 46.53%;
+    transform-origin: 40% 53.47%;
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
 }
@@ -106,6 +106,7 @@
     height: auto;
     display: block;
     opacity: 0;
+    transform: scaleY(-1);
 }
 
 .mapa-img.is-visible {
@@ -113,8 +114,8 @@
 }
 
 @keyframes mapa-fade-in {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(24px) scaleY(-1); }
+    to { opacity: 1; transform: translateY(0) scaleY(-1); }
 }
 
 .mapa-detalle-overlay {
@@ -302,7 +303,7 @@
 .mapa-pin {
     position: absolute;
     left: 38%;
-    top: 46.53%;
+    top: 53.47%;
     transform: translate(-50%, -100%);
     background: none;
     border: none;

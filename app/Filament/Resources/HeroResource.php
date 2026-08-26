@@ -140,3 +140,5 @@ class HeroResource extends Resource
         ];
     }
 }
+
+// Comentario
