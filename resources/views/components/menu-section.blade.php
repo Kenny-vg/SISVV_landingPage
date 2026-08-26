@@ -7,10 +7,8 @@
 <section class="premium-section bg-obsidian fade-in-section" id="gastronomia">
     <div class="gastronomy-asymmetric">
         <div class="gastronomy-media-wrapper">
-            <img src="{{ $menuSection?->image ? asset('storage/' . $menuSection->image) : asset('images/fallback-gastronomia.svg') }}" alt="Plato gourmet VistaVerde" class="gastronomy-main-img">
-            @if($menuSection?->image_float)
-            <img src="{{ asset('storage/' . $menuSection->image_float) }}" alt="Ingredientes gastronómicos frescos" class="gastronomy-float-img">
-            @endif
+            <x-responsive-image :path="$menuSection?->image" alt="Plato gourmet VistaVerde" fallback="{{ asset('images/fallback-gastronomia.svg') }}" class="gastronomy-main-img"/>
+            <x-responsive-image :path="$menuSection?->image_float" alt="Ingredientes gastronómicos frescos" fallback="{{ asset('images/fallback-gastronomia.svg') }}" class="gastronomy-float-img"/>
         </div>
 
         <div class="gastronomy-content-wrapper">
@@ -25,4 +23,4 @@
             </div>
         </div>
     </div>
-</section>
+</section>

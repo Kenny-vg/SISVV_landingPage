@@ -21,7 +21,7 @@
             </a>
         </div>
         <div style="border-radius: 24px; overflow: hidden; height: 500px; background-color: var(--color-surface);">
-            <img src="{{ $section?->image ? asset('storage/' . $section->image) : asset('images/about.jpg') }}" alt="Vista Verde Country Club" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;">
+            <x-responsive-image :path="$section?->image" :alt="'Vista Verde Country Club'" fallback="{{ asset('images/about.jpg') }}" style="width: 100%; height: 100%; max-width: 100%; object-fit: cover; display: block;"/>
         </div>
     </div>
 </section>

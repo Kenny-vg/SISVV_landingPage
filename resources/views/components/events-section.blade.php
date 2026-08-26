@@ -38,11 +38,12 @@
 
             @forelse($events as $event)
             <a href="{{ route('eventos.show', $event->slug) }}" class="bento-fullbleed event-card-item">
-                <img
-                    src="{{ $event->image ? asset('storage/' . $event->image) : asset('images/fallback-eventos.svg') }}"
-                    alt="{{ $event->title }}"
+                <x-responsive-image
+                    :path="$event->image"
+                    :alt="$event->title"
+                    fallback="{{ asset('images/fallback-eventos.svg') }}"
                     class="bento-fullbleed-img"
-                >
+                />
                 <div class="bento-fullbleed-overlay"></div>
                 <div class="bento-fullbleed-content">
                     <!-- Badge de fecha o categoría -->
