@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Pages\Concerns\InteractsWithSettings;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\View;
 use Filament\Forms\Form;
@@ -42,17 +43,44 @@ class NosotrosSettingsPage extends Page
                         'description' => 'La introducción, misión, visión, valores y filosofía se editan en "Nosotros → Contenido de Nosotros".',
                     ])
                     ->columnSpanFull(),
-                TextInput::make('about_btn_text')
-                    ->label('Botón "Conócenos más"')
-                    ->helperText('Enlace de la sección Nosotros en la portada'),
+                View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Hero de la página /nosotros',
+                        'description' => 'Edita el encabezado principal que se muestra al entrar a la página. La imagen de fondo se edita aquí abajo.',
+                    ])
+                    ->columnSpanFull(),
+                TextInput::make('nosotros_hero_tag')
+                    ->label('Etiqueta superior')
+                    ->default('Vista Verde Club')
+                    ->helperText('Texto pequeño dorado sobre el título (ej: "Vista Verde Club")')
+                    ->columnSpanFull(),
+                TextInput::make('nosotros_hero_title')
+                    ->label('Título principal')
+                    ->default('Sobre Nosotros.')
+                    ->helperText('Título grande. Para línea en cursiva, separa con punto y coma: Sobre; Nosotros.')
+                    ->columnSpanFull(),
+                Textarea::make('nosotros_hero_subtitle')
+                    ->label('Subtítulo')
+                    ->default('Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.')
+                    ->rows(2)
+                    ->columnSpanFull(),
                 FileUpload::make('about_image')
-                    ->label('Imagen de fondo de la página')
+                    ->label('Imagen de fondo del hero')
                     ->image()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                     ->maxSize(10240)
                     ->directory('about')
                     ->disk('public')
                     ->helperText('Imagen de fondo del encabezado de la página /nosotros'),
+                View::make('filament.components.section-guide')
+                    ->viewData([
+                        'title' => 'Otros textos',
+                        'description' => 'Botón de la portada y otros ajustes.',
+                    ])
+                    ->columnSpanFull(),
+                TextInput::make('about_btn_text')
+                    ->label('Botón "Conócenos más"')
+                    ->helperText('Enlace de la sección Nosotros en la portada'),
             ])
             ->statePath('data');
     }
