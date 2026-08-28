@@ -13,7 +13,7 @@
             Todos los<br><span>Eventos.</span>
         </h1>
         <p style="color: var(--color-text-secondary); max-width: 650px; font-size: 1.05rem; line-height: 1.7;">
-            Actividades exclusivas, torneos y celebraciones diseñadas para enriquecer tu experiencia como socio del club.
+            {{ setting('events_subtext', 'Actividades exclusivas, torneos y celebraciones diseñadas para la comunidad del club. Vive experiencias únicas junto a los tuyos.') }}
         </p>
     </header>
 

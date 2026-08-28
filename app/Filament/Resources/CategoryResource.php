@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
-use App\Rules\PdfMaxPages;
+
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -53,8 +53,7 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('pdf')
                     ->label('Archivo PDF del menú')
                     ->acceptedFileTypes(['application/pdf'])
-                    ->maxSize(10240)
-                    ->rules([new PdfMaxPages(8)])
+                    ->maxSize(20480)
                     ->directory('menus')
                     ->disk('public')
                     ->columnSpanFull(),
