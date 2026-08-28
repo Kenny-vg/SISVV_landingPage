@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
         pannellum.viewer('pano', {
             type: 'equirectangular',
             panorama: @json(asset('storage/' . $area->panorama_path)),
-            // Si usas PdfController/storage symlink roto, cambia a route('pdf.show') no aplica aquí porque es imagen
             autoLoad: true,
             compass: true,
             showZoomCtrl: false,
