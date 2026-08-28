@@ -1,14 +1,14 @@
 @extends('layouts.public')
 
 @section('title', 'Eventos — Vista Verde Country Club')
-@section('meta_description', 'Descubre todos los eventos, torneos y celebraciones del Club Vista Verde. Vive experiencias únicas.')
+@section('meta_description', 'Descubre todos los eventos, torneos y celebraciones de Vista Verde Country Club. Vive experiencias únicas.')
 
 @section('content')
 <div class="eventos-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg); color: var(--color-text-primary); transition: background-color 0.3s ease;">
 
     <!-- Encabezado de página -->
     <header style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
-        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Club Vista Verde</span>
+        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Country Club</span>
         <h1 class="section-header-editorial" style="font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; max-width: none;">
             Todos los<br><span>Eventos.</span>
         </h1>

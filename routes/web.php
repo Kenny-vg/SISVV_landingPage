@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PdfController;
 use App\Models\Category;
 use App\Models\Discipline;
 use App\Models\Event;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/img/{path}', ImageController::class)
     ->where('path', '.*')
     ->name('image.optimized');
+
+Route::get('/pdf/{path}', PdfController::class)
+    ->where('path', '.*')
+    ->name('pdf.show');
 
 Route::get('/', function () {
     $hero = Hero::where('is_active', true)->orderBy('sort_order')->first();

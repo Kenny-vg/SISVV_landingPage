@@ -8,10 +8,10 @@
 
     <!-- Banner de Encabezado Asimétrico -->
     <header class="section-header-editorial" style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1.5rem;">
-        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
-        <h1 style="font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Nuestras<br><span>Instalaciones.</span></h1>
+        <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">{{ setting('instalaciones_page_tag', 'Vista Verde Country Club') }}</span>
+        <h1 style="font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">{{ setting('instalaciones_page_heading', 'Nuestras') }}<br><span>{{ setting('instalaciones_page_heading_accent', 'Instalaciones.') }}</span></h1>
         <p style="max-width: 650px;">
-            Espacios concebidos para la excelencia y el esparcimiento social, donde el diseño de vanguardia se funde con el entorno natural del club.
+            {{ setting('instalaciones_page_description', 'Espacios concebidos para la excelencia y el esparcimiento social, donde el diseño de vanguardia se funde con el entorno natural del club.') }}
         </p>
     </header>
 

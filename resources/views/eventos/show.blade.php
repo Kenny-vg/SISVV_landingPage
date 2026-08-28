@@ -37,7 +37,7 @@
             @endif
 
             @if($event->pdf_path)
-            <a href="{{ asset('storage/' . $event->pdf_path) }}" target="_blank" class="evento-pdf-download-btn">
+            <a href="{{ route('pdf.show', ['path' => $event->pdf_path]) }}" target="_blank" class="evento-pdf-download-btn">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
@@ -96,7 +96,7 @@
                     </svg>
                 </button>
                 <div class="pdf-divider"></div>
-                <a href="{{ asset('storage/' . $event->pdf_path) }}" download class="pdf-btn" id="download-pdf" title="Descargar PDF">
+                <a href="{{ route('pdf.show', ['path' => $event->pdf_path]) }}" download class="pdf-btn" id="download-pdf" title="Descargar PDF">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
@@ -128,7 +128,7 @@
         let startX, startY;
         let scrollLeft, scrollTop;
 
-        const pdfUrl = @json(asset('storage/' . $event->pdf_path));
+        const pdfUrl = @json(route('pdf.show', ['path' => $event->pdf_path]));
 
         const canvas = document.getElementById('pdf-canvas');
         const ctx = canvas.getContext('2d');
