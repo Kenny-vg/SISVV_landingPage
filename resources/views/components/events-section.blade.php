@@ -10,7 +10,7 @@
     <!-- Encabezado con botones de navegación -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 2rem;">
         <div class="section-header-editorial" style="margin-bottom: 0; max-width: 700px;">
-            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">{{ setting('events_label', 'Club Vista Verde') }}</span>
+            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 0.8rem;">{{ setting('events_label', 'Vista Verde Country Club') }}</span>
             <x-section-heading :text="setting('events_heading', 'Eventos &')" :accent="setting('events_heading_accent', 'Próximas fechas.')" />
             <p>
                 {{ setting('events_subtext', 'Actividades exclusivas, torneos y celebraciones diseñadas para la comunidad del club. Vive experiencias únicas junto a los tuyos.') }}

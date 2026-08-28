@@ -76,7 +76,7 @@
         <div class="pdf-divider"></div>
 
         <!-- Botón de Descarga -->
-        <a href="{{ $category->pdf ? asset('storage/'.$category->pdf) : '#' }}" download class="pdf-btn" id="download-pdf" title="{{ setting('download_menu_text', 'Descargar Menú') }}">
+        <a href="{{ $category->pdf ? route('pdf.show', ['path' => $category->pdf]) : '#' }}" download class="pdf-btn" id="download-pdf" title="{{ setting('download_menu_text', 'Descargar Menú') }}">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
@@ -118,7 +118,7 @@
 
         // URL dinámica del PDF correspondiente
         const hasPdf = {{ $category->pdf ? 'true' : 'false' }};
-        const pdfUrl = hasPdf ? @json($category->pdf ? asset('storage/'.$category->pdf) : '') : null;
+        const pdfUrl = hasPdf ? @json($category->pdf ? route('pdf.show', ['path' => $category->pdf]) : '') : null;
 
         // Actualizar botón de descarga flotante
         const downloadBtn = document.getElementById('download-pdf');

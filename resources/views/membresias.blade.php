@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title', 'Membresías — Vista Verde Country Club')
-@section('meta_description', 'Conoce los planes de membresía del Club Vista Verde y elige el que mejor se adapte a ti.')
+@section('meta_description', 'Conoce los planes de membresía de Vista Verde Country Club y elige el que mejor se adapte a ti.')
 
 @section('content')
 <div class="membresias-page" style="padding-top: 120px; min-height: 100vh; background-color: var(--color-bg);">
@@ -10,7 +10,7 @@
     <div class="membresias-hero" style="background-image: url('{{ asset('images/hero.jpg') }}');">
         <div class="membresias-hero-overlay"></div>
         <div class="membresias-hero-content">
-            <span class="membresias-hero-tag">Vista Verde Club</span>
+            <span class="membresias-hero-tag">Vista Verde Country Club</span>
             <h1>Nuestras<br><span>Membresías.</span></h1>
             <p>Elige el plan que mejor se adapte a tu estilo de vida y disfruta de todos los beneficios que Vista Verde tiene para ti y tu familia.</p>
         </div>

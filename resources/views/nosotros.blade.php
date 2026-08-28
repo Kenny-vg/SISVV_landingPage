@@ -38,7 +38,7 @@
     <div class="about-hero" style="background-image: url('{{ $aboutImage }}');">
         <div class="about-hero-overlay"></div>
         <div class="about-hero-content">
-            <span class="about-hero-tag">Vista Verde Club</span>
+            <span class="about-hero-tag">Vista Verde Country Club</span>
             <h1>Sobre<br><span>Nosotros.</span></h1>
             <p>Conoce nuestra historia, nuestra filosofía y el compromiso que nos define como el club campestre más exclusivo de la región.</p>
         </div>
@@ -49,7 +49,7 @@
     <section class="premium-section bg-obsidian fade-in-section">
         <div class="about-home-grid">
             <div>
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Country Club</span>
                 @php
                     $mW = explode(' ', $mission->title, 2);
                 @endphp
@@ -72,7 +72,7 @@
     <section class="premium-section bg-obsidian fade-in-section" style="padding-top: 0;">
         <div class="about-home-grid" style="direction: rtl;">
             <div style="direction: ltr;">
-                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+                <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Country Club</span>
                 @php
                     $vW = explode(' ', $vision->title, 2);
                 @endphp
@@ -94,7 +94,7 @@
     @if($values)
     <section class="premium-section bg-obsidian fade-in-section" style="padding-top: 0;">
         <div class="about-home-grid" style="display: block; text-align: center;">
-            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Club</span>
+            <span style="font-family: var(--font-alt); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Country Club</span>
             @php
                 $valsT = explode(' ', $values->title, 2);
             @endphp
@@ -121,7 +121,7 @@
     <section class="about-banner fade-in-section" style="background-image: url('{{ $philosophy->image ? asset('storage/'.$philosophy->image) : $aboutImage }}');">
         <div class="about-banner-overlay"></div>
         <div class="about-banner-content">
-            <span class="about-hero-tag">Vista Verde Club</span>
+            <span class="about-hero-tag">Vista Verde Country Club</span>
             @php
                 $pT = explode(' ', $philosophy->title, 2);
             @endphp

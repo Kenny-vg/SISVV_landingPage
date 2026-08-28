@@ -71,23 +71,21 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Tour 360° o Carrusel -->
+            <!-- Columna Derecha: Tour 360° + Galería -->
             <div>
                 @if($area->panorama_path)
                     <div id="pano" style="width:100%;height:500px;border-radius:12px;overflow:hidden;"></div>
                     <p style="text-align:center;margin-top:1rem;font-size:0.8rem;color:var(--color-text-secondary);font-family:var(--font-alt);letter-spacing:1px;text-transform:uppercase;">Arrastra para explorar 360°</p>
-                @else
-                    <div class="carousel-container" data-carousel>
+                @endif
+
+                @if($area->images->count() > 0)
+                    <div class="carousel-container" data-carousel style="{{ $area->panorama_path ? 'margin-top:2rem;' : '' }}">
                         <div class="carousel-track" data-track>
-                            @forelse($area->images as $img)
+                            @foreach($area->images as $img)
                                 <div class="carousel-slide">
-                                    <x-responsive-image :path="$img->image_path" :alt="$area->title" :eager="$loop->first"/>
+                                    <x-responsive-image :path="$img->image_path" :alt="$area->title" :eager="$loop->first && !$area->panorama_path"/>
                                 </div>
-                            @empty
-                                <div class="carousel-slide">
-                                    <img src="{{ asset('images/fallback-instalaciones.svg') }}" alt="{{ $area->title }}">
-                                </div>
-                            @endforelse
+                            @endforeach
                         </div>
 
                         @if($area->images->count() > 1)
@@ -100,6 +98,14 @@
                                 @endforeach
                             </div>
                         @endif
+                    </div>
+                @elseif(!$area->panorama_path)
+                    <div class="carousel-container" data-carousel>
+                        <div class="carousel-track" data-track>
+                            <div class="carousel-slide">
+                                <img src="{{ asset('images/fallback-instalaciones.svg') }}" alt="{{ $area->title }}" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                        </div>
                     </div>
                 @endif
             </div>
@@ -116,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         pannellum.viewer('pano', {
             type: 'equirectangular',
             panorama: @json(asset('storage/' . $area->panorama_path)),
+            // Si usas PdfController/storage symlink roto, cambia a route('pdf.show') no aplica aquí porque es imagen
             autoLoad: true,
             compass: true,
             showZoomCtrl: false,

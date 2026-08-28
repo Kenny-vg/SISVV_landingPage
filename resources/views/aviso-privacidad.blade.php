@@ -14,7 +14,7 @@
     </a>
 
     <header class="pdf-header-editorial">
-        <span class="pdf-category-tag">Vista Verde Club</span>
+        <span class="pdf-category-tag">Vista Verde Country Club</span>
         <h1>Aviso de<br><span style="font-style: italic; font-weight: 300; color: var(--color-accent-gold);">Privacidad.</span></h1>
         <p>Conoce el tratamiento que damos a tus datos personales y la protección que garantizamos.</p>
         <div class="pdf-header-divider"></div>
@@ -67,7 +67,7 @@
 
         <div class="pdf-divider"></div>
 
-        <a href="{{ setting('privacy_pdf') ? asset('storage/' . setting('privacy_pdf')) : '#' }}" download class="pdf-btn" id="download-pdf" title="Descargar Aviso de Privacidad">
+        <a href="{{ setting('privacy_pdf') ? route('pdf.show', ['path' => setting('privacy_pdf')]) : '#' }}" download class="pdf-btn" id="download-pdf" title="Descargar Aviso de Privacidad">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
@@ -113,7 +113,7 @@
         const sliderPageMax = document.getElementById('slider-page-max');
 
         const hasPdf = @json((bool) setting('privacy_pdf'));
-        const pdfUrl = hasPdf ? @json(setting('privacy_pdf') ? asset('storage/' . setting('privacy_pdf')) : '') : null;
+        const pdfUrl = hasPdf ? @json(setting('privacy_pdf') ? route('pdf.show', ['path' => setting('privacy_pdf')]) : '') : null;
 
         const downloadBtn = document.getElementById('download-pdf');
         if (downloadBtn) {
