@@ -11,7 +11,7 @@
         <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Vista Verde Country Club</span>
         <h1 style="font-size: clamp(2.8rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem;">Nuestras<br><span>Clases.</span></h1>
         <p style="color: var(--color-text-secondary); max-width: 650px;">
-            Disciplinas de élite impartidas por instructores certificados, diseñadas para elevar tu rendimiento y bienestar en cada sesión.
+            {{ setting('facilities_subtext', 'Instructores certificados, metodología de élite y espacios de primer nivel para elevar tu rendimiento y bienestar en cada sesión.') }}
         </p>
     </header>
 

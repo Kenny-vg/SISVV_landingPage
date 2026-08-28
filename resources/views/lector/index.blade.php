@@ -11,8 +11,11 @@
         <header class="section-header-editorial" style="margin-bottom: 4rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
             <span style="font-family: var(--font-alt); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: var(--color-accent-gold); display: block; margin-bottom: 1rem;">Experiencia Gastronómica</span>
             <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); color: var(--color-text-primary); margin-bottom: 1.5rem; line-height: 1.1;">Nuestra Carta</h1>
+            @php
+                $menuSection = \App\Models\PageSection::where('key', 'menu_intro')->where('is_active', true)->first();
+            @endphp
             <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">
-                Seleccione una de nuestras categorías para descubrir una propuesta culinaria de temporada diseñada para deleitar sus sentidos.
+                {!! $menuSection?->content !!}
             </p>
         </header>
 
